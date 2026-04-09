@@ -1,0 +1,6 @@
+imap\_processing.spice.time.ttj2000ns\_to\_et
+=============================================
+
+.. currentmodule:: imap_processing.spice.time
+
+.. autofunction:: ttj2000ns_to_et

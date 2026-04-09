@@ -1,0 +1,40 @@
+imap\_processing.swe.utils.swe\_utils.SWEAPID
+=============================================
+
+.. currentmodule:: imap_processing.swe.utils.swe_utils
+
+.. autoclass:: SWEAPID
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~SWEAPID.conjugate
+      ~SWEAPID.bit_length
+      ~SWEAPID.bit_count
+      ~SWEAPID.to_bytes
+      ~SWEAPID.from_bytes
+      ~SWEAPID.as_integer_ratio
+      ~SWEAPID.__init__
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~SWEAPID.real
+      ~SWEAPID.imag
+      ~SWEAPID.numerator
+      ~SWEAPID.denominator
+      ~SWEAPID.SWE_SCIENCE
+      ~SWEAPID.SWE_APP_HK
+      ~SWEAPID.SWE_CEM_RAW
+   
+   

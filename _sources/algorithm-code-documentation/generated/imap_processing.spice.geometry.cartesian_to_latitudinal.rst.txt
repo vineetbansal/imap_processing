@@ -1,0 +1,6 @@
+imap\_processing.spice.geometry.cartesian\_to\_latitudinal
+==========================================================
+
+.. currentmodule:: imap_processing.spice.geometry
+
+.. autofunction:: cartesian_to_latitudinal

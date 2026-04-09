@@ -1,0 +1,6 @@
+imap\_processing.spice.time.epoch\_to\_fractional\_doy
+======================================================
+
+.. currentmodule:: imap_processing.spice.time
+
+.. autofunction:: epoch_to_fractional_doy

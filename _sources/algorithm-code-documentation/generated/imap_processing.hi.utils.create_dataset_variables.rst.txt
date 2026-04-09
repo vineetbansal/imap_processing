@@ -1,0 +1,6 @@
+imap\_processing.hi.utils.create\_dataset\_variables
+====================================================
+
+.. currentmodule:: imap_processing.hi.utils
+
+.. autofunction:: create_dataset_variables

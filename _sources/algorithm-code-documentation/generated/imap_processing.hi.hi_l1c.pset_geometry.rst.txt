@@ -1,0 +1,6 @@
+imap\_processing.hi.hi\_l1c.pset\_geometry
+==========================================
+
+.. currentmodule:: imap_processing.hi.hi_l1c
+
+.. autofunction:: pset_geometry

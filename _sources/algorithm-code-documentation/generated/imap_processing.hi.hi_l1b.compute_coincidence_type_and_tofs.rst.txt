@@ -1,0 +1,6 @@
+imap\_processing.hi.hi\_l1b.compute\_coincidence\_type\_and\_tofs
+=================================================================
+
+.. currentmodule:: imap_processing.hi.hi_l1b
+
+.. autofunction:: compute_coincidence_type_and_tofs

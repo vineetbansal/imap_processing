@@ -1,0 +1,6 @@
+imap\_processing.hi.hi\_l1b.get\_esa\_to\_esa\_energy\_step\_lut
+================================================================
+
+.. currentmodule:: imap_processing.hi.hi_l1b
+
+.. autofunction:: get_esa_to_esa_energy_step_lut

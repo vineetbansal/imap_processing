@@ -1,0 +1,6 @@
+imap\_processing.hi.utils.iter\_qualified\_events\_by\_config
+=============================================================
+
+.. currentmodule:: imap_processing.hi.utils
+
+.. autofunction:: iter_qualified_events_by_config

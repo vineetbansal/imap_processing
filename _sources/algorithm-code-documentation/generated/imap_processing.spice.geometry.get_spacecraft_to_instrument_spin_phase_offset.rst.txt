@@ -1,0 +1,6 @@
+imap\_processing.spice.geometry.get\_spacecraft\_to\_instrument\_spin\_phase\_offset
+====================================================================================
+
+.. currentmodule:: imap_processing.spice.geometry
+
+.. autofunction:: get_spacecraft_to_instrument_spin_phase_offset

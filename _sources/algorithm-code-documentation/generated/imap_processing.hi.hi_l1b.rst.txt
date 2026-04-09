@@ -1,0 +1,46 @@
+﻿imap\_processing.hi.hi\_l1b
+===========================
+
+.. automodule:: imap_processing.hi.hi_l1b
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+      :toctree:
+   
+      annotate_direct_events
+      any_good_direct_events
+      compute_coincidence_type_and_tofs
+      compute_hae_coordinates
+      de_ccsds_qf
+      de_esa_energy_step
+      de_esa_step_met
+      de_nominal_bin_and_spin_phase
+      get_esa_to_esa_energy_step_lut
+      housekeeping
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+      :toctree:
+   
+      TriggerId
+   
+   
+
+   
+   
+   
+
+
+

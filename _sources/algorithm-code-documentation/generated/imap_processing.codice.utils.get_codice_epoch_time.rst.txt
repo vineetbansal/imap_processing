@@ -1,0 +1,6 @@
+imap\_processing.codice.utils.get\_codice\_epoch\_time
+======================================================
+
+.. currentmodule:: imap_processing.codice.utils
+
+.. autofunction:: get_codice_epoch_time

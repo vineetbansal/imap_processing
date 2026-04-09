@@ -1,0 +1,79 @@
+imap\_processing.spice.geometry.SpiceFrame
+==========================================
+
+.. currentmodule:: imap_processing.spice.geometry
+
+.. autoclass:: SpiceFrame
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~SpiceFrame.conjugate
+      ~SpiceFrame.bit_length
+      ~SpiceFrame.bit_count
+      ~SpiceFrame.to_bytes
+      ~SpiceFrame.from_bytes
+      ~SpiceFrame.as_integer_ratio
+      ~SpiceFrame.__init__
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~SpiceFrame.real
+      ~SpiceFrame.imag
+      ~SpiceFrame.numerator
+      ~SpiceFrame.denominator
+      ~SpiceFrame.J2000
+      ~SpiceFrame.ECLIPJ2000
+      ~SpiceFrame.ITRF93
+      ~SpiceFrame.IMAP_DPS
+      ~SpiceFrame.IMAP_SPACECRAFT
+      ~SpiceFrame.IMAP_LO_BASE
+      ~SpiceFrame.IMAP_LO
+      ~SpiceFrame.IMAP_LO_STAR_SENSOR
+      ~SpiceFrame.IMAP_HI_45
+      ~SpiceFrame.IMAP_HI_90
+      ~SpiceFrame.IMAP_ULTRA_45
+      ~SpiceFrame.IMAP_ULTRA_90
+      ~SpiceFrame.IMAP_MAG_BOOM
+      ~SpiceFrame.IMAP_MAG_I
+      ~SpiceFrame.IMAP_MAG_O
+      ~SpiceFrame.IMAP_MAG_BASE
+      ~SpiceFrame.IMAP_SWE
+      ~SpiceFrame.IMAP_SWAPI
+      ~SpiceFrame.IMAP_CODICE
+      ~SpiceFrame.IMAP_HIT
+      ~SpiceFrame.IMAP_IDEX
+      ~SpiceFrame.IMAP_GLOWS
+      ~SpiceFrame.IMAP_EARTHFIXED
+      ~SpiceFrame.IMAP_ECLIPDATE
+      ~SpiceFrame.IMAP_MDI
+      ~SpiceFrame.IMAP_MDR
+      ~SpiceFrame.IMAP_GMC
+      ~SpiceFrame.IMAP_GEI
+      ~SpiceFrame.IMAP_GSE
+      ~SpiceFrame.IMAP_GSM
+      ~SpiceFrame.IMAP_SMD
+      ~SpiceFrame.IMAP_RTN
+      ~SpiceFrame.IMAP_HCI
+      ~SpiceFrame.IMAP_HCD
+      ~SpiceFrame.IMAP_HGC
+      ~SpiceFrame.IMAP_HAE
+      ~SpiceFrame.IMAP_HAED
+      ~SpiceFrame.IMAP_HEE
+      ~SpiceFrame.IMAP_HRE
+      ~SpiceFrame.IMAP_HNU
+      ~SpiceFrame.IMAP_GCS
+      ~SpiceFrame.IMAP_HRC
+   
+   

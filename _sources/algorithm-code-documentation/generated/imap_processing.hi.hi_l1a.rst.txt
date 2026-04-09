@@ -1,0 +1,37 @@
+﻿imap\_processing.hi.hi\_l1a
+===========================
+
+.. automodule:: imap_processing.hi.hi_l1a
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+      :toctree:
+   
+      create_de_dataset
+      finish_de_dataset
+      finish_hist_dataset
+      finish_memdmp_dataset
+      hi_l1a
+      hi_packet_file_to_datasets
+      parse_direct_events
+      unpack_hist_counter
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+

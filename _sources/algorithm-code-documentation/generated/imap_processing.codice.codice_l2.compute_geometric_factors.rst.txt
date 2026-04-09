@@ -1,0 +1,6 @@
+imap\_processing.codice.codice\_l2.compute\_geometric\_factors
+==============================================================
+
+.. currentmodule:: imap_processing.codice.codice_l2
+
+.. autofunction:: compute_geometric_factors

@@ -1,0 +1,39 @@
+imap\_processing.mag.l0.mag\_l0\_data.Mode
+==========================================
+
+.. currentmodule:: imap_processing.mag.l0.mag_l0_data
+
+.. autoclass:: Mode
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Mode.conjugate
+      ~Mode.bit_length
+      ~Mode.bit_count
+      ~Mode.to_bytes
+      ~Mode.from_bytes
+      ~Mode.as_integer_ratio
+      ~Mode.__init__
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Mode.real
+      ~Mode.imag
+      ~Mode.numerator
+      ~Mode.denominator
+      ~Mode.BURST
+      ~Mode.NORMAL
+   
+   

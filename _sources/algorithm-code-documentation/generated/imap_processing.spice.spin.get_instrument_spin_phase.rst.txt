@@ -1,0 +1,6 @@
+imap\_processing.spice.spin.get\_instrument\_spin\_phase
+========================================================
+
+.. currentmodule:: imap_processing.spice.spin
+
+.. autofunction:: get_instrument_spin_phase

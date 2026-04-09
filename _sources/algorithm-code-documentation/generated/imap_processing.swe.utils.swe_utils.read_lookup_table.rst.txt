@@ -1,0 +1,6 @@
+imap\_processing.swe.utils.swe\_utils.read\_lookup\_table
+=========================================================
+
+.. currentmodule:: imap_processing.swe.utils.swe_utils
+
+.. autofunction:: read_lookup_table

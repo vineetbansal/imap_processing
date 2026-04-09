@@ -1,0 +1,6 @@
+imap\_processing.idex.idex\_l2a.calculate\_kappa
+================================================
+
+.. currentmodule:: imap_processing.idex.idex_l2a
+
+.. autofunction:: calculate_kappa

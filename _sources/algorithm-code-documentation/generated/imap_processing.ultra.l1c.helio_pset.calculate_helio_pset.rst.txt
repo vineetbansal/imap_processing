@@ -1,0 +1,6 @@
+imap\_processing.ultra.l1c.helio\_pset.calculate\_helio\_pset
+=============================================================
+
+.. currentmodule:: imap_processing.ultra.l1c.helio_pset
+
+.. autofunction:: calculate_helio_pset

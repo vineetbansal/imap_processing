@@ -1,0 +1,6 @@
+imap\_processing.spice.repoint.get\_repoint\_data
+=================================================
+
+.. currentmodule:: imap_processing.spice.repoint
+
+.. autofunction:: get_repoint_data

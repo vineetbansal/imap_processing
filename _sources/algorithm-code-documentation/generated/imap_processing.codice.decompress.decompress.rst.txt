@@ -1,0 +1,6 @@
+imap\_processing.codice.decompress.decompress
+=============================================
+
+.. currentmodule:: imap_processing.codice.decompress
+
+.. autofunction:: decompress

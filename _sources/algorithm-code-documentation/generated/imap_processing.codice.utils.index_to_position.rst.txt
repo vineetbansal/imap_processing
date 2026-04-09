@@ -1,0 +1,6 @@
+imap\_processing.codice.utils.index\_to\_position
+=================================================
+
+.. currentmodule:: imap_processing.codice.utils
+
+.. autofunction:: index_to_position

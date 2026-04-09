@@ -1,0 +1,6 @@
+imap\_processing.hit.l1a.hit\_l1a.calculate\_uncertainties
+==========================================================
+
+.. currentmodule:: imap_processing.hit.l1a.hit_l1a
+
+.. autofunction:: calculate_uncertainties

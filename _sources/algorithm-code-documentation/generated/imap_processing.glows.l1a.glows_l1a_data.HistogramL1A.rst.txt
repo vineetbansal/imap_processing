@@ -1,0 +1,50 @@
+imap\_processing.glows.l1a.glows\_l1a\_data.HistogramL1A
+========================================================
+
+.. currentmodule:: imap_processing.glows.l1a.glows_l1a_data
+
+.. autoclass:: HistogramL1A
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~HistogramL1A.__init__
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~HistogramL1A.pkts_file_name
+      ~HistogramL1A.l0
+      ~HistogramL1A.histogram
+      ~HistogramL1A.flight_software_version
+      ~HistogramL1A.seq_count_in_pkts_file
+      ~HistogramL1A.first_spin_id
+      ~HistogramL1A.last_spin_id
+      ~HistogramL1A.imap_start_time
+      ~HistogramL1A.imap_time_offset
+      ~HistogramL1A.glows_start_time
+      ~HistogramL1A.glows_time_offset
+      ~HistogramL1A.number_of_spins_per_block
+      ~HistogramL1A.number_of_bins_per_histogram
+      ~HistogramL1A.number_of_events
+      ~HistogramL1A.filter_temperature_average
+      ~HistogramL1A.filter_temperature_variance
+      ~HistogramL1A.hv_voltage_average
+      ~HistogramL1A.hv_voltage_variance
+      ~HistogramL1A.spin_period_average
+      ~HistogramL1A.spin_period_variance
+      ~HistogramL1A.pulse_length_average
+      ~HistogramL1A.pulse_length_variance
+      ~HistogramL1A.flags
+   
+   

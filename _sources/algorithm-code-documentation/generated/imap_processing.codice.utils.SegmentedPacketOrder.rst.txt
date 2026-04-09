@@ -1,0 +1,41 @@
+imap\_processing.codice.utils.SegmentedPacketOrder
+==================================================
+
+.. currentmodule:: imap_processing.codice.utils
+
+.. autoclass:: SegmentedPacketOrder
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~SegmentedPacketOrder.conjugate
+      ~SegmentedPacketOrder.bit_length
+      ~SegmentedPacketOrder.bit_count
+      ~SegmentedPacketOrder.to_bytes
+      ~SegmentedPacketOrder.from_bytes
+      ~SegmentedPacketOrder.as_integer_ratio
+      ~SegmentedPacketOrder.__init__
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~SegmentedPacketOrder.real
+      ~SegmentedPacketOrder.imag
+      ~SegmentedPacketOrder.numerator
+      ~SegmentedPacketOrder.denominator
+      ~SegmentedPacketOrder.UNSEGMENTED
+      ~SegmentedPacketOrder.FIRST_SEGMENT
+      ~SegmentedPacketOrder.CONTINUATION_SEGMENT
+      ~SegmentedPacketOrder.LAST_SEGMENT
+   
+   

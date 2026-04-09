@@ -1,0 +1,6 @@
+imap\_processing.hi.utils.get\_bin\_range\_with\_wrap
+=====================================================
+
+.. currentmodule:: imap_processing.hi.utils
+
+.. autofunction:: get_bin_range_with_wrap

@@ -1,0 +1,6 @@
+imap\_processing.codice.codice\_l1a.process\_l1a
+================================================
+
+.. currentmodule:: imap_processing.codice.codice_l1a
+
+.. autofunction:: process_l1a

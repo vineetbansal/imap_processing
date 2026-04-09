@@ -1,0 +1,45 @@
+﻿imap\_processing.codice.codice\_l2
+==================================
+
+.. automodule:: imap_processing.codice.codice_l2
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+      :toctree:
+   
+      calculate_intensity
+      compute_geometric_factors
+      get_efficiency_lut
+      get_geometric_factor_lut
+      get_hi_de_luts
+      get_lo_de_energy_luts
+      get_mpq_calc_energy_conversion_vals
+      get_mpq_calc_tof_conversion_vals
+      get_species_efficiency
+      process_codice_l2
+      process_hi_direct_events
+      process_hi_omni
+      process_hi_sectored
+      process_lo_angular_intensity
+      process_lo_direct_events
+      process_lo_species_intensity
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+

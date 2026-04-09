@@ -1,0 +1,6 @@
+imap\_processing.hi.hi\_l1b.housekeeping
+========================================
+
+.. currentmodule:: imap_processing.hi.hi_l1b
+
+.. autofunction:: housekeeping

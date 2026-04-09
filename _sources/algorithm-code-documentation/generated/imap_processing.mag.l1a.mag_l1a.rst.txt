@@ -1,0 +1,33 @@
+﻿imap\_processing.mag.l1a.mag\_l1a
+=================================
+
+.. automodule:: imap_processing.mag.l1a.mag_l1a
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+      :toctree:
+   
+      create_l1a
+      generate_dataset
+      mag_l1a
+      process_packets
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+

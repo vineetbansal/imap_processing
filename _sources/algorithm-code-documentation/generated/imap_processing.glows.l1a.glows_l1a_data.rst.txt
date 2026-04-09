@@ -1,0 +1,32 @@
+﻿imap\_processing.glows.l1a.glows\_l1a\_data
+===========================================
+
+.. automodule:: imap_processing.glows.l1a.glows_l1a_data
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+      :toctree:
+   
+      DirectEventL1A
+      HistogramL1A
+      StatusData
+   
+   
+
+   
+   
+   
+
+
+

@@ -1,0 +1,6 @@
+imap\_processing.idex.idex\_l2a.load\_calibration\_files
+========================================================
+
+.. currentmodule:: imap_processing.idex.idex_l2a
+
+.. autofunction:: load_calibration_files

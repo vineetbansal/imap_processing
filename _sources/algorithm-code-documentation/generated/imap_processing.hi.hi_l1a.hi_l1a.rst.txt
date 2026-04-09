@@ -1,0 +1,6 @@
+imap\_processing.hi.hi\_l1a.hi\_l1a
+===================================
+
+.. currentmodule:: imap_processing.hi.hi_l1a
+
+.. autofunction:: hi_l1a

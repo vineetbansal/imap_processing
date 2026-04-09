@@ -1,0 +1,6 @@
+imap\_processing.hi.hi\_l2.create\_sky\_map\_from\_psets
+========================================================
+
+.. currentmodule:: imap_processing.hi.hi_l2
+
+.. autofunction:: create_sky_map_from_psets

@@ -1,0 +1,6 @@
+imap\_processing.idex.idex\_l1a.calculate\_idex\_event\_time
+============================================================
+
+.. currentmodule:: imap_processing.idex.idex_l1a
+
+.. autofunction:: calculate_idex_event_time

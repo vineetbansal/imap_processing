@@ -1,0 +1,44 @@
+﻿imap\_processing.spice.time
+===========================
+
+.. automodule:: imap_processing.spice.time
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+      :toctree:
+   
+      epoch_to_doy
+      epoch_to_fractional_doy
+      et_to_datetime64
+      et_to_met
+      et_to_ttj2000ns
+      et_to_utc
+      met_to_datetime64
+      met_to_sclkticks
+      met_to_ttj2000ns
+      met_to_utc
+      sct_to_et
+      sct_to_ttj2000s
+      str_to_et
+      ttj2000ns_to_et
+      ttj2000ns_to_met
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+

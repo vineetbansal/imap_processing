@@ -1,0 +1,6 @@
+imap\_processing.hi.hi\_l1c.empty\_pset\_dataset
+================================================
+
+.. currentmodule:: imap_processing.hi.hi_l1c
+
+.. autofunction:: empty_pset_dataset

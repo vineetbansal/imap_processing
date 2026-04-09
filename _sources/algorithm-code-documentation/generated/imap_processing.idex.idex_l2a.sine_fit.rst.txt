@@ -1,0 +1,6 @@
+imap\_processing.idex.idex\_l2a.sine\_fit
+=========================================
+
+.. currentmodule:: imap_processing.idex.idex_l2a
+
+.. autofunction:: sine_fit

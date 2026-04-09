@@ -1,0 +1,6 @@
+imap\_processing.hi.utils.filter\_events\_by\_coincidence
+=========================================================
+
+.. currentmodule:: imap_processing.hi.utils
+
+.. autofunction:: filter_events_by_coincidence

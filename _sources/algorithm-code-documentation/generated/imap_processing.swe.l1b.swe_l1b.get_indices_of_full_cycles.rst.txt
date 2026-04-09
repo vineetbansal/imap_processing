@@ -1,0 +1,6 @@
+imap\_processing.swe.l1b.swe\_l1b.get\_indices\_of\_full\_cycles
+================================================================
+
+.. currentmodule:: imap_processing.swe.l1b.swe_l1b
+
+.. autofunction:: get_indices_of_full_cycles

@@ -1,0 +1,6 @@
+imap\_processing.hi.hi\_l1b.any\_good\_direct\_events
+=====================================================
+
+.. currentmodule:: imap_processing.hi.hi_l1b
+
+.. autofunction:: any_good_direct_events

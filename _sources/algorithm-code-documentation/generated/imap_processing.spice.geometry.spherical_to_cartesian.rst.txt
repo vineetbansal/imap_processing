@@ -1,0 +1,6 @@
+imap\_processing.spice.geometry.spherical\_to\_cartesian
+========================================================
+
+.. currentmodule:: imap_processing.spice.geometry
+
+.. autofunction:: spherical_to_cartesian

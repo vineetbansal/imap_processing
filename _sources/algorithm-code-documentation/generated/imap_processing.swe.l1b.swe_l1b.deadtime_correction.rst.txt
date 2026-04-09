@@ -1,0 +1,6 @@
+imap\_processing.swe.l1b.swe\_l1b.deadtime\_correction
+======================================================
+
+.. currentmodule:: imap_processing.swe.l1b.swe_l1b
+
+.. autofunction:: deadtime_correction

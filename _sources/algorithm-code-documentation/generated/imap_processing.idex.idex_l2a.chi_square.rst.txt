@@ -1,0 +1,6 @@
+imap\_processing.idex.idex\_l2a.chi\_square
+===========================================
+
+.. currentmodule:: imap_processing.idex.idex_l2a
+
+.. autofunction:: chi_square

@@ -1,0 +1,6 @@
+imap\_processing.codice.utils.get\_energy\_info
+===============================================
+
+.. currentmodule:: imap_processing.codice.utils
+
+.. autofunction:: get_energy_info

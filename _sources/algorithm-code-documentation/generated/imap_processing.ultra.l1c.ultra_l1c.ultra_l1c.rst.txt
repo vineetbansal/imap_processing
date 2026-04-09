@@ -1,0 +1,6 @@
+imap\_processing.ultra.l1c.ultra\_l1c.ultra\_l1c
+================================================
+
+.. currentmodule:: imap_processing.ultra.l1c.ultra_l1c
+
+.. autofunction:: ultra_l1c

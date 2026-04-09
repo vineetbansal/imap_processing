@@ -1,0 +1,33 @@
+imap\_processing.codice.utils.ViewTabInfo
+=========================================
+
+.. currentmodule:: imap_processing.codice.utils
+
+.. autoclass:: ViewTabInfo
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~ViewTabInfo.__init__
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~ViewTabInfo.apid
+      ~ViewTabInfo.collapse_table
+      ~ViewTabInfo.compression
+      ~ViewTabInfo.sensor
+      ~ViewTabInfo.three_d_collapsed
+      ~ViewTabInfo.view_id
+   
+   

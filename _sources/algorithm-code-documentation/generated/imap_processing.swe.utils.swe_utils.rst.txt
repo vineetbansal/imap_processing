@@ -1,0 +1,39 @@
+﻿imap\_processing.swe.utils.swe\_utils
+=====================================
+
+.. automodule:: imap_processing.swe.utils.swe_utils
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+      :toctree:
+   
+      calculate_data_acquisition_time
+      combine_acquisition_time
+      read_lookup_table
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+      :toctree:
+   
+      SWEAPID
+   
+   
+
+   
+   
+   
+
+
+

@@ -1,0 +1,30 @@
+﻿imap\_processing.ultra.l1b.badtimes
+===================================
+
+.. automodule:: imap_processing.ultra.l1b.badtimes
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+      :toctree:
+   
+      calculate_badtimes
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+

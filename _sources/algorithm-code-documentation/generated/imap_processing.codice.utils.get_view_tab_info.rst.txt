@@ -1,0 +1,6 @@
+imap\_processing.codice.utils.get\_view\_tab\_info
+==================================================
+
+.. currentmodule:: imap_processing.codice.utils
+
+.. autofunction:: get_view_tab_info

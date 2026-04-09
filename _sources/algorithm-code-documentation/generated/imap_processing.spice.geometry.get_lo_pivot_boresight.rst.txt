@@ -1,0 +1,6 @@
+imap\_processing.spice.geometry.get\_lo\_pivot\_boresight
+=========================================================
+
+.. currentmodule:: imap_processing.spice.geometry
+
+.. autofunction:: get_lo_pivot_boresight

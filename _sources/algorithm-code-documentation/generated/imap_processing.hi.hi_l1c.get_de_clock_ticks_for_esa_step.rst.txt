@@ -1,0 +1,6 @@
+imap\_processing.hi.hi\_l1c.get\_de\_clock\_ticks\_for\_esa\_step
+=================================================================
+
+.. currentmodule:: imap_processing.hi.hi_l1c
+
+.. autofunction:: get_de_clock_ticks_for_esa_step

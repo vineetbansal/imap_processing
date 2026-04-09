@@ -1,0 +1,31 @@
+﻿imap\_processing.mag.l0.mag\_l0\_data
+=====================================
+
+.. automodule:: imap_processing.mag.l0.mag_l0_data
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+      :toctree:
+   
+      MagL0
+      Mode
+   
+   
+
+   
+   
+   
+
+
+

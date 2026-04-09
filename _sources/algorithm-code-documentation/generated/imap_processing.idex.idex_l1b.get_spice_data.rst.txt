@@ -1,0 +1,6 @@
+imap\_processing.idex.idex\_l1b.get\_spice\_data
+================================================
+
+.. currentmodule:: imap_processing.idex.idex_l1b
+
+.. autofunction:: get_spice_data

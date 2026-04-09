@@ -1,0 +1,6 @@
+imap\_processing.hi.hi\_l2.calculate\_all\_rates\_and\_intensities
+==================================================================
+
+.. currentmodule:: imap_processing.hi.hi_l2
+
+.. autofunction:: calculate_all_rates_and_intensities

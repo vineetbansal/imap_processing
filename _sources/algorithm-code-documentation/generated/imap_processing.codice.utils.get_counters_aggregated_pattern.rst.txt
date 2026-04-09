@@ -1,0 +1,6 @@
+imap\_processing.codice.utils.get\_counters\_aggregated\_pattern
+================================================================
+
+.. currentmodule:: imap_processing.codice.utils
+
+.. autofunction:: get_counters_aggregated_pattern

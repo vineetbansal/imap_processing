@@ -1,0 +1,18 @@
+imap\_processing.lo.l0.utils.bit\_decompression
+===============================================
+
+.. automodule:: imap_processing.lo.l0.utils.bit_decompression
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      decompress_int
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      Decompress
+   

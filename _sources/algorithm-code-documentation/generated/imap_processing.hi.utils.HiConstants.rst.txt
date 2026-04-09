@@ -1,0 +1,45 @@
+imap\_processing.hi.utils.HiConstants
+=====================================
+
+.. currentmodule:: imap_processing.hi.utils
+
+.. autoclass:: HiConstants
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~HiConstants.__init__
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~HiConstants.DE_CLOCK_TICK_S
+      ~HiConstants.DE_CLOCK_TICK_US
+      ~HiConstants.HALF_CLOCK_TICK_S
+      ~HiConstants.STAT_FILTER_0_THRESHOLD_FACTOR
+      ~HiConstants.STAT_FILTER_0_TOF_AB_LIMIT_NS
+      ~HiConstants.STAT_FILTER_1_CONSECUTIVE_SIGMA
+      ~HiConstants.STAT_FILTER_1_EXTREME_SIGMA
+      ~HiConstants.STAT_FILTER_1_MIN_CONSECUTIVE
+      ~HiConstants.STAT_FILTER_2_BIN_PADDING
+      ~HiConstants.STAT_FILTER_2_MAX_TIME_DELTA
+      ~HiConstants.STAT_FILTER_2_MIN_EVENTS
+      ~HiConstants.STAT_FILTER_MIN_POINTINGS
+      ~HiConstants.TOF1_BAD_VALUES
+      ~HiConstants.TOF1_TICK_DUR
+      ~HiConstants.TOF2_BAD_VALUES
+      ~HiConstants.TOF2_TICK_DUR
+      ~HiConstants.TOF3_BAD_VALUES
+      ~HiConstants.TOF3_TICK_DUR
+   
+   

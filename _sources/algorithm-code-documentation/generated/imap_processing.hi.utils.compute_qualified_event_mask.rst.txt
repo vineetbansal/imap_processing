@@ -1,0 +1,6 @@
+imap\_processing.hi.utils.compute\_qualified\_event\_mask
+=========================================================
+
+.. currentmodule:: imap_processing.hi.utils
+
+.. autofunction:: compute_qualified_event_mask

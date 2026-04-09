@@ -1,0 +1,6 @@
+imap\_processing.hi.hi\_l1b.de\_esa\_energy\_step
+=================================================
+
+.. currentmodule:: imap_processing.hi.hi_l1b
+
+.. autofunction:: de_esa_energy_step

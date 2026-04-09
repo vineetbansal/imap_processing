@@ -1,0 +1,6 @@
+imap\_processing.spice.geometry.solar\_longitude
+================================================
+
+.. currentmodule:: imap_processing.spice.geometry
+
+.. autofunction:: solar_longitude

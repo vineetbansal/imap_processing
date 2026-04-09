@@ -1,0 +1,6 @@
+imap\_processing.swe.l1b.swe\_l1b.read\_in\_flight\_cal\_data
+=============================================================
+
+.. currentmodule:: imap_processing.swe.l1b.swe_l1b
+
+.. autofunction:: read_in_flight_cal_data

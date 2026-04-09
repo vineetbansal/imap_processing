@@ -1,0 +1,42 @@
+imap\_processing.hi.utils.CoincidenceBitmap
+===========================================
+
+.. currentmodule:: imap_processing.hi.utils
+
+.. autoclass:: CoincidenceBitmap
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~CoincidenceBitmap.conjugate
+      ~CoincidenceBitmap.bit_length
+      ~CoincidenceBitmap.bit_count
+      ~CoincidenceBitmap.to_bytes
+      ~CoincidenceBitmap.from_bytes
+      ~CoincidenceBitmap.as_integer_ratio
+      ~CoincidenceBitmap.detector_hit_str_to_int
+      ~CoincidenceBitmap.__init__
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~CoincidenceBitmap.real
+      ~CoincidenceBitmap.imag
+      ~CoincidenceBitmap.numerator
+      ~CoincidenceBitmap.denominator
+      ~CoincidenceBitmap.A
+      ~CoincidenceBitmap.B
+      ~CoincidenceBitmap.C1
+      ~CoincidenceBitmap.C2
+   
+   

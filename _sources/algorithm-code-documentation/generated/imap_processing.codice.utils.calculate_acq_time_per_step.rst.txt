@@ -1,0 +1,6 @@
+imap\_processing.codice.utils.calculate\_acq\_time\_per\_step
+=============================================================
+
+.. currentmodule:: imap_processing.codice.utils
+
+.. autofunction:: calculate_acq_time_per_step

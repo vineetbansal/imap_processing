@@ -1,0 +1,6 @@
+imap\_processing.ultra.l0.decom\_ultra.get\_event\_id
+=====================================================
+
+.. currentmodule:: imap_processing.ultra.l0.decom_ultra
+
+.. autofunction:: get_event_id

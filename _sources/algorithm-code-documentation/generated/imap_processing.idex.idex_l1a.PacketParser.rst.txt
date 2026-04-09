@@ -1,0 +1,22 @@
+imap\_processing.idex.idex\_l1a.PacketParser
+============================================
+
+.. currentmodule:: imap_processing.idex.idex_l1a
+
+.. autoclass:: PacketParser
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~PacketParser.__init__
+   
+   
+
+   
+   
+   

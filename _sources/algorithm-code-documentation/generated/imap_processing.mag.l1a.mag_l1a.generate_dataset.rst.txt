@@ -1,0 +1,6 @@
+imap\_processing.mag.l1a.mag\_l1a.generate\_dataset
+===================================================
+
+.. currentmodule:: imap_processing.mag.l1a.mag_l1a
+
+.. autofunction:: generate_dataset

@@ -1,0 +1,44 @@
+imap\_processing.idex.idex\_l1a.Scitype
+=======================================
+
+.. currentmodule:: imap_processing.idex.idex_l1a
+
+.. autoclass:: Scitype
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Scitype.conjugate
+      ~Scitype.bit_length
+      ~Scitype.bit_count
+      ~Scitype.to_bytes
+      ~Scitype.from_bytes
+      ~Scitype.as_integer_ratio
+      ~Scitype.__init__
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Scitype.real
+      ~Scitype.imag
+      ~Scitype.numerator
+      ~Scitype.denominator
+      ~Scitype.FIRST_PACKET
+      ~Scitype.TOF_HIGH
+      ~Scitype.TOF_LOW
+      ~Scitype.TOF_MID
+      ~Scitype.TARGET_LOW
+      ~Scitype.TARGET_HIGH
+      ~Scitype.ION_GRID
+   
+   

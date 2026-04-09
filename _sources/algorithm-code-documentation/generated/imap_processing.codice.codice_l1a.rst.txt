@@ -1,0 +1,30 @@
+﻿imap\_processing.codice.codice\_l1a
+===================================
+
+.. automodule:: imap_processing.codice.codice_l1a
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+      :toctree:
+   
+      process_l1a
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+

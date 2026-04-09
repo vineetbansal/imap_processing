@@ -1,0 +1,30 @@
+﻿imap\_processing.ultra.l1b.goodtimes
+====================================
+
+.. automodule:: imap_processing.ultra.l1b.goodtimes
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+      :toctree:
+   
+      calculate_goodtimes
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+

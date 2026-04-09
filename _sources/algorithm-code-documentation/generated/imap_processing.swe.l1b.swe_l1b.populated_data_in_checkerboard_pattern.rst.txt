@@ -1,0 +1,6 @@
+imap\_processing.swe.l1b.swe\_l1b.populated\_data\_in\_checkerboard\_pattern
+============================================================================
+
+.. currentmodule:: imap_processing.swe.l1b.swe_l1b
+
+.. autofunction:: populated_data_in_checkerboard_pattern

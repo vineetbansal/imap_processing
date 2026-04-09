@@ -1,0 +1,6 @@
+imap\_processing.ultra.l1b.de.calculate\_events\_in\_pointing
+=============================================================
+
+.. currentmodule:: imap_processing.ultra.l1b.de
+
+.. autofunction:: calculate_events_in_pointing

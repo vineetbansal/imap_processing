@@ -1,0 +1,6 @@
+imap\_processing.hit.l1a.hit\_l1a.update\_livetime\_coord
+=========================================================
+
+.. currentmodule:: imap_processing.hit.l1a.hit_l1a
+
+.. autofunction:: update_livetime_coord

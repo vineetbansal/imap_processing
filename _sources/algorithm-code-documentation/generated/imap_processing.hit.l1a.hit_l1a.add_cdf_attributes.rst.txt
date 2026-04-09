@@ -1,0 +1,6 @@
+imap\_processing.hit.l1a.hit\_l1a.add\_cdf\_attributes
+======================================================
+
+.. currentmodule:: imap_processing.hit.l1a.hit_l1a
+
+.. autofunction:: add_cdf_attributes

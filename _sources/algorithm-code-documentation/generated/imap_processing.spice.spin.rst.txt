@@ -1,0 +1,36 @@
+﻿imap\_processing.spice.spin
+===========================
+
+.. automodule:: imap_processing.spice.spin
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+      :toctree:
+   
+      get_instrument_spin_phase
+      get_spacecraft_spin_phase
+      get_spin_angle
+      get_spin_data
+      get_spin_number
+      interpolate_spin_data
+      set_global_spin_table_paths
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+

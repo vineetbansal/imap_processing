@@ -1,0 +1,6 @@
+imap\_processing.idex.idex\_l2a.estimate\_dust\_mass
+====================================================
+
+.. currentmodule:: imap_processing.idex.idex_l2a
+
+.. autofunction:: estimate_dust_mass

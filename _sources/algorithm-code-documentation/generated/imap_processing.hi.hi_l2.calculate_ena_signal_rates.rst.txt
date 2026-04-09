@@ -1,0 +1,6 @@
+imap\_processing.hi.hi\_l2.calculate\_ena\_signal\_rates
+========================================================
+
+.. currentmodule:: imap_processing.hi.hi_l2
+
+.. autofunction:: calculate_ena_signal_rates

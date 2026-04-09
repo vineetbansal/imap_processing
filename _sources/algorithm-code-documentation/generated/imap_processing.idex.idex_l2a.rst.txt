@@ -1,0 +1,52 @@
+﻿imap\_processing.idex.idex\_l2a
+===============================
+
+.. automodule:: imap_processing.idex.idex_l2a
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+      :toctree:
+   
+      analyze_peaks
+      butter_lowpass_filter
+      calculate_area_under_emg
+      calculate_kappa
+      calculate_snr
+      calculate_velocity_and_mass
+      chi_square
+      estimate_dust_mass
+      fit_emg
+      fit_impact
+      idex_l2a
+      load_calibration_files
+      log_smooth_powerlaw
+      remove_signal_noise
+      sine_fit
+      time_to_mass
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+      :toctree:
+   
+      BaselineNoiseTime
+   
+   
+
+   
+   
+   
+
+
+

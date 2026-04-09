@@ -1,0 +1,36 @@
+﻿imap\_processing.spice.repoint
+==============================
+
+.. automodule:: imap_processing.spice.repoint
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+      :toctree:
+   
+      get_mid_point_state
+      get_pointing_mid_time
+      get_pointing_times
+      get_pointing_times_from_id
+      get_repoint_data
+      interpolate_repoint_data
+      set_global_repoint_table_paths
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+

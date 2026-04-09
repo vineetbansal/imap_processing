@@ -1,0 +1,6 @@
+imap\_processing.mag.l0.decom\_mag.generate\_dataset
+====================================================
+
+.. currentmodule:: imap_processing.mag.l0.decom_mag
+
+.. autofunction:: generate_dataset

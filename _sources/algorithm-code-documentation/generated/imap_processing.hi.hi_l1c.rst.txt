@@ -1,0 +1,39 @@
+﻿imap\_processing.hi.hi\_l1c
+===========================
+
+.. automodule:: imap_processing.hi.hi_l1c
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+      :toctree:
+   
+      empty_pset_dataset
+      find_last_de_packet_data
+      generate_pset_dataset
+      get_de_clock_ticks_for_esa_step
+      good_time_and_phase_mask
+      hi_l1c
+      pset_backgrounds
+      pset_counts
+      pset_exposure
+      pset_geometry
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+

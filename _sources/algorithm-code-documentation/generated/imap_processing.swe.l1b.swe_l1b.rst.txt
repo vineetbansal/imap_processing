@@ -1,0 +1,43 @@
+﻿imap\_processing.swe.l1b.swe\_l1b
+=================================
+
+.. automodule:: imap_processing.swe.l1b.swe_l1b
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+      :toctree:
+   
+      apply_in_flight_calibration
+      calculate_calibration_factor
+      convert_counts_to_rate
+      deadtime_correction
+      filter_full_cycle_data
+      find_cycle_starts
+      get_checker_board_pattern
+      get_esa_dataframe
+      get_esa_energy_pattern
+      get_indices_of_full_cycles
+      populated_data_in_checkerboard_pattern
+      read_in_flight_cal_data
+      swe_l1b
+      swe_l1b_science
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+

@@ -1,0 +1,48 @@
+﻿imap\_processing.hi.utils
+=========================
+
+.. automodule:: imap_processing.hi.utils
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+      :toctree:
+   
+      compute_qualified_event_mask
+      create_dataset_variables
+      filter_events_by_coincidence
+      full_dataarray
+      get_bin_range_with_wrap
+      get_tof_window_mask
+      iter_qualified_events_by_config
+      parse_sensor_number
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+      :toctree:
+   
+      CalibrationProductConfig
+      CoincidenceBitmap
+      EsaEnergyStepLookupTable
+      HIAPID
+      HiConstants
+   
+   
+
+   
+   
+   
+
+
+

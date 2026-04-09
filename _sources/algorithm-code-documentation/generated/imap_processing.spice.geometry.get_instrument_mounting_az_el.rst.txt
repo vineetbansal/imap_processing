@@ -1,0 +1,6 @@
+imap\_processing.spice.geometry.get\_instrument\_mounting\_az\_el
+=================================================================
+
+.. currentmodule:: imap_processing.spice.geometry
+
+.. autofunction:: get_instrument_mounting_az_el

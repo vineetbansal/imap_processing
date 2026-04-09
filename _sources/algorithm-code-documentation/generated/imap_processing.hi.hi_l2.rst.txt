@@ -1,0 +1,39 @@
+﻿imap\_processing.hi.hi\_l2
+==========================
+
+.. automodule:: imap_processing.hi.hi_l2
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+      :toctree:
+   
+      calculate_all_rates_and_intensities
+      calculate_ena_intensity
+      calculate_ena_signal_rates
+      cleanup_intermediate_variables
+      combine_calibration_products
+      combine_maps
+      create_sky_map_from_psets
+      esa_energy_df
+      hi_l2
+      process_single_pset
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+

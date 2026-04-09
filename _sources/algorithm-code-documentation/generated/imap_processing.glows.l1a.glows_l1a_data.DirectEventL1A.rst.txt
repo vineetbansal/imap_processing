@@ -1,0 +1,36 @@
+imap\_processing.glows.l1a.glows\_l1a\_data.DirectEventL1A
+==========================================================
+
+.. currentmodule:: imap_processing.glows.l1a.glows_l1a_data
+
+.. autoclass:: DirectEventL1A
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~DirectEventL1A.__init__
+      ~DirectEventL1A.finish_incomplete_packet
+      ~DirectEventL1A.merge_de_packets
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~DirectEventL1A.direct_events
+      ~DirectEventL1A.pkts_file_name
+      ~DirectEventL1A.l0
+      ~DirectEventL1A.de_data
+      ~DirectEventL1A.most_recent_seq
+      ~DirectEventL1A.missing_seq
+      ~DirectEventL1A.status_data
+   
+   

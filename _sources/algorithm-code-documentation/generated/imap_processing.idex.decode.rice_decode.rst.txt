@@ -1,0 +1,6 @@
+imap\_processing.idex.decode.rice\_decode
+=========================================
+
+.. currentmodule:: imap_processing.idex.decode
+
+.. autofunction:: rice_decode

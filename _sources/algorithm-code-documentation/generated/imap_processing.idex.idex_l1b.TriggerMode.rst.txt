@@ -1,0 +1,30 @@
+imap\_processing.idex.idex\_l1b.TriggerMode
+===========================================
+
+.. currentmodule:: imap_processing.idex.idex_l1b
+
+.. autoclass:: TriggerMode
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~TriggerMode.get_mode_label
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~TriggerMode.Threshold
+      ~TriggerMode.SinglePulse
+      ~TriggerMode.DoublePulse
+   
+   

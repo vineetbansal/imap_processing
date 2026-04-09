@@ -1,0 +1,6 @@
+imap\_processing.idex.idex\_l2b.get\_science\_acquisition\_on\_percentage
+=========================================================================
+
+.. currentmodule:: imap_processing.idex.idex_l2b
+
+.. autofunction:: get_science_acquisition_on_percentage

@@ -1,0 +1,40 @@
+imap\_processing.hi.hi\_l1b.TriggerId
+=====================================
+
+.. currentmodule:: imap_processing.hi.hi_l1b
+
+.. autoclass:: TriggerId
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~TriggerId.conjugate
+      ~TriggerId.bit_length
+      ~TriggerId.bit_count
+      ~TriggerId.to_bytes
+      ~TriggerId.from_bytes
+      ~TriggerId.as_integer_ratio
+      ~TriggerId.__init__
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~TriggerId.real
+      ~TriggerId.imag
+      ~TriggerId.numerator
+      ~TriggerId.denominator
+      ~TriggerId.A
+      ~TriggerId.B
+      ~TriggerId.C
+   
+   

@@ -1,0 +1,6 @@
+imap\_processing.idex.idex\_l2a.log\_smooth\_powerlaw
+=====================================================
+
+.. currentmodule:: imap_processing.idex.idex_l2a
+
+.. autofunction:: log_smooth_powerlaw

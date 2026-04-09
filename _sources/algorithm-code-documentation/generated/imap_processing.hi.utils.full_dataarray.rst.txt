@@ -1,0 +1,6 @@
+imap\_processing.hi.utils.full\_dataarray
+=========================================
+
+.. currentmodule:: imap_processing.hi.utils
+
+.. autofunction:: full_dataarray

@@ -1,0 +1,6 @@
+imap\_processing.ultra.l1c.spacecraft\_pset.calculate\_spacecraft\_pset
+=======================================================================
+
+.. currentmodule:: imap_processing.ultra.l1c.spacecraft_pset
+
+.. autofunction:: calculate_spacecraft_pset

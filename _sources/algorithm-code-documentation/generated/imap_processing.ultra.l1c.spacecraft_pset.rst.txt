@@ -1,0 +1,30 @@
+﻿imap\_processing.ultra.l1c.spacecraft\_pset
+===========================================
+
+.. automodule:: imap_processing.ultra.l1c.spacecraft_pset
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+      :toctree:
+   
+      calculate_spacecraft_pset
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+

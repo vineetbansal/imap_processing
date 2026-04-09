@@ -1,0 +1,6 @@
+imap\_processing.ultra.l1b.badtimes.calculate\_badtimes
+=======================================================
+
+.. currentmodule:: imap_processing.ultra.l1b.badtimes
+
+.. autofunction:: calculate_badtimes

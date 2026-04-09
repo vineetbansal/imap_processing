@@ -1,0 +1,6 @@
+imap\_processing.hi.hi\_l1a.hi\_packet\_file\_to\_datasets
+==========================================================
+
+.. currentmodule:: imap_processing.hi.hi_l1a
+
+.. autofunction:: hi_packet_file_to_datasets

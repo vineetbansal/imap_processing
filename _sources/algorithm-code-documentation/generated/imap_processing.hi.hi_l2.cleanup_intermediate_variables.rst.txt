@@ -1,0 +1,6 @@
+imap\_processing.hi.hi\_l2.cleanup\_intermediate\_variables
+===========================================================
+
+.. currentmodule:: imap_processing.hi.hi_l2
+
+.. autofunction:: cleanup_intermediate_variables

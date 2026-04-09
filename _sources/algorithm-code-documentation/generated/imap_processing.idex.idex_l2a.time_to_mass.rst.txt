@@ -1,0 +1,6 @@
+imap\_processing.idex.idex\_l2a.time\_to\_mass
+==============================================
+
+.. currentmodule:: imap_processing.idex.idex_l2a
+
+.. autofunction:: time_to_mass

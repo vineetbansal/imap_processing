@@ -1,0 +1,6 @@
+imap\_processing.codice.codice\_l2.get\_hi\_de\_luts
+====================================================
+
+.. currentmodule:: imap_processing.codice.codice_l2
+
+.. autofunction:: get_hi_de_luts

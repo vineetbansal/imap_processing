@@ -1,0 +1,12 @@
+imap\_processing.lo.l0.utils.binary\_string
+===========================================
+
+.. automodule:: imap_processing.lo.l0.utils.binary_string
+
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      BinaryString
+   

@@ -1,0 +1,6 @@
+imap\_processing.hi.utils.parse\_sensor\_number
+===============================================
+
+.. currentmodule:: imap_processing.hi.utils
+
+.. autofunction:: parse_sensor_number

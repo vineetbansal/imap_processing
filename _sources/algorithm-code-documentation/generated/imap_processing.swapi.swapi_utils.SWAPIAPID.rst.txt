@@ -1,0 +1,40 @@
+imap\_processing.swapi.swapi\_utils.SWAPIAPID
+=============================================
+
+.. currentmodule:: imap_processing.swapi.swapi_utils
+
+.. autoclass:: SWAPIAPID
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~SWAPIAPID.conjugate
+      ~SWAPIAPID.bit_length
+      ~SWAPIAPID.bit_count
+      ~SWAPIAPID.to_bytes
+      ~SWAPIAPID.from_bytes
+      ~SWAPIAPID.as_integer_ratio
+      ~SWAPIAPID.__init__
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~SWAPIAPID.real
+      ~SWAPIAPID.imag
+      ~SWAPIAPID.numerator
+      ~SWAPIAPID.denominator
+      ~SWAPIAPID.SWP_HK
+      ~SWAPIAPID.SWP_SCI
+      ~SWAPIAPID.SWP_AUT
+   
+   

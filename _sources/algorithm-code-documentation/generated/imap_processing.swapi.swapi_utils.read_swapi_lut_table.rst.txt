@@ -1,0 +1,6 @@
+imap\_processing.swapi.swapi\_utils.read\_swapi\_lut\_table
+===========================================================
+
+.. currentmodule:: imap_processing.swapi.swapi_utils
+
+.. autofunction:: read_swapi_lut_table

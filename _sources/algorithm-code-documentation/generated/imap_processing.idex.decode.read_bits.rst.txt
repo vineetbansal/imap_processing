@@ -1,0 +1,6 @@
+imap\_processing.idex.decode.read\_bits
+=======================================
+
+.. currentmodule:: imap_processing.idex.decode
+
+.. autofunction:: read_bits

@@ -1,0 +1,43 @@
+imap\_processing.spice.geometry.SpiceBody
+=========================================
+
+.. currentmodule:: imap_processing.spice.geometry
+
+.. autoclass:: SpiceBody
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~SpiceBody.conjugate
+      ~SpiceBody.bit_length
+      ~SpiceBody.bit_count
+      ~SpiceBody.to_bytes
+      ~SpiceBody.from_bytes
+      ~SpiceBody.as_integer_ratio
+      ~SpiceBody.__init__
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~SpiceBody.real
+      ~SpiceBody.imag
+      ~SpiceBody.numerator
+      ~SpiceBody.denominator
+      ~SpiceBody.IMAP
+      ~SpiceBody.IMAP_SPACECRAFT
+      ~SpiceBody.IMAP_DPS
+      ~SpiceBody.SOLAR_SYSTEM_BARYCENTER
+      ~SpiceBody.SUN
+      ~SpiceBody.EARTH
+   
+   

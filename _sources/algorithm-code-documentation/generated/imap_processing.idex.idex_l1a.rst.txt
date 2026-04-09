@@ -1,0 +1,39 @@
+﻿imap\_processing.idex.idex\_l1a
+===============================
+
+.. automodule:: imap_processing.idex.idex_l1a
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+      :toctree:
+   
+      calculate_idex_event_time
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+      :toctree:
+   
+      PacketParser
+      RawDustEvent
+      Scitype
+   
+   
+
+   
+   
+   
+
+
+

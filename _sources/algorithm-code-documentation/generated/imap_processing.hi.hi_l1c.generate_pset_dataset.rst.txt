@@ -1,0 +1,6 @@
+imap\_processing.hi.hi\_l1c.generate\_pset\_dataset
+===================================================
+
+.. currentmodule:: imap_processing.hi.hi_l1c
+
+.. autofunction:: generate_pset_dataset

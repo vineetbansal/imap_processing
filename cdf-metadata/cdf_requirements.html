@@ -1,0 +1,1005 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>CDF File Requirements &#8212; imap_processing 0.0.0.post1.dev0+d3d45b2 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=7f76b32a3354e82990f2" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=7f76b32a3354e82990f2" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=7f76b32a3354e82990f2"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=7f76b32a3354e82990f2" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=7f76b32a3354e82990f2" />
+
+    <script src="../_static/documentation_options.js?v=a0789c6a"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'cdf-metadata/cdf_requirements';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Verifying CDF contents" href="cdf_verification.html" />
+    <link rel="prev" title="CDF Introduction" href="cdf_introduction.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/imap-mark-hor-multicolor-dark.png" class="logo__image only-light" alt="imap_processing 0.0.0.post1.dev0+d3d45b2 documentation - Home"/>
+    <img src="../_static/imap-mark-hor-multicolor-dark.png" class="logo__image only-dark pst-js-only" alt="imap_processing 0.0.0.post1.dev0+d3d45b2 documentation - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../development/index.html">
+    Onboarding & Collaboration
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../data-access/index.html">
+    IMAP Data Access Tool
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    CDF Metadata Resources
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../filename-convention/index.html">
+    Filename Conventions
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../project-management/index.html">
+    SDC Project Management
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../algorithm-code-documentation/index.html">
+    Algorithm Code Documentation
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/IMAP-Science-Operations-Center/imap_processing" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../development/index.html">
+    Onboarding & Collaboration
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../data-access/index.html">
+    IMAP Data Access Tool
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    CDF Metadata Resources
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../filename-convention/index.html">
+    Filename Conventions
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../project-management/index.html">
+    SDC Project Management
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../algorithm-code-documentation/index.html">
+    Algorithm Code Documentation
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/IMAP-Science-Operations-Center/imap_processing" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item pst-sidebar-collapse"><button id="pst-collapse-sidebar-button" aria-expanded="true" aria-controls="pst-primary-sidebar"><svg class="pst-icon svg-inline--fa" role="img" aria-hidden="true" focusable="false" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+    <path fill="currentColor" d="M3 15.5C2.36232 15.5 1.74874 15.2564 1.28478 14.8189C0.820828 14.3815 0.541576 13.7832 0.504167 13.1467L0.5 13L0.5 3C0.499965 2.36232 0.743605 1.74874 1.18107 1.28478C1.61854 0.820828 2.21676 0.541576 2.85333 0.504167L3 0.5L13 0.5C13.6377 0.499965 14.2513 0.743605 14.7152 1.18107C15.1792 1.61854 15.4584 2.21676 15.4958 2.85333L15.5 3L15.5 13C15.5 13.6377 15.2564 14.2513 14.8189 14.7152C14.3815 15.1792 13.7832 15.4584 13.1467 15.4958L13 15.5L3 15.5ZM3 13.8333L10.5 13.8333L10.5 2.16667L3 2.16667C2.79589 2.16669 2.59889 2.24163 2.44636 2.37726C2.29383 2.5129 2.19638 2.69979 2.1725 2.9025L2.16667 3L2.16667 13C2.16669 13.2041 2.24163 13.4011 2.37726 13.5536C2.5129 13.7062 2.69979 13.8036 2.9025 13.8275L3 13.8333ZM6.65583 10.325L6.5775 10.2558L4.91083 8.58917C4.76735 8.44567 4.68116 8.25476 4.66843 8.05223C4.65569 7.84971 4.71729 7.6495 4.84167 7.48917L4.91083 7.41083L6.5775 5.74417C6.72747 5.59471 6.9287 5.50794 7.14032 5.50148C7.35194 5.49502 7.55809 5.56935 7.7169 5.70937C7.8757 5.8494 7.97525 6.04463 7.99533 6.25539C8.01541 6.46616 7.95451 6.67667 7.825 6.84417L7.75583 6.9225L6.67917 8L7.75583 9.0775C7.89931 9.22099 7.98551 9.41191 7.99824 9.61443C8.01097 9.81695 7.94938 10.0172 7.825 10.1775L7.75583 10.2558C7.61234 10.3993 7.42142 10.4855 7.2189 10.4982C7.01638 10.511 6.81617 10.4494 6.65583 10.325Z"/>
+  </svg>
+  <span class="pst-collapse-sidebar-label">Collapse Sidebar</span>
+  <span class="pst-expand-sidebar-label">Expand Sidebar</span>
+</button></div>
+        <div class="sidebar-primary-item">
+
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="cdf_introduction.html">CDF Introduction</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">CDF File Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cdf_verification.html">Verifying CDF contents</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">CDF Metadata</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">CDF File Requirements</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="cdf-file-requirements">
+<h1>CDF File Requirements<a class="headerlink" href="#cdf-file-requirements" title="Link to this heading">#</a></h1>
+<p>The following page describes the necessary contents inside of a CDF file generated for the IMAP mission.</p>
+<p>For a more general introduction to CDF files, see <a class="reference internal" href="cdf_introduction.html#cdf-introduction"><span class="std std-ref">CDF Introduction</span></a>.</p>
+<p>For sample code that will generate a file that matches the below guidelines, see <a class="reference internal" href="../development/tools/xarray-to-cdf.html#imap-xarray-to-cdf-example"><span class="std std-ref">IMAP xarray_to_cdf Example</span></a></p>
+<section id="required-attributes-of-istp-compliant-cdf-file-components">
+<h2>Required Attributes of ISTP Compliant CDF File Components<a class="headerlink" href="#required-attributes-of-istp-compliant-cdf-file-components" title="Link to this heading">#</a></h2>
+<p>CDF files are composed of these main components: Global Attributes, Data Variables, Support Data Variables, and Metadata Variables. Each of these components has a set of required attributes that must be included in the CDF file.</p>
+<section id="required-global-attributes">
+<h3>Required Global Attributes<a class="headerlink" href="#required-global-attributes" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Data_type</p></li>
+<li><p>Data_version</p></li>
+<li><p>Descriptor</p></li>
+<li><p>Discipline</p></li>
+<li><p>Instrument_type</p></li>
+<li><p>Logical_file_id</p></li>
+<li><p>Logical_source</p></li>
+<li><p>Logical_source_description</p></li>
+<li><p>Mission_group</p></li>
+<li><p>PI_affiliation</p></li>
+<li><p>PI_name</p></li>
+<li><p>Project</p></li>
+<li><p>Source_name</p></li>
+<li><p>TEXT</p></li>
+</ul>
+<p>Section <a class="reference internal" href="#global-attributes"><span class="std std-ref">Global Attributes</span></a> provides more information on each of these attributes.</p>
+</section>
+<section id="required-data-attributes">
+<h3>Required Data Attributes<a class="headerlink" href="#required-data-attributes" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>CATDESC</p></li>
+<li><p>DEPEND_0</p></li>
+<li><p>DEPEND_i (if applicable)</p></li>
+<li><p>DISPLAY_TYPE</p></li>
+<li><p>FIELDNAM</p></li>
+<li><p>FILLVAL</p></li>
+<li><p>FORMAT or FORM_PTR. Required to have at least one of these attributes.</p></li>
+<li><p>LABLAXIS or LABL_PTR_i. Required to have at least one of these attributes.</p></li>
+<li><p>UNITS or UNIT_PTR. Required to have at least one of these attributes.</p></li>
+<li><p>VALIDMIN</p></li>
+<li><p>VALIDMAX</p></li>
+<li><p>VAR_TYPE = “data”</p></li>
+</ul>
+<p>Section <a class="reference internal" href="#data-attributes"><span class="std std-ref">Data Attributes</span></a> provides more information on each of these attributes.</p>
+</section>
+<section id="required-support-data-attributes">
+<h3>Required Support Data Attributes<a class="headerlink" href="#required-support-data-attributes" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>CATDESC</p></li>
+<li><p>DEPEND_0 (if time varying)</p></li>
+<li><p>FIELDNAM</p></li>
+<li><p>FILLVAL (if time varying)</p></li>
+<li><p>FORMAT or FORM_PTR. Required to have at least one of these attributes.</p></li>
+<li><p>SI_CONVERSION</p></li>
+<li><p>UNITS/UNIT_PTR</p></li>
+<li><p>VALIDMIN (if time varying)</p></li>
+<li><p>VALIDMAX (if time varying)</p></li>
+<li><p>VAR_TYPE = “support_data”</p></li>
+</ul>
+<p>Variables appearing in a data variable’s <code class="docutils literal notranslate"><span class="pre">DEPEND_i</span></code> attribute require a minimal set of their own attributes to fulfill their role in supporting the data variable.</p>
+<p>Section <a class="reference internal" href="#data-attributes"><span class="std std-ref">Data Attributes</span></a> provides more information on each of these attributes.</p>
+</section>
+<section id="required-metadata-data-attributes">
+<h3>Required Metadata Data Attributes<a class="headerlink" href="#required-metadata-data-attributes" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>CATDESC</p></li>
+<li><p>DEPEND_0 (if time varying)</p></li>
+<li><p>FIELDNAM</p></li>
+<li><p>FILLVAL (if time varying)</p></li>
+<li><p>FORMAT or FORM_PTR. Required to have at least one of these attributes.</p></li>
+<li><p>VAR_TYPE = “metadata”</p></li>
+</ul>
+<p>Section <a class="reference internal" href="#data-attributes"><span class="std std-ref">Data Attributes</span></a> provides more information on each of these attributes.</p>
+<p>See <a class="reference internal" href="#metadata-attributes"><span class="std std-ref">Metadata Data</span></a> for more information on metadata data attributes for <code class="docutils literal notranslate"><span class="pre">LABL_PTR_i</span></code>.</p>
+</section>
+</section>
+<section id="global-attributes">
+<span id="id1"></span><h2>Global Attributes<a class="headerlink" href="#global-attributes" title="Link to this heading">#</a></h2>
+<p>Global attributes are used to provide information about the data set as an entity. Together with variables and variable attributes, the global attributes make the data correctly and independently usable by someone not connected with the instrument team, and hence, a good archive product.</p>
+<p>Global attributes that have been identified for use with IMAP data products are listed below. Additional Global attributes can be defined but they must start with a letter and can otherwise contain letters, numbers and the underscore character (no other special characters allowed). Note that CDF attributes are case-sensitive and must exactly follow what is shown here.</p>
+<p>ISTP Compliant Global Attributes are listed here: <a class="reference external" href="https://spdf.gsfc.nasa.gov/istp_guide/gattributes.html">https://spdf.gsfc.nasa.gov/istp_guide/gattributes.html</a>, and notes about how they are used on IMAP are below -</p>
+<section id="data-type">
+<h3><code class="docutils literal notranslate"><span class="pre">Data_type</span></code><a class="headerlink" href="#data-type" title="Link to this heading">#</a></h3>
+<p>It is a combination of the following filename components: <code class="docutils literal notranslate"><span class="pre">data</span> <span class="pre">level</span></code>, and data product <code class="docutils literal notranslate"><span class="pre">descriptor</span></code>.  It contains both the short form and the long form of the name, separated by a <code class="docutils literal notranslate"><span class="pre">&gt;</span></code> (e.g. <code class="docutils literal notranslate"><span class="pre">L1A_norm&gt;Level-1A</span> <span class="pre">normal</span> <span class="pre">rate</span></code>). The short form is separated by a <code class="docutils literal notranslate"><span class="pre">_</span></code>.</p>
+</section>
+<section id="data-version">
+<h3><code class="docutils literal notranslate"><span class="pre">Data_version</span></code><a class="headerlink" href="#data-version" title="Link to this heading">#</a></h3>
+<p>This attribute identifies the version of a particular CDF data file. (e.g. <code class="docutils literal notranslate"><span class="pre">v001</span></code>)</p>
+</section>
+<section id="descriptor">
+<h3><code class="docutils literal notranslate"><span class="pre">Descriptor</span></code><a class="headerlink" href="#descriptor" title="Link to this heading">#</a></h3>
+<p>This attribute identifies the name of the instrument or sensor that collected the data. Note that this is not the same as <code class="docutils literal notranslate"><span class="pre">descriptor</span></code> from <code class="docutils literal notranslate"><span class="pre">Data_type</span></code>, but the name of the instrument that collected the data.</p>
+<p>Both a long name and a short name are given.  For any data file, only a single value is allowed.</p>
+<p>For IMAP, one of the following must be used:</p>
+<ul class="simple">
+<li><p>CoDICE&gt;Compact Dual Ion Composition Experiment</p></li>
+<li><p>GLOWS&gt;GLObal Solar Wind Structure</p></li>
+<li><p>HIT&gt;High-energy Ion Telescope</p></li>
+<li><p>IDEX&gt;Interstellar Dust Experiment</p></li>
+<li><p>IMAP-Hi&gt;Interstellar Mapping and Acceleration Probe High</p></li>
+<li><p>IMAP-Lo&gt;Interstellar Mapping and Acceleration Probe Low</p></li>
+<li><p>IMAP-Ultra&gt;Interstellar Mapping and Acceleration Probe Ultra</p></li>
+<li><p>MAG&gt;Magnetometer</p></li>
+<li><p>SWAPI&gt;Solar wind and Pickup Ions</p></li>
+<li><p>SWE&gt;Solar Wind Electrons</p></li>
+</ul>
+</section>
+<section id="discipline">
+<h3><code class="docutils literal notranslate"><span class="pre">Discipline</span></code><a class="headerlink" href="#discipline" title="Link to this heading">#</a></h3>
+<p>For IMAP, this value should always be <code class="docutils literal notranslate"><span class="pre">Space</span> <span class="pre">Physics&gt;Heliospheric</span> <span class="pre">Physics</span></code>. This attribute describes both the science discipline and sub discipline.</p>
+</section>
+<section id="generation-date">
+<h3><code class="docutils literal notranslate"><span class="pre">Generation_date</span></code><a class="headerlink" href="#generation-date" title="Link to this heading">#</a></h3>
+<p>Date stamps the creation of the file using the syntax YYYYMMDD, e.g. <code class="docutils literal notranslate"><span class="pre">20150923</span></code>.</p>
+</section>
+<section id="instrument-type">
+<h3><code class="docutils literal notranslate"><span class="pre">Instrument_type</span></code><a class="headerlink" href="#instrument-type" title="Link to this heading">#</a></h3>
+<p>This attribute is used to facilitate making choices of instrument type. More than one entry is allowed. Valid IMAP values include:</p>
+<ul class="simple">
+<li><p>Electric Fields (space)</p></li>
+<li><p>Magnetic Fields (space)</p></li>
+<li><p>Particles (space)</p></li>
+<li><p>Plasma and Solar Wind</p></li>
+<li><p>Ephemeris</p></li>
+</ul>
+</section>
+<section id="logical-file-id">
+<h3><code class="docutils literal notranslate"><span class="pre">Logical_file_id</span></code><a class="headerlink" href="#logical-file-id" title="Link to this heading">#</a></h3>
+<p>This attribute stores the name of the CDF file as described in Section 3.1 but without the file extension or version (e.g. <code class="docutils literal notranslate"><span class="pre">.cdf</span></code>). This attribute is required to avoid loss of the original source in the case of accidental (or intentional) renaming. This attribute must be manually set by the user during creation.</p>
+</section>
+<section id="logical-source">
+<h3><code class="docutils literal notranslate"><span class="pre">Logical_source</span></code><a class="headerlink" href="#logical-source" title="Link to this heading">#</a></h3>
+<p>This attribute determines the file naming convention and is used by CDA Web.  It is composed of the following other attributes:</p>
+<ul class="simple">
+<li><p>Source_name - (e.g. <code class="docutils literal notranslate"><span class="pre">imap</span></code>)</p></li>
+<li><p>Descriptor - (e.g. the instrument, see above)</p></li>
+<li><p>Data_type - (e.g. data level, and descriptor)</p></li>
+</ul>
+<p>These three attributes can be ordered in different ways based on the user’s filename convention. SPDF uses default naming conventions of <code class="docutils literal notranslate"><span class="pre">source_datatype_descriptor_yyyyMMdd</span></code> but IMAP uses this convention, <code class="docutils literal notranslate"><span class="pre">source_descriptor_datatype_yyyyMMdd_vNNN</span></code>. For example, <code class="docutils literal notranslate"><span class="pre">source_datatype_descriptor_yyyyMMdd</span></code> would result in filename convention like this, <code class="docutils literal notranslate"><span class="pre">imap_l1a_norm-raw_mag_20241122</span></code>, whereas <code class="docutils literal notranslate"><span class="pre">source_descriptor_datatype_yyyyMMdd_vNNN</span></code> would result in filename convention like this, <code class="docutils literal notranslate"><span class="pre">imap_mag_l1a_norm-raw_20241122_v001</span></code>. See <a class="reference internal" href="../filename-convention/naming-conventions.html#naming-conventions"><span class="std std-ref">Science File Naming Conventions</span></a> for more details of IMAP filename convention.</p>
+</section>
+<section id="logical-source-description">
+<h3><code class="docutils literal notranslate"><span class="pre">Logical_source_description</span></code><a class="headerlink" href="#logical-source-description" title="Link to this heading">#</a></h3>
+<p>This attribute writes out the full words associated with the encrypted Logical_source above, e.g., <code class="docutils literal notranslate"><span class="pre">Level</span> <span class="pre">1</span> <span class="pre">Dual</span> <span class="pre">Electron</span> <span class="pre">Spectrometer</span> <span class="pre">Survey</span> <span class="pre">Data</span></code>. Users on CDAWeb see this value on their website.</p>
+</section>
+<section id="mission-group">
+<h3><code class="docutils literal notranslate"><span class="pre">Mission_group</span></code><a class="headerlink" href="#mission-group" title="Link to this heading">#</a></h3>
+<p>This attribute has a single value and is used to facilitate making choices of source through CDAWeb.  This value should be <code class="docutils literal notranslate"><span class="pre">IMAP</span></code>.</p>
+</section>
+<section id="pi-affiliation">
+<h3><code class="docutils literal notranslate"><span class="pre">PI_affiliation</span></code><a class="headerlink" href="#pi-affiliation" title="Link to this heading">#</a></h3>
+<p>This attribute value should include the IMAP mission PI affiliation followed by a comma separated list of any Co-I affiliations that are responsible for this particular dataset. The following are valid IMAP values, of which the abbreviations should be used exclusively within this attribute value, and the full text of the affiliation included in the general text attribute as it is used solely in plot labels.</p>
+<ul class="simple">
+<li><p>JHU/APL - Applied Physics Laboratory</p></li>
+<li><p>GSFC - Goddard Space Flight Center</p></li>
+<li><p>LANL - Los Alamos National Laboratory</p></li>
+<li><p>LASP - Laboratory for Atmospheric and Space Physics</p></li>
+<li><p>SWRI - Southwest Research Institute</p></li>
+<li><p>UCLA - University of California Los Angeles</p></li>
+<li><p>UNH - University of New Hampshire</p></li>
+</ul>
+</section>
+<section id="pi-name">
+<h3><code class="docutils literal notranslate"><span class="pre">PI_name</span></code><a class="headerlink" href="#pi-name" title="Link to this heading">#</a></h3>
+<p>This attribute value should include first initial and last name of the IMAP mission PI followed by a comma-separated list of any Co-Is that are responsible for this particular dataset. For example, a single PI entry in this attribute would be: <code class="docutils literal notranslate"><span class="pre">Dr.</span> <span class="pre">David</span> <span class="pre">J.</span> <span class="pre">McComas</span></code>.</p>
+</section>
+<section id="project">
+<h3><code class="docutils literal notranslate"><span class="pre">Project</span></code><a class="headerlink" href="#project" title="Link to this heading">#</a></h3>
+<p>This attribute identifies the name of the project and indicates ownership. For IMAP, this value should be <code class="docutils literal notranslate"><span class="pre">STP&gt;Solar-Terrestrial</span> <span class="pre">Physics</span></code>.</p>
+</section>
+<section id="source-name">
+<h3><code class="docutils literal notranslate"><span class="pre">Source_name</span></code><a class="headerlink" href="#source-name" title="Link to this heading">#</a></h3>
+<p>This attribute identifies the observatory where the data originated. For IMAP, this should simply be <code class="docutils literal notranslate"><span class="pre">IMAP</span></code></p>
+</section>
+<section id="text">
+<h3><code class="docutils literal notranslate"><span class="pre">TEXT</span></code><a class="headerlink" href="#text" title="Link to this heading">#</a></h3>
+<p>This attribute is an SPDF standard global attribute, which is a text description of the experiment whose data is included in the CDF. A reference to a journal article(s) or to a webpage describing the experiment is essential, and constitutes the minimum requirement. A written description of the data set is also desirable. This attribute can have as many entries as necessary to contain the desired information. Typically, this attribute is about a paragraph in length and is not shown on CDAWeb.</p>
+</section>
+<section id="mods">
+<h3><code class="docutils literal notranslate"><span class="pre">MODS</span></code><a class="headerlink" href="#mods" title="Link to this heading">#</a></h3>
+<p>This attribute is an SPDF standard global attribute, which is used to denote the history of modifications made to the CDF data set. The MODS attribute should contain a description of all significant changes to the data set, essentially capturing a log of high-level release notes. This attribute can have as many entries as necessary and should be updated if there is a major version change.</p>
+</section>
+<section id="parents">
+<h3><code class="docutils literal notranslate"><span class="pre">Parents</span></code><a class="headerlink" href="#parents" title="Link to this heading">#</a></h3>
+<p>This attribute lists the parent data files for files of derived and merged data sets. The syntax for a CDF parent is: <code class="docutils literal notranslate"><span class="pre">CDF&gt;logical_file_id</span></code>. Multiple entry values are used for multiple parents. This attribute is required for any data products that are derived from 2 or more data sources and the file names of parent data should be clearly identified. CDF parents may include source files with non-cdf extensions.</p>
+</section>
+<section id="example">
+<h3>Example<a class="headerlink" href="#example" title="Link to this heading">#</a></h3>
+<p>Here is an example of what this looks like for CoDICE:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;Project&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;STP&gt;Solar-Terrestrial Physics&#39;</span><span class="p">],</span>
+ <span class="s1">&#39;Source_name&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;IMAP&gt;Interstellar Mapping and Acceleration Probe&#39;</span><span class="p">],</span>
+ <span class="s1">&#39;Discipline&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Solar Physics&gt;Heliospheric Physics&#39;</span><span class="p">],</span>
+ <span class="s1">&#39;Mission_group&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;IMAP&gt;Interstellar Mapping and Acceleration Probe&#39;</span><span class="p">],</span>
+ <span class="s1">&#39;PI_name&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Dr. David J. McComas&#39;</span><span class="p">],</span>
+ <span class="s1">&#39;PI_affiliation&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Princeton Plasma Physics Laboratory&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;100 Stellarator Road, Princeton, NJ 08540&#39;</span><span class="p">],</span>
+ <span class="s1">&#39;File_naming_convention&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;source_descriptor_datatype_yyyyMMdd_vNNN&#39;</span><span class="p">],</span>
+ <span class="s1">&#39;Data_version&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;001&#39;</span><span class="p">],</span>
+ <span class="s1">&#39;Descriptor&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;CoDICE&gt;Compact Dual Ion Composition Experiment&#39;</span><span class="p">],</span>
+ <span class="s1">&#39;TEXT&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;The Compact Dual Ion Composition Experiment (CoDICE) will measure the distributions and composition of interstellar pickup ions (PUIs), particles that make it through the heliosheath into the heliosphere. CoDICE also collects and characterizes solar wind ions including the mass and composition of highly energized particles (called suprathermal) from the Sun. CoDICE combines an electrostatic analyzer(ESA) with a Time-Of-Flight versus Energy (TOF / E) subsystem to simultaneously  measure the velocity, arrival direction, ionic charge state, and mass of specific species of ions in the LISM. CoDICE also has a path for higher energy particles to skip the ESA but still get measured by the common TOF / E system. These measurements are critical in determining the Local Interstellar Medium (LISM) composition and flow properties, the origin of the enigmatic suprathermal tails on the solar wind distributions and advance understanding of the acceleration of particles in the heliosphere.&#39;</span><span class="p">],</span>
+ <span class="s1">&#39;Instrument_type&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Particles (space)&#39;</span><span class="p">],</span>
+ <span class="s1">&#39;Logical_file_id&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;imap_codice_l1a_lo-sw-species-counts_20240319_v001&#39;</span><span class="p">],</span>
+ <span class="s1">&#39;Data_type&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;L1A_lo-sw-species-counts-&gt;Level-1A Lo Sunward Species Counts Data&#39;</span><span class="p">],</span>
+ <span class="s1">&#39;Logical_source&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;imap_codice_l1a_lo-sw-species-counts&#39;</span><span class="p">],</span>
+ <span class="s1">&#39;Logical_source_description&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;IMAP Mission CoDICE Instrument Level-1A Lo Sunward Species Counts Data&#39;</span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+</section>
+<section id="imap-variables">
+<h2>IMAP Variables<a class="headerlink" href="#imap-variables" title="Link to this heading">#</a></h2>
+<p>There are three types of variables that should be included in CDF files: data, support data, and metadata. Additionally, required attributes are listed with each variable type listed below.</p>
+<p>To facilitate data exchange and software development, variable names should be consistent across the IMAP instruments. Additionally, it is preferable that data types are consistent throughout all IMAP data products (e.g. all real variables are <code class="docutils literal notranslate"><span class="pre">CDF_REAL4</span></code>, all integer variables are <code class="docutils literal notranslate"><span class="pre">CDF_INT4</span></code>, and flag/status variables are <code class="docutils literal notranslate"><span class="pre">UINT4</span></code>).
+This is not to imply that only these data types are allowable within IMAP CDF files. All CDF supported data types are available for use by IMAP. For detailed information and examples, please see the following ISTP/IACG webpage:
+<a class="reference external" href="http://spdf.gsfc.nasa.gov/istp_guide/variables.html">http://spdf.gsfc.nasa.gov/istp_guide/variables.html</a></p>
+<section id="data">
+<h3>Data<a class="headerlink" href="#data" title="Link to this heading">#</a></h3>
+<p>These are variables of primary importance (e.g., density, magnetic field, particle flux). Data are always time (record) varying, but can be of any dimensionality or CDF supported data type. Real or Integer data are always defined as having one element.</p>
+<section id="required-epoch-variable">
+<h4>Required Epoch Variable<a class="headerlink" href="#required-epoch-variable" title="Link to this heading">#</a></h4>
+<p>All IMAP CDF Data files must contain at least one variable of data type <code class="docutils literal notranslate"><span class="pre">CDF_TIME_TT2000</span></code> named <code class="docutils literal notranslate"><span class="pre">epoch</span></code>.  All time varying variables in the CDF data set will depend on either this <code class="docutils literal notranslate"><span class="pre">epoch</span></code> or another variable of type <code class="docutils literal notranslate"><span class="pre">CDF_TIME_TT2000</span></code>.  More than one <code class="docutils literal notranslate"><span class="pre">CDF_TIME_TT2000</span></code> variable is allowed in a data set to allow for more than one time resolution.  It is recommended that all such time variable use <code class="docutils literal notranslate"><span class="pre">epoch</span></code> within their variable name.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In the <code class="docutils literal notranslate"><span class="pre">xarray_to_cdf</span></code> function described in <a class="reference internal" href="../development/tools/xarray-to-cdf.html#cdflib-xarray-to-cdf"><span class="std std-ref">cdflib.xarray_to_cdf</span></a>, all variables with <code class="docutils literal notranslate"><span class="pre">epoch</span></code> in their name will be converted to <code class="docutils literal notranslate"><span class="pre">CDF_TT2000</span></code> if the flag “istp=True” is given.</p>
+</div>
+<p>For ISTP compliance, the time value of a record refers to the <strong>center</strong> of the accumulation period if the measurement is not an instantaneous one.</p>
+<p><code class="docutils literal notranslate"><span class="pre">CDF_TT2000</span></code> is defined as an 8-byte signed integer with the following characteristics:</p>
+<ul class="simple">
+<li><p>Time_Base=J2000 (Julian date 2451545.0 TT or 2000 January 1, 12h TT)</p></li>
+<li><p>Resolution=nanoseconds</p></li>
+<li><p>Time_Scale=Terrestrial Time (TT)</p></li>
+<li><p>Units=nanoseconds</p></li>
+<li><p>Reference_Position=rotating Earth Geoid</p></li>
+</ul>
+<p>Given a current list of leap seconds, conversion between TT and UTC is straightforward (<code class="docutils literal notranslate"><span class="pre">TT</span> <span class="pre">=</span> <span class="pre">TAI</span> <span class="pre">+</span> <span class="pre">32.184s</span></code>; <code class="docutils literal notranslate"><span class="pre">TT</span> <span class="pre">=</span> <span class="pre">UTC</span> <span class="pre">+</span> <span class="pre">deltaAT</span> <span class="pre">+</span> <span class="pre">32.184s</span></code>, where <code class="docutils literal notranslate"><span class="pre">deltaAT</span></code> is the sum of the leap seconds since 1960; for example, for 2009, <code class="docutils literal notranslate"><span class="pre">deltaAT</span> <span class="pre">=</span> <span class="pre">34s</span></code>). Pad values of <code class="docutils literal notranslate"><span class="pre">-9223372036854775808</span> <span class="pre">(0x8000000000000000)</span></code> which corresponds to <code class="docutils literal notranslate"><span class="pre">1707-09-22T12:13:15.145224192</span></code>; recommended <code class="docutils literal notranslate"><span class="pre">FILLVAL</span></code> is same.</p>
+<p>It is proposed that the required data variables <code class="docutils literal notranslate"><span class="pre">VALIDMIN</span></code> and <code class="docutils literal notranslate"><span class="pre">VALIDMAX</span></code> are given values corresponding to the dates <code class="docutils literal notranslate"><span class="pre">1990-01-01T00:00:00</span></code> and <code class="docutils literal notranslate"><span class="pre">2100-01-01T00:00:00</span></code> as these are well outside any expected valid times.</p>
+</section>
+<section id="data-attributes">
+<span id="id2"></span><h4>Data Attributes<a class="headerlink" href="#data-attributes" title="Link to this heading">#</a></h4>
+<section id="catdesc">
+<h5><code class="docutils literal notranslate"><span class="pre">CATDESC</span></code><a class="headerlink" href="#catdesc" title="Link to this heading">#</a></h5>
+<p>This is a human readable description of the data variable. Generally, this is an 80-character string which describes the variable and what it depends on.</p>
+</section>
+<section id="depend-0">
+<h5><code class="docutils literal notranslate"><span class="pre">DEPEND_0</span></code><a class="headerlink" href="#depend-0" title="Link to this heading">#</a></h5>
+<p>Explicitly ties a data variable to the time variable on which it depends (i.e. - the <cite>epoch</cite> variable). All variables which change with time must have a <code class="docutils literal notranslate"><span class="pre">DEPEND_0</span></code> attribute defined.</p>
+<p>Even if there is no time dependency of the data <em>within</em> the CDF file, SPDF has stated it would still be ideal to include a <code class="docutils literal notranslate"><span class="pre">DEPEND_0</span></code> for each variable to ensure continuity <em>between</em> CDF files.</p>
+</section>
+<section id="depend-i">
+<h5><code class="docutils literal notranslate"><span class="pre">DEPEND_i</span></code><a class="headerlink" href="#depend-i" title="Link to this heading">#</a></h5>
+<p>Ties a dimensional data variable to a <code class="docutils literal notranslate"><span class="pre">SUPPORT_DATA</span></code> variable on which the i-th dimension of the data variable depends. The number of <code class="docutils literal notranslate"><span class="pre">DEPEND</span></code> attributes must match the dimensionality of the variable, i.e., a one-dimensional variable must have a <code class="docutils literal notranslate"><span class="pre">DEPEND_1</span></code>, a two-dimensional variable must have a <code class="docutils literal notranslate"><span class="pre">DEPEND_1</span></code> and a <code class="docutils literal notranslate"><span class="pre">DEPEND_2</span></code> attribute, etc. The value of the attribute must be a variable in the same CDF data set. It is strongly recommended that <code class="docutils literal notranslate"><span class="pre">DEPEND_i</span></code> variables hold values in physical units. <code class="docutils literal notranslate"><span class="pre">DEPEND_i</span></code> variables also require their own attributes, as described in the following sections.</p>
+</section>
+<section id="display-type">
+<h5><code class="docutils literal notranslate"><span class="pre">DISPLAY_TYPE</span></code><a class="headerlink" href="#display-type" title="Link to this heading">#</a></h5>
+<p>This tells automated software, such as CDAWEB, how the data should be displayed.
+Examples of valid values include</p>
+<ul class="simple">
+<li><p>time_series</p></li>
+<li><p>spectrogram</p></li>
+<li><p>stack_plot</p></li>
+<li><p>image</p></li>
+</ul>
+</section>
+<section id="fieldnam">
+<h5><code class="docutils literal notranslate"><span class="pre">FIELDNAM</span></code><a class="headerlink" href="#fieldnam" title="Link to this heading">#</a></h5>
+<p>A shortened version of <code class="docutils literal notranslate"><span class="pre">CATDESC</span></code> which can be used to label a plot axis or as a data listing heading. This is a string, up to ~30 characters in length.</p>
+</section>
+<section id="fillval">
+<h5><code class="docutils literal notranslate"><span class="pre">FILLVAL</span></code><a class="headerlink" href="#fillval" title="Link to this heading">#</a></h5>
+<p>Identifies the fill value used where data values are known to be bad or missing.
+<code class="docutils literal notranslate"><span class="pre">FILLVAL</span></code> is required for time-varying variables. Fill data are always non-valid data. The ISTP standard fill values are listed below:</p>
+<ul class="simple">
+<li><p>BYTE —- -128</p></li>
+<li><p>INTEGER*2 —- -32768</p></li>
+<li><p>INTEGER*4 —- -2147483648</p></li>
+<li><p>INTEGER*8 —- -9223372036854775808</p></li>
+<li><p>Unsigned INTEGER*1 —- 255</p></li>
+<li><p>Unsigned INTEGER*2 —- 65535</p></li>
+<li><p>Unsigned INTEGER*4 —- 4294967295</p></li>
+<li><p>REAL*4 —- -1.0E31</p></li>
+<li><p>REAL*8 —- -1.0E31</p></li>
+<li><p>EPOCH —- -1.0E31 (9999-12-31:23:59:59.999)</p></li>
+<li><p>EPOCH16 —- -1.0E31 (9999-12-31:23:59:59.999999999999)</p></li>
+<li><p>TT2000 —- -9223372036854775808LL (9999-12-31:23:59:59.999999999999)</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Using <code class="docutils literal notranslate"><span class="pre">xarray_to_cdf</span></code>, these values are automatically cast to be the same type of data as the CDF variable they are attached to.  For example, if your data is <code class="docutils literal notranslate"><span class="pre">REAL4</span></code> and you specify your <code class="docutils literal notranslate"><span class="pre">VALIDMIN=0</span></code>, the function will know to store the <code class="docutils literal notranslate"><span class="pre">0</span></code> as a <code class="docutils literal notranslate"><span class="pre">REAL4</span></code> type as well.</p>
+</div>
+</section>
+<section id="format">
+<h5><code class="docutils literal notranslate"><span class="pre">FORMAT</span></code><a class="headerlink" href="#format" title="Link to this heading">#</a></h5>
+<p>This field allows software to properly format the associated data when displayed on a screen or output to a file. Format can be specified using either Fortran or C format codes. For instance, <code class="docutils literal notranslate"><span class="pre">F10.3</span></code> indicates that the data should be displayed across 10 characters where 3 of those characters are to the right of the decimal.</p>
+</section>
+<section id="lablaxis">
+<h5><code class="docutils literal notranslate"><span class="pre">LABLAXIS</span></code><a class="headerlink" href="#lablaxis" title="Link to this heading">#</a></h5>
+<p>Required if not using <code class="docutils literal notranslate"><span class="pre">LABL_PTR_i</span></code>.</p>
+<p>Used to label a plot axis or to provide a heading for a data listing. This field is generally 6-10 characters.</p>
+</section>
+<section id="labl-ptr-i">
+<h5><code class="docutils literal notranslate"><span class="pre">LABL_PTR_i</span></code><a class="headerlink" href="#labl-ptr-i" title="Link to this heading">#</a></h5>
+<p>Required if not using <code class="docutils literal notranslate"><span class="pre">LABLAXIS</span></code>.</p>
+<p>Used to label a dimensional variable when one value of <code class="docutils literal notranslate"><span class="pre">LABLAXIS</span></code> is not sufficient to describe the variable or to label all the axes. <code class="docutils literal notranslate"><span class="pre">LABL_PTR_i</span></code> is used instead of <code class="docutils literal notranslate"><span class="pre">LABLAXIS</span></code>, where i can take on any value from 1 to n where n is the total number of dimensions of the original variable.</p>
+<p>The value of <code class="docutils literal notranslate"><span class="pre">LABL_PTR_1</span></code> is another variable within the same CDF, which will contain the short character strings to describe the first dimension of the original variable.</p>
+<p>An example of how <code class="docutils literal notranslate"><span class="pre">LABL_PTR_i</span></code> can be used is found at this following link: <a class="reference external" href="https://spdf.gsfc.nasa.gov/istp_guide/variables.html#data_eg2">https://spdf.gsfc.nasa.gov/istp_guide/variables.html#data_eg2</a></p>
+</section>
+<section id="units">
+<h5><code class="docutils literal notranslate"><span class="pre">UNITS</span></code><a class="headerlink" href="#units" title="Link to this heading">#</a></h5>
+<p>A 6-20 character string that identifies the units of the variable (e.g. <code class="docutils literal notranslate"><span class="pre">nT</span></code> for magnetic field). Use a blank character, rather than <code class="docutils literal notranslate"><span class="pre">None</span></code> or <code class="docutils literal notranslate"><span class="pre">unitless</span></code>, for variables that have no units (e.g., a ratio or a direction cosine).</p>
+</section>
+<section id="validmin">
+<h5><code class="docutils literal notranslate"><span class="pre">VALIDMIN</span></code><a class="headerlink" href="#validmin" title="Link to this heading">#</a></h5>
+<p>The minimum value for a particular variable that is expected over the lifetime of the mission. Used by application software to filter out values that are out of range. The value must match the data type of the variable.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Using <code class="docutils literal notranslate"><span class="pre">xarray_to_cdf</span></code>, these values are automatically cast to be the same type of data as the CDF variable they are attached to</p>
+</div>
+</section>
+<section id="validmax">
+<h5><code class="docutils literal notranslate"><span class="pre">VALIDMAX</span></code><a class="headerlink" href="#validmax" title="Link to this heading">#</a></h5>
+<p>The maximum value for a particular variable that is expected over the lifetime of the mission. Used by application software to filter out values that are out of range. The value must match the data type of the variable.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Using <code class="docutils literal notranslate"><span class="pre">xarray_to_cdf</span></code>, these values are automatically cast to be the same type of data as the CDF variable they are attached to</p>
+</div>
+</section>
+<section id="var-type">
+<h5><code class="docutils literal notranslate"><span class="pre">VAR_TYPE</span></code><a class="headerlink" href="#var-type" title="Link to this heading">#</a></h5>
+<p>Used in CDAWeb to indicate if the data should be used directly by users. Possible values:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">data</span></code> - integer or real numbers that are plottable</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">support_data</span></code> - integer or real “attached” or secondary data variables</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">metadata</span></code> - labels or character variables</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ignore_data</span></code> - data that can be ignored by CDAWeb plots. For example, packet header info.</p></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="support-data">
+<h3>Support Data<a class="headerlink" href="#support-data" title="Link to this heading">#</a></h3>
+<p>These are variables of secondary importance employed as <code class="docutils literal notranslate"><span class="pre">DEPEND_i</span></code> variables, but they may also be used for housekeeping or other information not normally used for scientific analysis.</p>
+<section id="delta-plus-var-and-delta-minus-var">
+<h4><code class="docutils literal notranslate"><span class="pre">DELTA_PLUS_VAR</span></code> and <code class="docutils literal notranslate"><span class="pre">DELTA_MINUS_VAR</span></code><a class="headerlink" href="#delta-plus-var-and-delta-minus-var" title="Link to this heading">#</a></h4>
+<p><code class="docutils literal notranslate"><span class="pre">DEPEND_i</span></code> variables are typically physical values along the corresponding i-th dimension of the parent data variable, such as energy levels or spectral frequencies. The discrete set of values are located with respect to the sampling bin by <code class="docutils literal notranslate"><span class="pre">DELTA_PLUS_VAR</span></code> and <code class="docutils literal notranslate"><span class="pre">DELTA_MINUS_VAR</span></code>, which hold the variable name containing the distance from the value to the bin edge. It is strongly recommended that IMAP <code class="docutils literal notranslate"><span class="pre">DEPEND_i</span></code> variables include <code class="docutils literal notranslate"><span class="pre">DELTA_PLUS_VAR</span></code> and <code class="docutils literal notranslate"><span class="pre">DELTA_MINUS_VAR</span></code> attributes that point to the appropriate variable(s) located elsewhere in the CDF file.</p>
+<p>For example, for a variable <code class="docutils literal notranslate"><span class="pre">energy_level</span></code> that is the <code class="docutils literal notranslate"><span class="pre">DEPEND_i</span></code> of a particle distribution, if <code class="docutils literal notranslate"><span class="pre">energy_dplus</span></code> and <code class="docutils literal notranslate"><span class="pre">energy_dminus</span></code> are two variables pointed to by <code class="docutils literal notranslate"><span class="pre">energy_level</span></code>’s <code class="docutils literal notranslate"><span class="pre">DELTA_PLUS_VAR</span></code> and <code class="docutils literal notranslate"><span class="pre">DELTA_MINUS_VAR</span></code>, then element [n] corresponds to the energy bin <code class="docutils literal notranslate"><span class="pre">(energy_level[n]-energy_dminus[n])</span></code> to <code class="docutils literal notranslate"><span class="pre">(energy_level[n]+energy_dplus[n])</span></code>. <code class="docutils literal notranslate"><span class="pre">DELTA_PLUS_VAR</span></code> and <code class="docutils literal notranslate"><span class="pre">DELTA_MINUS_VAR</span></code> can point to the same variable which implies that <code class="docutils literal notranslate"><span class="pre">energy_level[n]</span></code> is in the center of the bin. <code class="docutils literal notranslate"><span class="pre">DELTA_PLUS_VAR</span></code> and <code class="docutils literal notranslate"><span class="pre">DELTA_MINUS_VAR</span></code> must have the same number of values as the size of the corresponding dimension of the parent variable, or hold a single constant value which applies for all bins. They can be record-varying, in which case they require a <code class="docutils literal notranslate"><span class="pre">DEPEND_0</span></code> attribute.</p>
+<p>In the case of the <code class="docutils literal notranslate"><span class="pre">DEPEND_0</span></code> <code class="docutils literal notranslate"><span class="pre">timetag</span></code> variable, <code class="docutils literal notranslate"><span class="pre">DELTA_PLUS_VAR</span></code> and <code class="docutils literal notranslate"><span class="pre">DELTA_MINUS_VAR</span></code> together with the <code class="docutils literal notranslate"><span class="pre">timetag</span></code> identify the time interval over which the data was sampled, integrated, or otherwise regarded as representative of. <code class="docutils literal notranslate"><span class="pre">DELTA_PLUS_VAR</span></code> and <code class="docutils literal notranslate"><span class="pre">DELTA_MINUS_VAR</span></code> variables require <code class="docutils literal notranslate"><span class="pre">FIELDNAM</span></code>, <code class="docutils literal notranslate"><span class="pre">UNITS</span></code> and <code class="docutils literal notranslate"><span class="pre">SI_CONVERSION</span></code> attributes; in principle, these could differ from those of the <code class="docutils literal notranslate"><span class="pre">DEPEND_i</span></code> parent. They also require <code class="docutils literal notranslate"><span class="pre">VAR_TYPE=SUPPORT_DATA</span></code>. Other standard attributes might be helpful.</p>
+</section>
+</section>
+<section id="metadata-data">
+<span id="metadata-attributes"></span><h3>Metadata Data<a class="headerlink" href="#metadata-data" title="Link to this heading">#</a></h3>
+<p>When data has more than one dimension, in addition to <code class="docutils literal notranslate"><span class="pre">DEPEND_i</span></code>, it requires to have <code class="docutils literal notranslate"><span class="pre">LABL_PTR_i</span></code>
+attributes for each extra dimension of the data. <code class="docutils literal notranslate"><span class="pre">LABL_PTR_i</span></code> of corresponding <code class="docutils literal notranslate"><span class="pre">DEPEND_i</span></code> will
+required to have these attributes:</p>
+<ul class="simple">
+<li><p>CATDESC</p></li>
+<li><p>FIELDNAM</p></li>
+<li><p>FORMAT</p></li>
+<li><p>VAR_TYPE = “metadata”</p></li>
+</ul>
+<p>In this case, <code class="docutils literal notranslate"><span class="pre">FORMAT</span></code> is required to be of character type. For example, <code class="docutils literal notranslate"><span class="pre">FORMAT:</span> <span class="pre">A10</span></code> indicating that the data is a string of 10 characters.</p>
+<p>This is used to label the axes of the data in a plot. For example, if the data is a 2D plot of energy vs. time, the <code class="docutils literal notranslate"><span class="pre">LABL_PTR_1</span></code> would be the energy axis. Time is already labeled by the <code class="docutils literal notranslate"><span class="pre">DEPEND_0</span></code> attribute.</p>
+</section>
+</section>
+<section id="variable-naming-convention">
+<h2>Variable Naming Convention<a class="headerlink" href="#variable-naming-convention" title="Link to this heading">#</a></h2>
+<section id="data-variables">
+<h3>Data Variables<a class="headerlink" href="#data-variables" title="Link to this heading">#</a></h3>
+<p>IMAP data variables should adhere to the following naming conventions:</p>
+<p><code class="docutils literal notranslate"><span class="pre">parameter[_coordinateSystem][_timeInterval]</span></code></p>
+<p>An underscore is used to separate different fields in the variable name.
+It is strongly recommended that variable name employ further fields, qualifiers, and information designed to identify unambiguously the nature of the variable, and instrument mode.
+These variable names may only include lowercase letters, numbers, and underscores.  No upper-case letters, hyphens, or other special characters are allowed.</p>
+<section id="required">
+<h4>Required<a class="headerlink" href="#required" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>parameter - a short representation of the physical parameter held in the variable. (e.g. <code class="docutils literal notranslate"><span class="pre">density</span></code>, <code class="docutils literal notranslate"><span class="pre">temperature</span></code>, <code class="docutils literal notranslate"><span class="pre">energy</span></code>)</p></li>
+</ul>
+</section>
+<section id="optional">
+<h4>Optional<a class="headerlink" href="#optional" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>coordinateSystem - an identifier for the coordinate system in which the parameter is set (e.g. <code class="docutils literal notranslate"><span class="pre">gse</span></code>, <code class="docutils literal notranslate"><span class="pre">gsm</span></code>, <code class="docutils literal notranslate"><span class="pre">rtn</span></code>)</p></li>
+<li><p>timeInterval - an identifier for the time interval over which the parameter is valid (e.g. <code class="docutils literal notranslate"><span class="pre">1sec</span></code>, <code class="docutils literal notranslate"><span class="pre">10sec</span></code>, <code class="docutils literal notranslate"><span class="pre">1min</span></code>, <code class="docutils literal notranslate"><span class="pre">1hour</span></code>)</p></li>
+</ul>
+</section>
+</section>
+<section id="support-data-variables">
+<h3>Support Data Variables<a class="headerlink" href="#support-data-variables" title="Link to this heading">#</a></h3>
+<p>Support data variable names must begin with a letter and can contain numbers and underscores, but no other special characters. Support data variable names need not follow the same naming convention as Data Variables (5.1.1) but may be shortened for convenience.</p>
+</section>
+</section>
+<section id="file-naming-convention">
+<h2>File Naming Convention<a class="headerlink" href="#file-naming-convention" title="Link to this heading">#</a></h2>
+<p>See <a class="reference internal" href="../filename-convention/naming-conventions.html#naming-conventions"><span class="std std-ref">Science File Naming Conventions</span></a> for a description of the file naming convention for IMAP CDF files.</p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="cdf_introduction.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">CDF Introduction</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="cdf_verification.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Verifying CDF contents</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#required-attributes-of-istp-compliant-cdf-file-components">Required Attributes of ISTP Compliant CDF File Components</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#required-global-attributes">Required Global Attributes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#required-data-attributes">Required Data Attributes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#required-support-data-attributes">Required Support Data Attributes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#required-metadata-data-attributes">Required Metadata Data Attributes</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#global-attributes">Global Attributes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-type"><code class="docutils literal notranslate"><span class="pre">Data_type</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-version"><code class="docutils literal notranslate"><span class="pre">Data_version</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#descriptor"><code class="docutils literal notranslate"><span class="pre">Descriptor</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#discipline"><code class="docutils literal notranslate"><span class="pre">Discipline</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generation-date"><code class="docutils literal notranslate"><span class="pre">Generation_date</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#instrument-type"><code class="docutils literal notranslate"><span class="pre">Instrument_type</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#logical-file-id"><code class="docutils literal notranslate"><span class="pre">Logical_file_id</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#logical-source"><code class="docutils literal notranslate"><span class="pre">Logical_source</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#logical-source-description"><code class="docutils literal notranslate"><span class="pre">Logical_source_description</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mission-group"><code class="docutils literal notranslate"><span class="pre">Mission_group</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pi-affiliation"><code class="docutils literal notranslate"><span class="pre">PI_affiliation</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pi-name"><code class="docutils literal notranslate"><span class="pre">PI_name</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#project"><code class="docutils literal notranslate"><span class="pre">Project</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#source-name"><code class="docutils literal notranslate"><span class="pre">Source_name</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#text"><code class="docutils literal notranslate"><span class="pre">TEXT</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mods"><code class="docutils literal notranslate"><span class="pre">MODS</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parents"><code class="docutils literal notranslate"><span class="pre">Parents</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#imap-variables">IMAP Variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data">Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#required-epoch-variable">Required Epoch Variable</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#data-attributes">Data Attributes</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#catdesc"><code class="docutils literal notranslate"><span class="pre">CATDESC</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#depend-0"><code class="docutils literal notranslate"><span class="pre">DEPEND_0</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#depend-i"><code class="docutils literal notranslate"><span class="pre">DEPEND_i</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#display-type"><code class="docutils literal notranslate"><span class="pre">DISPLAY_TYPE</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#fieldnam"><code class="docutils literal notranslate"><span class="pre">FIELDNAM</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#fillval"><code class="docutils literal notranslate"><span class="pre">FILLVAL</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#format"><code class="docutils literal notranslate"><span class="pre">FORMAT</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#lablaxis"><code class="docutils literal notranslate"><span class="pre">LABLAXIS</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#labl-ptr-i"><code class="docutils literal notranslate"><span class="pre">LABL_PTR_i</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#units"><code class="docutils literal notranslate"><span class="pre">UNITS</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#validmin"><code class="docutils literal notranslate"><span class="pre">VALIDMIN</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#validmax"><code class="docutils literal notranslate"><span class="pre">VALIDMAX</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#var-type"><code class="docutils literal notranslate"><span class="pre">VAR_TYPE</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#support-data">Support Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#delta-plus-var-and-delta-minus-var"><code class="docutils literal notranslate"><span class="pre">DELTA_PLUS_VAR</span></code> and <code class="docutils literal notranslate"><span class="pre">DELTA_MINUS_VAR</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metadata-data">Metadata Data</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-naming-convention">Variable Naming Convention</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-variables">Data Variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#required">Required</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#optional">Optional</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#support-data-variables">Support Data Variables</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#file-naming-convention">File Naming Convention</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/cdf-metadata/cdf_requirements.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=7f76b32a3354e82990f2"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=7f76b32a3354e82990f2"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, Regents of the University of Colorado.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.0.4.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.17.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

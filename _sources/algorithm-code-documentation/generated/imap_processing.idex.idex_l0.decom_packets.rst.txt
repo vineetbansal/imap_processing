@@ -1,0 +1,6 @@
+imap\_processing.idex.idex\_l0.decom\_packets
+=============================================
+
+.. currentmodule:: imap_processing.idex.idex_l0
+
+.. autofunction:: decom_packets

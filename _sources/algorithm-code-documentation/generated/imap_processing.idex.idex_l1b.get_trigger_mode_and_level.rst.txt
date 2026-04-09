@@ -1,0 +1,6 @@
+imap\_processing.idex.idex\_l1b.get\_trigger\_mode\_and\_level
+==============================================================
+
+.. currentmodule:: imap_processing.idex.idex_l1b
+
+.. autofunction:: get_trigger_mode_and_level

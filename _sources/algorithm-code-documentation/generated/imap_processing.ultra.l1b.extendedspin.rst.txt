@@ -1,0 +1,30 @@
+﻿imap\_processing.ultra.l1b.extendedspin
+=======================================
+
+.. automodule:: imap_processing.ultra.l1b.extendedspin
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+      :toctree:
+   
+      calculate_extendedspin
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+

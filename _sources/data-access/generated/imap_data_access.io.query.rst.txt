@@ -1,0 +1,23 @@
+﻿imap\_data\_access.io.query
+===========================
+
+.. automodule:: imap_data_access.io.query
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+

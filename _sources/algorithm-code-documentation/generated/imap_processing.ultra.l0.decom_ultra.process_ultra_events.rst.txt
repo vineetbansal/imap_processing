@@ -1,0 +1,6 @@
+imap\_processing.ultra.l0.decom\_ultra.process\_ultra\_events
+=============================================================
+
+.. currentmodule:: imap_processing.ultra.l0.decom_ultra
+
+.. autofunction:: process_ultra_events

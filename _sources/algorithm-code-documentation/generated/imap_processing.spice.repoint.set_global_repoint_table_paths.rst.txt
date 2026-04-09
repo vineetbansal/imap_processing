@@ -1,0 +1,6 @@
+imap\_processing.spice.repoint.set\_global\_repoint\_table\_paths
+=================================================================
+
+.. currentmodule:: imap_processing.spice.repoint
+
+.. autofunction:: set_global_repoint_table_paths

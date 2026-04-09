@@ -1,0 +1,38 @@
+imap\_processing.mag.l1a.mag\_l1a\_data.MagL1aPacketProperties
+==============================================================
+
+.. currentmodule:: imap_processing.mag.l1a.mag_l1a_data
+
+.. autoclass:: MagL1aPacketProperties
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~MagL1aPacketProperties.__init__
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~MagL1aPacketProperties.shcoarse
+      ~MagL1aPacketProperties.start_time
+      ~MagL1aPacketProperties.vectors_per_second
+      ~MagL1aPacketProperties.pus_ssubtype
+      ~MagL1aPacketProperties.src_seq_ctr
+      ~MagL1aPacketProperties.compression
+      ~MagL1aPacketProperties.mago_is_primary
+      ~MagL1aPacketProperties.first_byte
+      ~MagL1aPacketProperties.seconds_per_packet
+      ~MagL1aPacketProperties.total_vectors
+      ~MagL1aPacketProperties.compression_width
+   
+   

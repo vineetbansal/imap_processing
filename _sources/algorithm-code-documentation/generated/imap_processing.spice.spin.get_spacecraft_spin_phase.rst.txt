@@ -1,0 +1,6 @@
+imap\_processing.spice.spin.get\_spacecraft\_spin\_phase
+========================================================
+
+.. currentmodule:: imap_processing.spice.spin
+
+.. autofunction:: get_spacecraft_spin_phase

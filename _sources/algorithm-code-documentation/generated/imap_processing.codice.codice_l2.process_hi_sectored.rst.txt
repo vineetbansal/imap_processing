@@ -1,0 +1,6 @@
+imap\_processing.codice.codice\_l2.process\_hi\_sectored
+========================================================
+
+.. currentmodule:: imap_processing.codice.codice_l2
+
+.. autofunction:: process_hi_sectored

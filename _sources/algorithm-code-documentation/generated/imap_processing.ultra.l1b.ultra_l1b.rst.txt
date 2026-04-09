@@ -1,0 +1,30 @@
+﻿imap\_processing.ultra.l1b.ultra\_l1b
+=====================================
+
+.. automodule:: imap_processing.ultra.l1b.ultra_l1b
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+      :toctree:
+   
+      ultra_l1b
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+

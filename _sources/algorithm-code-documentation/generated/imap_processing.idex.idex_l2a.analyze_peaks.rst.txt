@@ -1,0 +1,6 @@
+imap\_processing.idex.idex\_l2a.analyze\_peaks
+==============================================
+
+.. currentmodule:: imap_processing.idex.idex_l2a
+
+.. autofunction:: analyze_peaks

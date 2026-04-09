@@ -1,0 +1,31 @@
+imap\_processing.mag.l1a.mag\_l1a\_data.TimeTuple
+=================================================
+
+.. currentmodule:: imap_processing.mag.l1a.mag_l1a_data
+
+.. autoclass:: TimeTuple
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~TimeTuple.__init__
+      ~TimeTuple.to_j2000ns
+      ~TimeTuple.to_seconds
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~TimeTuple.coarse_time
+      ~TimeTuple.fine_time
+   
+   

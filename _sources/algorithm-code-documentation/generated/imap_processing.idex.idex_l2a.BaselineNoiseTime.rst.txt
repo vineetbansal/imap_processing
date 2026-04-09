@@ -1,0 +1,39 @@
+imap\_processing.idex.idex\_l2a.BaselineNoiseTime
+=================================================
+
+.. currentmodule:: imap_processing.idex.idex_l2a
+
+.. autoclass:: BaselineNoiseTime
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~BaselineNoiseTime.conjugate
+      ~BaselineNoiseTime.bit_length
+      ~BaselineNoiseTime.bit_count
+      ~BaselineNoiseTime.to_bytes
+      ~BaselineNoiseTime.from_bytes
+      ~BaselineNoiseTime.as_integer_ratio
+      ~BaselineNoiseTime.__init__
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~BaselineNoiseTime.real
+      ~BaselineNoiseTime.imag
+      ~BaselineNoiseTime.numerator
+      ~BaselineNoiseTime.denominator
+      ~BaselineNoiseTime.START
+      ~BaselineNoiseTime.STOP
+   
+   

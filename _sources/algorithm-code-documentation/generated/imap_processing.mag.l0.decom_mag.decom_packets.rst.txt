@@ -1,0 +1,6 @@
+imap\_processing.mag.l0.decom\_mag.decom\_packets
+=================================================
+
+.. currentmodule:: imap_processing.mag.l0.decom_mag
+
+.. autofunction:: decom_packets

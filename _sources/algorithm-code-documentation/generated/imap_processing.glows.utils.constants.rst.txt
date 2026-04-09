@@ -1,0 +1,32 @@
+﻿imap\_processing.glows.utils.constants
+======================================
+
+.. automodule:: imap_processing.glows.utils.constants
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+      :toctree:
+   
+      DirectEvent
+      GlowsConstants
+      TimeTuple
+   
+   
+
+   
+   
+   
+
+
+

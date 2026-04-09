@@ -1,0 +1,6 @@
+imap\_processing.swe.l1b.swe\_l1b.find\_cycle\_starts
+=====================================================
+
+.. currentmodule:: imap_processing.swe.l1b.swe_l1b
+
+.. autofunction:: find_cycle_starts

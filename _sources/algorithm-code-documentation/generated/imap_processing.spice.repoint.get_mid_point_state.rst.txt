@@ -1,0 +1,6 @@
+imap\_processing.spice.repoint.get\_mid\_point\_state
+=====================================================
+
+.. currentmodule:: imap_processing.spice.repoint
+
+.. autofunction:: get_mid_point_state

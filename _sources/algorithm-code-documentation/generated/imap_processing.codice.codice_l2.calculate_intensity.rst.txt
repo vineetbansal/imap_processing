@@ -1,0 +1,6 @@
+imap\_processing.codice.codice\_l2.calculate\_intensity
+=======================================================
+
+.. currentmodule:: imap_processing.codice.codice_l2
+
+.. autofunction:: calculate_intensity

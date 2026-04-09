@@ -1,0 +1,6 @@
+imap\_processing.ultra.l1b.goodtimes.calculate\_goodtimes
+=========================================================
+
+.. currentmodule:: imap_processing.ultra.l1b.goodtimes
+
+.. autofunction:: calculate_goodtimes

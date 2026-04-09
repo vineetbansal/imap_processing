@@ -1,0 +1,6 @@
+imap\_processing.spice.spin.set\_global\_spin\_table\_paths
+===========================================================
+
+.. currentmodule:: imap_processing.spice.spin
+
+.. autofunction:: set_global_spin_table_paths

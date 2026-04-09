@@ -1,0 +1,44 @@
+imap\_processing.codice.utils.CoDICECompression
+===============================================
+
+.. currentmodule:: imap_processing.codice.utils
+
+.. autoclass:: CoDICECompression
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~CoDICECompression.conjugate
+      ~CoDICECompression.bit_length
+      ~CoDICECompression.bit_count
+      ~CoDICECompression.to_bytes
+      ~CoDICECompression.from_bytes
+      ~CoDICECompression.as_integer_ratio
+      ~CoDICECompression.__init__
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~CoDICECompression.real
+      ~CoDICECompression.imag
+      ~CoDICECompression.numerator
+      ~CoDICECompression.denominator
+      ~CoDICECompression.NO_COMPRESSION
+      ~CoDICECompression.LOSSY_A
+      ~CoDICECompression.LOSSY_B
+      ~CoDICECompression.LOSSLESS
+      ~CoDICECompression.LOSSY_A_LOSSLESS
+      ~CoDICECompression.LOSSY_B_LOSSLESS
+      ~CoDICECompression.PACK_24_BIT
+   
+   

@@ -1,0 +1,6 @@
+imap\_processing.hi.hi\_l1c.good\_time\_and\_phase\_mask
+========================================================
+
+.. currentmodule:: imap_processing.hi.hi_l1c
+
+.. autofunction:: good_time_and_phase_mask

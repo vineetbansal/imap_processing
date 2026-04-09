@@ -1,0 +1,47 @@
+imap\_processing.mag.l0.mag\_l0\_data.MagL0
+===========================================
+
+.. currentmodule:: imap_processing.mag.l0.mag_l0_data
+
+.. autoclass:: MagL0
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~MagL0.__init__
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~MagL0.ccsds_header
+      ~MagL0.SHCOARSE
+      ~MagL0.PUS_SPARE1
+      ~MagL0.PUS_VERSION
+      ~MagL0.PUS_SPARE2
+      ~MagL0.PUS_STYPE
+      ~MagL0.PUS_SSUBTYPE
+      ~MagL0.COMPRESSION
+      ~MagL0.MAGO_ACT
+      ~MagL0.MAGI_ACT
+      ~MagL0.PRI_SENS
+      ~MagL0.SPARE1
+      ~MagL0.PRI_VECSEC
+      ~MagL0.SEC_VECSEC
+      ~MagL0.SPARE2
+      ~MagL0.PRI_COARSETM
+      ~MagL0.PRI_FNTM
+      ~MagL0.SEC_COARSETM
+      ~MagL0.SEC_FNTM
+      ~MagL0.VECTORS
+   
+   

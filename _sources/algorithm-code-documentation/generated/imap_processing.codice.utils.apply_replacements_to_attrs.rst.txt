@@ -1,0 +1,6 @@
+imap\_processing.codice.utils.apply\_replacements\_to\_attrs
+============================================================
+
+.. currentmodule:: imap_processing.codice.utils
+
+.. autofunction:: apply_replacements_to_attrs

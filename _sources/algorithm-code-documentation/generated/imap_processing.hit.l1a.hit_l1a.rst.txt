@@ -1,0 +1,39 @@
+﻿imap\_processing.hit.l1a.hit\_l1a
+=================================
+
+.. automodule:: imap_processing.hit.l1a.hit_l1a
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+      :toctree:
+   
+      add_cdf_attributes
+      calculate_uncertainties
+      filter_dataset_to_processing_day
+      find_complete_mod10_sets
+      hit_l1a
+      process_science
+      subcom_sectorates
+      subset_livetime
+      subset_sectored_counts
+      update_livetime_coord
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+

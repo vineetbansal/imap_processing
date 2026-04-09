@@ -1,0 +1,6 @@
+imap\_processing.codice.codice\_l2.get\_mpq\_calc\_energy\_conversion\_vals
+===========================================================================
+
+.. currentmodule:: imap_processing.codice.codice_l2
+
+.. autofunction:: get_mpq_calc_energy_conversion_vals

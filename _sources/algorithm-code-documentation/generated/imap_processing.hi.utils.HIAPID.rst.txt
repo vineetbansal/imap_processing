@@ -1,0 +1,48 @@
+imap\_processing.hi.utils.HIAPID
+================================
+
+.. currentmodule:: imap_processing.hi.utils
+
+.. autoclass:: HIAPID
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~HIAPID.conjugate
+      ~HIAPID.bit_length
+      ~HIAPID.bit_count
+      ~HIAPID.to_bytes
+      ~HIAPID.from_bytes
+      ~HIAPID.as_integer_ratio
+      ~HIAPID.__init__
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~HIAPID.real
+      ~HIAPID.imag
+      ~HIAPID.numerator
+      ~HIAPID.denominator
+      ~HIAPID.sensor
+      ~HIAPID.H45_MEMDMP
+      ~HIAPID.H45_APP_NHK
+      ~HIAPID.H45_SCI_CNT
+      ~HIAPID.H45_SCI_DE
+      ~HIAPID.H45_DIAG_FEE
+      ~HIAPID.H90_MEMDMP
+      ~HIAPID.H90_APP_NHK
+      ~HIAPID.H90_SCI_CNT
+      ~HIAPID.H90_SCI_DE
+      ~HIAPID.H90_DIAG_FEE
+   
+   

@@ -1,0 +1,32 @@
+﻿imap\_processing.mag.l1a.mag\_l1a\_data
+=======================================
+
+.. automodule:: imap_processing.mag.l1a.mag_l1a_data
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+      :toctree:
+   
+      MagL1a
+      MagL1aPacketProperties
+      TimeTuple
+   
+   
+
+   
+   
+   
+
+
+

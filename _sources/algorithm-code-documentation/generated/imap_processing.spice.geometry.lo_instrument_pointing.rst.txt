@@ -1,0 +1,6 @@
+imap\_processing.spice.geometry.lo\_instrument\_pointing
+========================================================
+
+.. currentmodule:: imap_processing.spice.geometry
+
+.. autofunction:: lo_instrument_pointing

@@ -1,0 +1,38 @@
+﻿imap\_processing.swapi.swapi\_utils
+===================================
+
+.. automodule:: imap_processing.swapi.swapi_utils
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+      :toctree:
+   
+      read_swapi_lut_table
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+      :toctree:
+   
+      SWAPIAPID
+      SWAPIMODE
+   
+   
+
+   
+   
+   
+
+
+

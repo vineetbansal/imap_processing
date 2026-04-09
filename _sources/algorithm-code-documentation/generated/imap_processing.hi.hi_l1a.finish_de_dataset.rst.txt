@@ -1,0 +1,6 @@
+imap\_processing.hi.hi\_l1a.finish\_de\_dataset
+===============================================
+
+.. currentmodule:: imap_processing.hi.hi_l1a
+
+.. autofunction:: finish_de_dataset

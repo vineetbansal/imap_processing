@@ -1,0 +1,36 @@
+﻿imap\_processing.swapi.l1.swapi\_l1
+===================================
+
+.. automodule:: imap_processing.swapi.l1.swapi_l1
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+      :toctree:
+   
+      decompress_count
+      filter_good_data
+      find_sweep_starts
+      get_indices_of_full_sweep
+      process_swapi_science
+      process_sweep_data
+      swapi_l1
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+

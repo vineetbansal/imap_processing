@@ -1,0 +1,6 @@
+imap\_processing.hit.l1a.hit\_l1a.find\_complete\_mod10\_sets
+=============================================================
+
+.. currentmodule:: imap_processing.hit.l1a.hit_l1a
+
+.. autofunction:: find_complete_mod10_sets

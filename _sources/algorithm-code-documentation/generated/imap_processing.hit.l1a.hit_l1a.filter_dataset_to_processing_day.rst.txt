@@ -1,0 +1,6 @@
+imap\_processing.hit.l1a.hit\_l1a.filter\_dataset\_to\_processing\_day
+======================================================================
+
+.. currentmodule:: imap_processing.hit.l1a.hit_l1a
+
+.. autofunction:: filter_dataset_to_processing_day

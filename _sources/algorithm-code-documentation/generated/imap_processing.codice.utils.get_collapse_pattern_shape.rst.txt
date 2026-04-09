@@ -1,0 +1,6 @@
+imap\_processing.codice.utils.get\_collapse\_pattern\_shape
+===========================================================
+
+.. currentmodule:: imap_processing.codice.utils
+
+.. autofunction:: get_collapse_pattern_shape

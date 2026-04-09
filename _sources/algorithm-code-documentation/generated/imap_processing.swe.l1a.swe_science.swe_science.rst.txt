@@ -1,0 +1,6 @@
+imap\_processing.swe.l1a.swe\_science.swe\_science
+==================================================
+
+.. currentmodule:: imap_processing.swe.l1a.swe_science
+
+.. autofunction:: swe_science

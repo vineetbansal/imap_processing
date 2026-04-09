@@ -1,0 +1,6 @@
+imap\_processing.hi.hi\_l1b.compute\_hae\_coordinates
+=====================================================
+
+.. currentmodule:: imap_processing.hi.hi_l1b
+
+.. autofunction:: compute_hae_coordinates

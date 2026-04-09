@@ -1,0 +1,33 @@
+imap\_processing.hi.utils.CalibrationProductConfig
+==================================================
+
+.. currentmodule:: imap_processing.hi.utils
+
+.. autoclass:: CalibrationProductConfig
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~CalibrationProductConfig.__init__
+      ~CalibrationProductConfig.from_csv
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~CalibrationProductConfig.calibration_product_numbers
+      ~CalibrationProductConfig.index_columns
+      ~CalibrationProductConfig.number_of_products
+      ~CalibrationProductConfig.required_columns
+      ~CalibrationProductConfig.tof_detector_pairs
+   
+   

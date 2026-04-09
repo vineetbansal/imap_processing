@@ -1,0 +1,6 @@
+imap\_processing.spice.time.sct\_to\_ttj2000s
+=============================================
+
+.. currentmodule:: imap_processing.spice.time
+
+.. autofunction:: sct_to_ttj2000s

@@ -1,0 +1,6 @@
+imap\_processing.swe.l1b.swe\_l1b.get\_esa\_energy\_pattern
+===========================================================
+
+.. currentmodule:: imap_processing.swe.l1b.swe_l1b
+
+.. autofunction:: get_esa_energy_pattern

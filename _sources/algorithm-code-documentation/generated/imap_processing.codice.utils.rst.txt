@@ -1,0 +1,48 @@
+﻿imap\_processing.codice.utils
+=============================
+
+.. automodule:: imap_processing.codice.utils
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+      :toctree:
+   
+      apply_replacements_to_attrs
+      calculate_acq_time_per_step
+      get_codice_epoch_time
+      get_collapse_pattern_shape
+      get_counters_aggregated_pattern
+      get_energy_info
+      get_view_tab_info
+      index_to_position
+      read_sci_lut
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+      :toctree:
+   
+      CODICEAPID
+      CoDICECompression
+      SegmentedPacketOrder
+      ViewTabInfo
+   
+   
+
+   
+   
+   
+
+
+

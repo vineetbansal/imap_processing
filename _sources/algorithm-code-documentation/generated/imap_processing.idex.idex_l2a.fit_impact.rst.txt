@@ -1,0 +1,6 @@
+imap\_processing.idex.idex\_l2a.fit\_impact
+===========================================
+
+.. currentmodule:: imap_processing.idex.idex_l2a
+
+.. autofunction:: fit_impact

@@ -1,0 +1,51 @@
+imap\_processing.mag.l1a.mag\_l1a\_data.MagL1a
+==============================================
+
+.. currentmodule:: imap_processing.mag.l1a.mag_l1a_data
+
+.. autoclass:: MagL1a
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~MagL1a.__init__
+      ~MagL1a.all_vectors_primary
+      ~MagL1a.append_vectors
+      ~MagL1a.calculate_vector_time
+      ~MagL1a.convert_diffs_to_vectors
+      ~MagL1a.decode_fib_zig_zag
+      ~MagL1a.process_compressed_vectors
+      ~MagL1a.process_range_data_section
+      ~MagL1a.process_uncompressed_vectors
+      ~MagL1a.process_vector_data
+      ~MagL1a.twos_complement
+      ~MagL1a.unpack_one_vector
+      ~MagL1a.update_compression_array
+      ~MagL1a.vectors_per_second_attribute
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~MagL1a.compression_flags
+      ~MagL1a.vectors
+      ~MagL1a.is_mago
+      ~MagL1a.is_active
+      ~MagL1a.shcoarse
+      ~MagL1a.starting_vectors
+      ~MagL1a.starting_packet
+      ~MagL1a.packet_definitions
+      ~MagL1a.most_recent_sequence
+      ~MagL1a.missing_sequences
+      ~MagL1a.start_time
+   
+   

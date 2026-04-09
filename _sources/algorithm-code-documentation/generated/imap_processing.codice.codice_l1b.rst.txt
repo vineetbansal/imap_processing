@@ -1,0 +1,31 @@
+﻿imap\_processing.codice.codice\_l1b
+===================================
+
+.. automodule:: imap_processing.codice.codice_l1b
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+      :toctree:
+   
+      convert_to_rates
+      process_codice_l1b
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+

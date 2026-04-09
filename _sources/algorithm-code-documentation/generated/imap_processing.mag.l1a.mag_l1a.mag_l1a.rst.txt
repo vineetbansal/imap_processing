@@ -1,0 +1,6 @@
+imap\_processing.mag.l1a.mag\_l1a.mag\_l1a
+==========================================
+
+.. currentmodule:: imap_processing.mag.l1a.mag_l1a
+
+.. autofunction:: mag_l1a

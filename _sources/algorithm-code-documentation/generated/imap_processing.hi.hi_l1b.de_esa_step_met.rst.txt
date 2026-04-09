@@ -1,0 +1,6 @@
+imap\_processing.hi.hi\_l1b.de\_esa\_step\_met
+==============================================
+
+.. currentmodule:: imap_processing.hi.hi_l1b
+
+.. autofunction:: de_esa_step_met

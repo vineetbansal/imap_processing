@@ -1,0 +1,30 @@
+﻿imap\_processing.idex.idex\_l0
+==============================
+
+.. automodule:: imap_processing.idex.idex_l0
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+      :toctree:
+   
+      decom_packets
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+

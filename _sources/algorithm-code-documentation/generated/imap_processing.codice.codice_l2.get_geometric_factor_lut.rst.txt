@@ -1,0 +1,6 @@
+imap\_processing.codice.codice\_l2.get\_geometric\_factor\_lut
+==============================================================
+
+.. currentmodule:: imap_processing.codice.codice_l2
+
+.. autofunction:: get_geometric_factor_lut

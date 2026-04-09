@@ -1,0 +1,6 @@
+imap\_processing.codice.utils.read\_sci\_lut
+============================================
+
+.. currentmodule:: imap_processing.codice.utils
+
+.. autofunction:: read_sci_lut

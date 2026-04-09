@@ -1,0 +1,31 @@
+imap\_processing.glows.utils.constants.GlowsConstants
+=====================================================
+
+.. currentmodule:: imap_processing.glows.utils.constants
+
+.. autoclass:: GlowsConstants
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~GlowsConstants.__init__
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~GlowsConstants.HISTOGRAM_FILLVAL
+      ~GlowsConstants.SCAN_CIRCLE_ANGULAR_RADIUS
+      ~GlowsConstants.STANDARD_BIN_COUNT
+      ~GlowsConstants.SUBSECOND_LIMIT
+   
+   

@@ -1,0 +1,30 @@
+﻿imap\_processing.swe.l1a.swe\_l1a
+=================================
+
+.. automodule:: imap_processing.swe.l1a.swe_l1a
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+      :toctree:
+   
+      swe_l1a
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+

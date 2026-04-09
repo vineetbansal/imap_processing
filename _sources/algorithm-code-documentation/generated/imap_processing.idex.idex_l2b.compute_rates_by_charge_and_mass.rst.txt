@@ -1,0 +1,6 @@
+imap\_processing.idex.idex\_l2b.compute\_rates\_by\_charge\_and\_mass
+=====================================================================
+
+.. currentmodule:: imap_processing.idex.idex_l2b
+
+.. autofunction:: compute_rates_by_charge_and_mass

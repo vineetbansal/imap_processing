@@ -1,0 +1,6 @@
+imap\_processing.hi.hi\_l1a.unpack\_hist\_counter
+=================================================
+
+.. currentmodule:: imap_processing.hi.hi_l1a
+
+.. autofunction:: unpack_hist_counter

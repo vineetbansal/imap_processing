@@ -1,0 +1,6 @@
+imap\_processing.swe.l1b.swe\_l1b.apply\_in\_flight\_calibration
+================================================================
+
+.. currentmodule:: imap_processing.swe.l1b.swe_l1b
+
+.. autofunction:: apply_in_flight_calibration

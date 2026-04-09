@@ -1,0 +1,6 @@
+imap\_processing.ultra.l1b.extendedspin.calculate\_extendedspin
+===============================================================
+
+.. currentmodule:: imap_processing.ultra.l1b.extendedspin
+
+.. autofunction:: calculate_extendedspin

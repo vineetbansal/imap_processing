@@ -1,0 +1,6 @@
+imap\_processing.idex.idex\_l2b.bin\_spin\_phases
+=================================================
+
+.. currentmodule:: imap_processing.idex.idex_l2b
+
+.. autofunction:: bin_spin_phases

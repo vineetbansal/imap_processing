@@ -1,0 +1,6 @@
+imap\_processing.ultra.l0.decom\_ultra.extract\_initial\_items\_from\_combined\_packets
+=======================================================================================
+
+.. currentmodule:: imap_processing.ultra.l0.decom_ultra
+
+.. autofunction:: extract_initial_items_from_combined_packets

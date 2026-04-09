@@ -1,0 +1,51 @@
+﻿imap\_processing.spice.geometry
+===============================
+
+.. automodule:: imap_processing.spice.geometry
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+      :toctree:
+   
+      basis_vectors
+      cartesian_to_latitudinal
+      cartesian_to_spherical
+      frame_transform
+      frame_transform_az_el
+      get_instrument_mounting_az_el
+      get_lo_pivot_boresight
+      get_rotation_matrix
+      get_spacecraft_to_instrument_spin_phase_offset
+      imap_state
+      instrument_pointing
+      lo_instrument_pointing
+      solar_longitude
+      spherical_to_cartesian
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+      :toctree:
+   
+      SpiceBody
+      SpiceFrame
+   
+   
+
+   
+   
+   
+
+
+

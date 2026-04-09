@@ -1,0 +1,6 @@
+imap\_processing.spice.repoint.interpolate\_repoint\_data
+=========================================================
+
+.. currentmodule:: imap_processing.spice.repoint
+
+.. autofunction:: interpolate_repoint_data

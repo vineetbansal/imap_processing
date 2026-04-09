@@ -1,0 +1,6 @@
+imap\_processing.spice.time.epoch\_to\_doy
+==========================================
+
+.. currentmodule:: imap_processing.spice.time
+
+.. autofunction:: epoch_to_doy

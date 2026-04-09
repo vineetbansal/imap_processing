@@ -1,0 +1,923 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Data Access API &#8212; imap_processing 0.0.0.post1.dev0+d3d45b2 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=7f76b32a3354e82990f2" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=7f76b32a3354e82990f2" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=7f76b32a3354e82990f2"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=7f76b32a3354e82990f2" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=7f76b32a3354e82990f2" />
+
+    <script src="../_static/documentation_options.js?v=a0789c6a"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'data-access/index';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="IMAP Data Access" href="imap-data-access.html" />
+    <link rel="prev" title="Code for creating CDF attributes" href="../development/tools/cdf-global-attrs.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/imap-mark-hor-multicolor-dark.png" class="logo__image only-light" alt="imap_processing 0.0.0.post1.dev0+d3d45b2 documentation - Home"/>
+    <img src="../_static/imap-mark-hor-multicolor-dark.png" class="logo__image only-dark pst-js-only" alt="imap_processing 0.0.0.post1.dev0+d3d45b2 documentation - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../development/index.html">
+    Onboarding & Collaboration
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="#">
+    IMAP Data Access Tool
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../cdf-metadata/index.html">
+    CDF Metadata Resources
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../filename-convention/index.html">
+    Filename Conventions
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../project-management/index.html">
+    SDC Project Management
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../algorithm-code-documentation/index.html">
+    Algorithm Code Documentation
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/IMAP-Science-Operations-Center/imap_processing" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../development/index.html">
+    Onboarding & Collaboration
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="#">
+    IMAP Data Access Tool
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../cdf-metadata/index.html">
+    CDF Metadata Resources
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../filename-convention/index.html">
+    Filename Conventions
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../project-management/index.html">
+    SDC Project Management
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../algorithm-code-documentation/index.html">
+    Algorithm Code Documentation
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/IMAP-Science-Operations-Center/imap_processing" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item pst-sidebar-collapse"><button id="pst-collapse-sidebar-button" aria-expanded="true" aria-controls="pst-primary-sidebar"><svg class="pst-icon svg-inline--fa" role="img" aria-hidden="true" focusable="false" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+    <path fill="currentColor" d="M3 15.5C2.36232 15.5 1.74874 15.2564 1.28478 14.8189C0.820828 14.3815 0.541576 13.7832 0.504167 13.1467L0.5 13L0.5 3C0.499965 2.36232 0.743605 1.74874 1.18107 1.28478C1.61854 0.820828 2.21676 0.541576 2.85333 0.504167L3 0.5L13 0.5C13.6377 0.499965 14.2513 0.743605 14.7152 1.18107C15.1792 1.61854 15.4584 2.21676 15.4958 2.85333L15.5 3L15.5 13C15.5 13.6377 15.2564 14.2513 14.8189 14.7152C14.3815 15.1792 13.7832 15.4584 13.1467 15.4958L13 15.5L3 15.5ZM3 13.8333L10.5 13.8333L10.5 2.16667L3 2.16667C2.79589 2.16669 2.59889 2.24163 2.44636 2.37726C2.29383 2.5129 2.19638 2.69979 2.1725 2.9025L2.16667 3L2.16667 13C2.16669 13.2041 2.24163 13.4011 2.37726 13.5536C2.5129 13.7062 2.69979 13.8036 2.9025 13.8275L3 13.8333ZM6.65583 10.325L6.5775 10.2558L4.91083 8.58917C4.76735 8.44567 4.68116 8.25476 4.66843 8.05223C4.65569 7.84971 4.71729 7.6495 4.84167 7.48917L4.91083 7.41083L6.5775 5.74417C6.72747 5.59471 6.9287 5.50794 7.14032 5.50148C7.35194 5.49502 7.55809 5.56935 7.7169 5.70937C7.8757 5.8494 7.97525 6.04463 7.99533 6.25539C8.01541 6.46616 7.95451 6.67667 7.825 6.84417L7.75583 6.9225L6.67917 8L7.75583 9.0775C7.89931 9.22099 7.98551 9.41191 7.99824 9.61443C8.01097 9.81695 7.94938 10.0172 7.825 10.1775L7.75583 10.2558C7.61234 10.3993 7.42142 10.4855 7.2189 10.4982C7.01638 10.511 6.81617 10.4494 6.65583 10.325Z"/>
+  </svg>
+  <span class="pst-collapse-sidebar-label">Collapse Sidebar</span>
+  <span class="pst-expand-sidebar-label">Expand Sidebar</span>
+</button></div>
+        <div class="sidebar-primary-item">
+
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="imap-data-access.html">IMAP Data Access</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="generated/imap_data_access.io.download.html">imap_data_access.io.download</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/imap_data_access.io.query.html">imap_data_access.io.query</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/imap_data_access.io.upload.html">imap_data_access.io.upload</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="spice-files.html">SPICE Files</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="generated/imap_data_access.io.download.html">imap_data_access.io.download</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generated/imap_data_access.io.query.html">imap_data_access.io.query</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generated/imap_data_access.io.upload.html">imap_data_access.io.upload</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Data Access API</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="data-access-api">
+<span id="data-access"></span><h1>Data Access API<a class="headerlink" href="#data-access-api" title="Link to this heading">#</a></h1>
+<p>The <a class="reference external" href="https://github.com/IMAP-Science-Operations-Center/imap-data-access">imap-data-access</a>
+repository provides a command-line utility and python package for
+interacting with the API programmatically. It is the preferred way to use the API.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="imap-data-access.html">IMAP Data Access</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spice-files.html">SPICE Files</a></li>
+</ul>
+</div>
+<p>Users may also download, upload, and query via the REST API directly through the browser, or via <cite>curl</cite> commands.
+The <a class="reference internal" href="#id2">REST API Specification</a> section describes the various endpoints that are supported, and how to use them.</p>
+<p><em>Note: Several sections and links begin with</em> [WIP]. <em>As development on the API is ongoing, this indicates
+that the full implementation of the functionality is yet to be completed.</em></p>
+<p>The API can be accessed from the following URL [WIP]: <a class="reference external" href="https://api.dev.imap-mission.com">https://api.dev.imap-mission.com</a></p>
+<section id="command-line-utility">
+<h2>Command Line Utility<a class="headerlink" href="#command-line-utility" title="Link to this heading">#</a></h2>
+<section id="to-install">
+<h3>To Install<a class="headerlink" href="#to-install" title="Link to this heading">#</a></h3>
+<p>Run the following command to use the API CLI:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>imap-data-access
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+<section id="base-command-arguments">
+<h3>Base Command Arguments<a class="headerlink" href="#base-command-arguments" title="Link to this heading">#</a></h3>
+<p>The following are base command arguments for the CLI:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>imap-data-access<span class="w"> </span>-h<span class="w"> </span><span class="c1"># or</span>
+imap-data-access<span class="w"> </span>query<span class="w"> </span><span class="c1"># or</span>
+imap-data-access<span class="w"> </span>download<span class="w"> </span><span class="c1"># or</span>
+imap-data-access<span class="w"> </span>upload
+</pre></div>
+</div>
+</div></blockquote>
+<p>Add the -h flag with any base command for more information on use and functionality.</p>
+</section>
+<section id="query">
+<h3>Query<a class="headerlink" href="#query" title="Link to this heading">#</a></h3>
+<p>To query for files, you can use several parameters: <code class="docutils literal notranslate"><span class="pre">--instrument</span></code>, <code class="docutils literal notranslate"><span class="pre">--data-level</span></code>, <code class="docutils literal notranslate"><span class="pre">--descriptor</span></code>, etc.</p>
+<p>Further information is found in in the <code class="docutils literal notranslate"><span class="pre">query</span> <span class="pre">-h</span></code> menu. You can use parameters alone, or in combination.</p>
+<p><strong>Example Usage:</strong></p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>imap-data-access<span class="w"> </span>query<span class="w"> </span>--start-date<span class="w"> </span><span class="m">20240101</span><span class="w"> </span>--end-date<span class="w"> </span><span class="m">20241231</span><span class="w"> </span>--output-format<span class="w"> </span>json
+<span class="c1"># The following line is returned:</span>
+<span class="o">[{</span><span class="s1">&#39;file_path&#39;</span>:<span class="w"> </span><span class="s1">&#39;imap/swe/l0/2024/01/imap_swe_l0_sci_20240105_v001.pkts&#39;</span>,<span class="w"> </span><span class="s1">&#39;instrument&#39;</span>:<span class="w"> </span><span class="s1">&#39;swe&#39;</span>,
+<span class="w">    </span><span class="s1">&#39;data_level&#39;</span>:<span class="w"> </span><span class="s1">&#39;l0&#39;</span>,<span class="w"> </span><span class="s1">&#39;descriptor&#39;</span>:<span class="w"> </span><span class="s1">&#39;sci&#39;</span>,<span class="w"> </span><span class="s1">&#39;start_date&#39;</span>:<span class="w"> </span><span class="s1">&#39;20240105&#39;</span>,<span class="w"> </span><span class="s1">&#39;version&#39;</span>:<span class="w"> </span><span class="s1">&#39;v001&#39;</span>,<span class="w"> </span><span class="s1">&#39;extension&#39;</span>:<span class="w"> </span><span class="s1">&#39;pkts&#39;</span><span class="o">}</span>,
+<span class="o">{</span><span class="s1">&#39;file_path&#39;</span>:<span class="w"> </span><span class="s1">&#39;imap/swe/l0/2024/01/imap_swe_l0_sci_20240105_v001.pkts&#39;</span>,<span class="w"> </span><span class="s1">&#39;instrument&#39;</span>:<span class="w"> </span><span class="s1">&#39;swe&#39;</span>,
+<span class="w">    </span><span class="s1">&#39;data_level&#39;</span>:<span class="w"> </span><span class="s1">&#39;l0&#39;</span>,<span class="w"> </span><span class="s1">&#39;descriptor&#39;</span>:<span class="w"> </span><span class="s1">&#39;sci&#39;</span>,<span class="w"> </span><span class="s1">&#39;start_date&#39;</span>:<span class="w"> </span><span class="s1">&#39;20240105&#39;</span>,<span class="w"> </span><span class="s1">&#39;version&#39;</span>:<span class="w"> </span><span class="s1">&#39;v001&#39;</span>,<span class="w"> </span><span class="s1">&#39;extension&#39;</span>:<span class="w"> </span><span class="s1">&#39;pkts&#39;</span><span class="o">}]</span>
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+<section id="download">
+<h3>Download<a class="headerlink" href="#download" title="Link to this heading">#</a></h3>
+<p>To download files using the CLI tool, use the command <code class="docutils literal notranslate"><span class="pre">download</span></code>. The downloaded files will be placed in a <code class="docutils literal notranslate"><span class="pre">data</span></code> directory.</p>
+<p>It is important to note that your working directory will be established as the default directory. I.e, the <code class="docutils literal notranslate"><span class="pre">data</span></code>
+directory will automatically be placed in this file path. Choose your working directory
+accordingly to suit your desires.</p>
+<p>When downloading a file from the API, different folders within the <code class="docutils literal notranslate"><span class="pre">data</span></code> directory will be made to better
+organize the downloaded files. See the example path: <code class="docutils literal notranslate"><span class="pre">data/imap/swe/l0/2024/01/imap_swe_l0_sci_20240105_20240105_v00-01.pkts</span></code>.
+The <code class="docutils literal notranslate"><span class="pre">data</span></code> directory and its structure is further described here: <a class="reference internal" href="#id1">Data Directory</a></p>
+<p><strong>Example Usage:</strong></p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>imap-data-access<span class="w"> </span>download<span class="w"> </span>imap/swe/l0/2024/01/imap_swe_l0_sci_20240105_v001.pkts
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+<section id="upload">
+<h3>Upload<a class="headerlink" href="#upload" title="Link to this heading">#</a></h3>
+<p>Similarly, files can be uploaded to the API using the command <code class="docutils literal notranslate"><span class="pre">upload</span></code>.</p>
+<p>When uploading files to the API, ensure these files are stored properly in a <code class="docutils literal notranslate"><span class="pre">data</span></code> directory (see the <a class="reference internal" href="#id1">Data Directory</a> section below for more information). Then,
+ensure your working directory is one level above <code class="docutils literal notranslate"><span class="pre">data</span></code> in order to properly upload files.</p>
+<p>[WIP] Certain ancillary files can also be uploaded to the API. For more specific information regarding these files, visit
+<a class="reference external" href="https://imap-processing.readthedocs.io/en/latest/data-access-api/calibration-files.html">Ancillary Files</a></p>
+<p><strong>Example Usage:</strong></p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>imap-data-access<span class="w"> </span>upload<span class="w"> </span>/imap/swe/l1a/2024/01/imap_swe_l1a_sci_20240105_v001.cdf
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+</section>
+<section id="importing-as-a-package">
+<h2>Importing as a package<a class="headerlink" href="#importing-as-a-package" title="Link to this heading">#</a></h2>
+<p>Imap data access can also be imported and used as a python package.</p>
+<p><strong>Example Usage:</strong></p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>import<span class="w"> </span>imap_data_access
+
+<span class="c1"># Search for files</span>
+<span class="nv">results</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>imap_data_access.query<span class="o">(</span><span class="nv">instrument</span><span class="o">=</span><span class="s2">&quot;mag&quot;</span>,<span class="w"> </span><span class="nv">data_level</span><span class="o">=</span><span class="s2">&quot;l0&quot;</span><span class="o">)</span>
+<span class="c1"># results is a list of dictionaries</span>
+<span class="c1"># Example: [{&#39;file_path&#39;: &#39;imap/swe/l0/2024/01/imap_swe_l0_sci_20240105_v001.pkts&#39;, &#39;instrument&#39;: &#39;swe&#39;,</span>
+<span class="c1"># &#39;data_level&#39;: &#39;l0&#39;, &#39;descriptor&#39;: &#39;sci&#39;, &#39;start_date&#39;: &#39;20240105&#39;,&#39;version&#39;: &#39;v001&#39;, &#39;extension&#39;: &#39;pkts&#39;},</span>
+<span class="c1"># {&#39;file_path&#39;: &#39;imap/swe/l0/2024/01/imap_swe_l0_sci_20240105_v001.pkts&#39;, &#39;instrument&#39;: &#39;swe&#39;,</span>
+<span class="c1">#&#39;data_level&#39;: &#39;l0&#39;, &#39;descriptor&#39;: &#39;sci&#39;, &#39;start_date&#39;: &#39;20240105&#39;, &#39;version&#39;: &#39;v001&#39;, &#39;extension&#39;: &#39;pkts&#39;}]</span>
+
+<span class="c1"># Download a file that was returned from the search</span>
+imap_data_access.download<span class="o">(</span><span class="s2">&quot;imap/mag/l0/2024/01/imap_mag_l0_raw_202040101_v001.pkts&quot;</span><span class="o">)</span>
+
+<span class="c1"># Upload a calibration file that exists locally</span>
+imap_data_access.upload<span class="o">(</span><span class="s2">&quot;imap/swe/l1a/2024/01/imap_swe_l1a_sci_20240105_v001.cdf&quot;</span><span class="o">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+<section id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Link to this heading">#</a></h2>
+<section id="data-directory">
+<span id="id1"></span><h3>Data Directory<a class="headerlink" href="#data-directory" title="Link to this heading">#</a></h3>
+<p>The folder structure for data files within the IMAP SDC is rigidly defined, so the data access api will mimic that structure to make sure all data is stored in the same hierarchical structure as the SDC. This will enable seamless transition between a user’s local system and the SDC. This is only used for downloads.</p>
+<p>A user’s root data location can be specified as an environment variable <code class="docutils literal notranslate"><span class="pre">IMAP_DATA_DIR</span></code> or through a configuration dictionary within the package itself (<code class="docutils literal notranslate"><span class="pre">imap_data_access.config[&quot;DATA_DIR&quot;]</span></code>). If the <code class="docutils literal notranslate"><span class="pre">IMAP_DATA_DIR</span></code> variable is not set, the program defaults to the user’s current working directory + <code class="docutils literal notranslate"><span class="pre">data/</span></code>.
+The following is the directory structure the IMAP SDC uses.</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>&lt;IMAP_DATA_DIR&gt;/
+<span class="w">  </span>imap/
+<span class="w">    </span>&lt;instrument&gt;/
+<span class="w">      </span>&lt;data_level&gt;/
+<span class="w">        </span>&lt;year&gt;/
+<span class="w">          </span>&lt;month&gt;/
+<span class="w">            </span>&lt;filename&gt;
+</pre></div>
+</div>
+</div></blockquote>
+<p>for example, with <code class="docutils literal notranslate"><span class="pre">IMAP_DATA_DIR=/data:</span></code></p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/data/
+<span class="w">  </span>imap/
+<span class="w">    </span>swe/
+<span class="w">      </span>l0/
+<span class="w">        </span><span class="m">2024</span>/
+<span class="w">          </span><span class="m">01</span>/
+<span class="w">            </span>imap_swe_l0_sci_20240105_v001.pkts
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+<section id="data-access-url">
+<h3>Data Access URL<a class="headerlink" href="#data-access-url" title="Link to this heading">#</a></h3>
+<p>To change the default URL that the package accesses, you can set the environment variable <code class="docutils literal notranslate"><span class="pre">IMAP_DATA_ACCESS_URL</span></code> or within the package <code class="docutils literal notranslate"><span class="pre">imap_data_access.config[&quot;DATA_ACCESS_URL&quot;]</span></code>. The default is the development server (<code class="docutils literal notranslate"><span class="pre">https://api.dev.imap-mission.com</span></code>).</p>
+</section>
+</section>
+<section id="file-validation">
+<h2>File Validation<a class="headerlink" href="#file-validation" title="Link to this heading">#</a></h2>
+<p>This package validates filenames and paths to check they follow our standards, as defined by the <a class="reference internal" href="../filename-convention/naming-conventions.html#naming-conventions"><span class="std std-ref">naming conventions</span></a>. There is also a class available for use by other packages to create filepaths and filenames that follow the IMAP SDC conventions.
+To use this class, use <code class="docutils literal notranslate"><span class="pre">imap_data_access.ScienceFilePath</span></code>.</p>
+<p>Usage:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">science_file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>imap_data_access.ScienceFilePath<span class="o">(</span><span class="s2">&quot;imap_swe_l0_sci_20240101_v001.pkts&quot;</span><span class="o">)</span>
+
+<span class="c1"># Filepath = /imap/swe/l0/2024/01/imap_swe_l0_sci_20240101_v001.pkts</span>
+<span class="nv">filepath</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>science_file.construct_path<span class="o">()</span>
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">#</a></h2>
+<section id="network-issues">
+<h3>Network Issues<a class="headerlink" href="#network-issues" title="Link to this heading">#</a></h3>
+<p><strong>SSL</strong></p>
+<p>If you encounter SSL errors similar to the following:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>urllib.error.URLError:<span class="w"> </span>&lt;urlopen<span class="w"> </span>error<span class="w"> </span><span class="o">[</span>SSL:<span class="w"> </span>CERTIFICATE_VERIFY_FAILED<span class="o">]</span><span class="w"> </span>certificate<span class="w"> </span>verify<span class="w"> </span>failed:<span class="w"> </span>unable<span class="w"> </span>to<span class="w"> </span>get<span class="w"> </span><span class="nb">local</span><span class="w"> </span>issuer<span class="w"> </span>certificate<span class="w"> </span><span class="o">(</span>_ssl.c:997<span class="o">)</span>&gt;
+</pre></div>
+</div>
+</div></blockquote>
+<p>That generally means the Python environment you’re using is not finding your system’s root certificates properly. This means you need to tell Python how to find those certificates with the following potential solutions.</p>
+<ol class="arabic">
+<li><p>Upgrade the certifi package</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>certifi
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Install system certificates – Depending on the Python version you installed the program with, the command will look something like this:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/Applications/Python<span class="se">\ </span><span class="m">3</span>.10/Install<span class="se">\ </span>Certificates.command
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ol>
+<p><strong>HTTP Error 502: BadGateway</strong></p>
+<p>This could mean that the service is temporarily down. If you continue to encounter this, reach out to the IMAP SDC at <a class="reference external" href="mailto:imap-sdc&#37;&#52;&#48;lasp&#46;colorado&#46;edu">imap-sdc<span>&#64;</span>lasp<span>&#46;</span>colorado<span>&#46;</span>edu</a>.</p>
+</section>
+<section id="filenotfounderror">
+<h3>FileNotFoundError<a class="headerlink" href="#filenotfounderror" title="Link to this heading">#</a></h3>
+<p>This could mean that the local data directory is not set up with the same paths as the SDC. See the <a class="reference internal" href="#id1">Data Directory</a> section for an example of how to set this up.</p>
+</section>
+</section>
+<section id="rest-api-specification">
+<span id="id2"></span><h2>REST API Specification<a class="headerlink" href="#rest-api-specification" title="Link to this heading">#</a></h2>
+<section id="id3">
+<h3>Upload<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<dl class="http get">
+<dt class="sig sig-object http" id="get--upload-filepath">
+<span class="sig-name descname"><span class="pre">GET</span> </span><span class="sig-name descname"><span class="pre">/upload/{filepath}</span></span><a class="headerlink" href="#get--upload-filepath" title="Link to this definition">#</a></dt>
+<dd><p><strong>Upload a science file to the SDC</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filepath</strong> (<em>string</em>) – The full path to the file to upload, relative to the <code class="docutils literal notranslate"><span class="pre">IMAP_DATA_DIR</span></code> environment variable or the user’s
+current working directory. (e.g. <code class="docutils literal notranslate"><span class="pre">{IMAP_DATA_DIR}/imap/swe/l0/2024/01/imap_swe_l0_sci_20240105_20240105_v00-01.pkts</span></code>).
+The filename must be a valid IMAP Science or ancillary filename that follows the conventions described in our <a class="reference internal" href="../filename-convention/naming-conventions.html#naming-conventions"><span class="std std-ref">naming conventions</span></a>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Status Codes<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><span><a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/200">200 OK</a></span> – Pre-signed URL for upload</p></li>
+<li><p><span><a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/400">400 Bad Request</a></span> – Invalid or missing filename</p></li>
+<li><p><span><a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/409">409 Conflict</a></span> – File already exists</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Request Headers<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X-api-key</strong> – The API key for authentication. This key is used to authorize the upload request. (Optional for now).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="http put">
+<dt class="sig sig-object http" id="put--upload-filepath">
+<span class="sig-name descname"><span class="pre">PUT</span> </span><span class="sig-name descname"><span class="pre">/upload/{filepath}</span></span><a class="headerlink" href="#put--upload-filepath" title="Link to this definition">#</a></dt>
+<dd><p><strong>Upload a science file to the SDC via pre-signed URL</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>URL</strong> (<em>string</em>) – The pre-signed URL for uploading the file. This URL is generated by the GET request to the
+<code class="docutils literal notranslate"><span class="pre">/upload/{filepath}</span></code> endpoint.</p></li>
+<li><p><strong>data</strong> (<em>string</em>) – The file data to be uploaded. This should be the binary content of the file.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Status Codes<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><span><a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/200">200 OK</a></span> – Successful upload</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<p><strong>Example Usage:</strong></p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span>-H<span class="w"> </span><span class="s2">&quot;Accept: application/json&quot;</span><span class="w"> </span>https://api.dev.imap-mission.com/upload/imap/swe/l0/2024/01/imap_swe_l0_sci_20240105_20240105_v00-01.pkts
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>Possible Responses:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="nt">&quot;statusCode&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;body&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://sds-data-&lt;aws_account_number&gt;.s3.amazon.com/imap/swe/l0/2024/01/imap_swe_l0_sci_20240105_20240105_v00-01.pkts?&lt;credentials-string&gt;&quot;</span><span class="p">}</span>
+<span class="p">{</span><span class="nt">&quot;statusCode&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">400</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;body&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Invalid filename. Expected - &lt;mission&gt;_&lt;instrument&gt;_&lt;datalevel&gt;_&lt;descriptor&gt;_&lt;startdate&gt;_&lt;enddate&gt;_&lt;version&gt;.&lt;extension&gt;&quot;</span><span class="p">}</span>
+<span class="p">{</span><span class="nt">&quot;statusCode&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">400</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;body&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Invalid mission.&quot;</span><span class="p">}</span>
+<span class="p">{</span><span class="nt">&quot;statusCode&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">400</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;body&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Invalid instrument. Please choose from {&#39;ultra-45&#39;, &#39;codice&#39;, &#39;glows&#39;, &#39;hit&#39;, &#39;lo&#39;, &#39;mag&#39;, &#39;swe&#39;, &#39;hi-45&#39;, &#39;idex&#39;, &#39;ultra-90&#39;, &#39;hi-90&#39;, &#39;swapi&#39;}&quot;</span><span class="p">}</span>
+<span class="p">{</span><span class="nt">&quot;statusCode&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">400</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;body&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Invalid data level. Please choose from {&#39;l0&#39;, &#39;l1&#39;, &#39;l1a&#39;, &#39;l1b&#39;, &#39;l1c&#39;, &#39;l1d&#39;, &#39;l2&#39;}&quot;</span><span class="p">}</span>
+<span class="p">{</span><span class="nt">&quot;statusCode&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">400</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;body&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Invalid start date format. Please use YYYYMMDD format.&quot;</span><span class="p">}</span>
+<span class="p">{</span><span class="nt">&quot;statusCode&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">400</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;body&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Invalid end date format. Please use YYYYMMDD format.&quot;</span><span class="p">}</span>
+<span class="p">{</span><span class="nt">&quot;statusCode&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">400</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;body&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Invalid version format. Please use vxx-xx format.&quot;</span><span class="p">}</span>
+<span class="p">{</span><span class="nt">&quot;statusCode&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">400</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;body&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Invalid extension. Extension should be pkts for data level l0 and cdf for data level higher than l0&quot;</span><span class="p">}</span>
+<span class="p">{</span><span class="nt">&quot;statusCode&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">409</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;body&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://sds-data-&lt;aws_account_number&gt;.s3.amazon.com/imap/swe/l0/2024/01/imap_swe_l0_sci_20240105_20240105_v00-01.pkts already exists.&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+<section id="id4">
+<h3>Download<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<dl class="http get">
+<dt class="sig sig-object http" id="get--download-filepath">
+<span class="sig-name descname"><span class="pre">GET</span> </span><span class="sig-name descname"><span class="pre">/download/{filepath}</span></span><a class="headerlink" href="#get--download-filepath" title="Link to this definition">#</a></dt>
+<dd><p><strong>Download a file from the SDC</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filepath</strong> (<em>string</em>) – The full path to the file to download (e.g.
+<code class="docutils literal notranslate"><span class="pre">imap/swe/l0/2024/01/imap_swe_l0_sci_20240105_20240105_v00-01.pkts</span></code>). The filename must be a valid science or ancillary IMAP
+filename that follows the conventions described in our <a class="reference internal" href="../filename-convention/naming-conventions.html#naming-conventions"><span class="std std-ref">naming conventions</span></a>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Status Codes<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><span><a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/302">302 Found</a></span> – Successful download</p></li>
+<li><p><span><a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/400">400 Bad Request</a></span> – Missing filename</p></li>
+<li><p><span><a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/404">404 Not Found</a></span> – File not found</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<p><strong>Example Usage:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span>-H<span class="w"> </span><span class="s2">&quot;Accept: application/json&quot;</span><span class="w"> </span>https://api.dev.imap-mission.com/download/imap/swe/l0/2024/01/imap_swe_l0_sci_20240105_20240105_v00-01.pkts
+</pre></div>
+</div>
+<p><strong>Possible Responses:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="nt">&quot;statusCode&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">302</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;headers&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;Content-Type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;text/html&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;Location&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;s3://sds-data/imap/swe/l0/2024/01/imap_swe_l0_sci_20240105_20240105_v00-01&quot;</span><span class="p">},</span><span class="w"> </span><span class="nt">&quot;body&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;download_url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;s3://sds-data/imap/swe/l0/2024/01/imap_swe_l0_sci_20240105_20240105_v00-01&quot;</span><span class="p">}}</span>
+<span class="p">{</span><span class="nt">&quot;statusCode&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">400</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;body&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;No file requested for download. Please provide a filename in the path. Eg. /download/path/to/file/filename.pkts&quot;</span><span class="p">}</span>
+<span class="p">{</span><span class="nt">&quot;statusCode&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">404</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;body&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;File not found, make sure you include the full path to the file in the request, e.g. /download/path/to/file/filename.pkts&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+<section id="id5">
+<h3>Query<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<dl class="http get">
+<dt class="sig sig-object http" id="get--query">
+<span class="sig-name descname"><span class="pre">GET</span> </span><span class="sig-name descname"><span class="pre">/query</span></span><a class="headerlink" href="#get--query" title="Link to this definition">#</a></dt>
+<dd><p><strong>Query for file metadata</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">Query Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>table</strong> (<em>string</em>) – The database table of interest (e.g. <code class="docutils literal notranslate"><span class="pre">science</span></code> or <code class="docutils literal notranslate"><span class="pre">ancillary</span></code>) for the query to perform against.
+The default option is the <code class="docutils literal notranslate"><span class="pre">science</span></code> table.</p></li>
+<li><p><strong>instrument</strong> (<em>string</em>) – The instrument of interest (e.g. <code class="docutils literal notranslate"><span class="pre">mag</span></code>). Supported instruments are listed
+in our <a class="reference internal" href="../filename-convention/naming-conventions.html#naming-conventions"><span class="std std-ref">naming conventions</span></a>.</p></li>
+<li><p><strong>data_level</strong> (<em>string</em>) – The level of data product (e.g. <code class="docutils literal notranslate"><span class="pre">l1a</span></code>). Supported levels are listed
+in our <a class="reference internal" href="../filename-convention/naming-conventions.html#naming-conventions"><span class="std std-ref">naming conventions</span></a>.</p></li>
+<li><p><strong>descriptor</strong> (<em>string</em>) – The descriptor of interest (e.g. <code class="docutils literal notranslate"><span class="pre">burst</span></code>). Supported descriptors are listed
+in our <a class="reference internal" href="../filename-convention/naming-conventions.html#naming-conventions"><span class="std std-ref">naming conventions</span></a>.</p></li>
+<li><p><strong>start_date</strong> (<em>string</em>) – Search for all files with a start date on or after this time, in the format <code class="docutils literal notranslate"><span class="pre">YYYYMMDD</span></code>.</p></li>
+<li><p><strong>end_date</strong> (<em>string</em>) – Search for all files with a start date on or before this time, in the format <code class="docutils literal notranslate"><span class="pre">YYYYMMDD</span></code>.</p></li>
+<li><p><strong>ingestion_start_date</strong> (<em>string</em>) – Search for all files with an ingestion start date on or after this time, in the format <code class="docutils literal notranslate"><span class="pre">YYYYMMDD</span></code>.</p></li>
+<li><p><strong>ingestion_end_date</strong> (<em>string</em>) – Search for all files with an ingestion start date on or before this time, in the format <code class="docutils literal notranslate"><span class="pre">YYYYMMDD</span></code>.</p></li>
+<li><p><strong>version</strong> (<em>string</em>) – The version of data product in the format <code class="docutils literal notranslate"><span class="pre">vNNN</span></code> (e.g. <code class="docutils literal notranslate"><span class="pre">v001</span></code>). You can also choose to query <code class="docutils literal notranslate"><span class="pre">--version</span> <span class="pre">latest</span></code> in order to receive the most recent version of a file.</p></li>
+<li><p><strong>extension</strong> (<em>string</em>) – The file extension of interest (e.g. <code class="docutils literal notranslate"><span class="pre">cdf</span></code>). Supported extensions include <code class="docutils literal notranslate"><span class="pre">pkts</span></code> and <code class="docutils literal notranslate"><span class="pre">cdf</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Status Codes<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><span><a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/200">200 OK</a></span> – Successful query</p></li>
+<li><p><span><a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/400">400 Bad Request</a></span> – Unsuccessful query</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<p><strong>Example Usage:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span>-H<span class="w"> </span><span class="s2">&quot;Accept: application/json&quot;</span><span class="w"> </span>https://api.dev.imap-mission.com/query?instrument<span class="o">=</span>swe<span class="p">&amp;</span><span class="nv">data_level</span><span class="o">=</span>l0<span class="p">&amp;</span><span class="nv">descriptor</span><span class="o">=</span>sci<span class="p">&amp;</span><span class="nv">start_date</span><span class="o">=</span><span class="m">20240105</span><span class="p">&amp;</span><span class="nv">end_date</span><span class="o">=</span><span class="m">20240105</span><span class="p">&amp;</span><span class="nv">extension</span><span class="o">=</span>pkts
+</pre></div>
+</div>
+<p><strong>Possible Responses:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="nt">&quot;statusCode&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;headers&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;Content-Type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;application/json&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;Access-Control-Allow-Origin&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;*&quot;</span><span class="p">},</span><span class="w"> </span><span class="nt">&quot;body&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="nt">&quot;file_path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;imap/swe/l0/2024/01/imap_swe_l0_sci_20240105_20240105_v00-05.pkts&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;instrument&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;swe&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;data_level&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;l0&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;descriptor&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;sci&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;start_date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;20240105&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;end_date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;20240105&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;v00-05&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;extension&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pkts&quot;</span><span class="p">}]}</span>
+<span class="p">{</span><span class="nt">&quot;statusCode&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">400</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;headers&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;Content-Type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;application/json&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;Access-Control-Allow-Origin&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;*&quot;</span><span class="p">},</span><span class="w"> </span><span class="nt">&quot;body&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;param&gt; is not a valid query parameter. Valid query parameters are: [&#39;file_path&#39;, &#39;instrument&#39;, &#39;data_level&#39;, &#39;descriptor&#39;, &#39;start_date&#39;, &#39;end_date&#39;, &#39;version&#39;, &#39;extension&#39;]&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../development/tools/cdf-global-attrs.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Code for creating CDF attributes</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="imap-data-access.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">IMAP Data Access</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#command-line-utility">Command Line Utility</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#to-install">To Install</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#base-command-arguments">Base Command Arguments</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#query">Query</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#download">Download</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#upload">Upload</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importing-as-a-package">Importing as a package</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration">Configuration</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-directory">Data Directory</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-access-url">Data Access URL</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#file-validation">File Validation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting">Troubleshooting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#network-issues">Network Issues</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#filenotfounderror">FileNotFoundError</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rest-api-specification">REST API Specification</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Upload</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Download</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Query</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/data-access/index.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=7f76b32a3354e82990f2"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=7f76b32a3354e82990f2"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, Regents of the University of Colorado.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.0.4.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.17.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

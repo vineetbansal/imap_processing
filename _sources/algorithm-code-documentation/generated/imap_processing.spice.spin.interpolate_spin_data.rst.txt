@@ -1,0 +1,6 @@
+imap\_processing.spice.spin.interpolate\_spin\_data
+===================================================
+
+.. currentmodule:: imap_processing.spice.spin
+
+.. autofunction:: interpolate_spin_data

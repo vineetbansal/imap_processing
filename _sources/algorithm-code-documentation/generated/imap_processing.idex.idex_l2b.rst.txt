@@ -1,0 +1,35 @@
+﻿imap\_processing.idex.idex\_l2b
+===============================
+
+.. automodule:: imap_processing.idex.idex_l2b
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+      :toctree:
+   
+      bin_spin_phases
+      compute_counts_by_charge_and_mass
+      compute_rates
+      compute_rates_by_charge_and_mass
+      get_science_acquisition_on_percentage
+      idex_l2b
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+

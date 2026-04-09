@@ -1,0 +1,38 @@
+﻿imap\_processing.ultra.l0.decom\_ultra
+======================================
+
+.. automodule:: imap_processing.ultra.l0.decom_ultra
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+      :toctree:
+   
+      extract_initial_items_from_combined_packets
+      get_event_id
+      process_ultra_cmd_echo
+      process_ultra_energy_rates
+      process_ultra_energy_spectra
+      process_ultra_events
+      process_ultra_macros_checksum
+      process_ultra_rates
+      process_ultra_tof
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+

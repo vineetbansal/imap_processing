@@ -1,0 +1,6 @@
+imap\_processing.codice.codice\_l2.process\_hi\_direct\_events
+==============================================================
+
+.. currentmodule:: imap_processing.codice.codice_l2
+
+.. autofunction:: process_hi_direct_events

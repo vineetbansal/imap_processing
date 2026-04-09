@@ -1,0 +1,43 @@
+imap\_processing.idex.idex\_l1b.TriggerOrigin
+=============================================
+
+.. currentmodule:: imap_processing.idex.idex_l1b
+
+.. autoclass:: TriggerOrigin
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~TriggerOrigin.conjugate
+      ~TriggerOrigin.bit_length
+      ~TriggerOrigin.bit_count
+      ~TriggerOrigin.to_bytes
+      ~TriggerOrigin.from_bytes
+      ~TriggerOrigin.as_integer_ratio
+      ~TriggerOrigin.__init__
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~TriggerOrigin.real
+      ~TriggerOrigin.imag
+      ~TriggerOrigin.numerator
+      ~TriggerOrigin.denominator
+      ~TriggerOrigin.HS_ADC0I_TOF_HG
+      ~TriggerOrigin.HS_ADC0Q_TOF_LG
+      ~TriggerOrigin.HS_ADC1Q_TOF_MG
+      ~TriggerOrigin.LS_ADC1_TARGET_HG
+      ~TriggerOrigin.SW_TRIGGER
+      ~TriggerOrigin.EXTERNAL_TRIGGER
+   
+   

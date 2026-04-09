@@ -1,0 +1,6 @@
+imap\_processing.hi.hi\_l2.calculate\_ena\_intensity
+====================================================
+
+.. currentmodule:: imap_processing.hi.hi_l2
+
+.. autofunction:: calculate_ena_intensity

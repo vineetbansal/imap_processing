@@ -1,0 +1,6 @@
+imap\_processing.spice.time.met\_to\_datetime64
+===============================================
+
+.. currentmodule:: imap_processing.spice.time
+
+.. autofunction:: met_to_datetime64

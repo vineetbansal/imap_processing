@@ -1,0 +1,6 @@
+imap\_processing.codice.codice\_l1b.convert\_to\_rates
+======================================================
+
+.. currentmodule:: imap_processing.codice.codice_l1b
+
+.. autofunction:: convert_to_rates

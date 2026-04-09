@@ -1,0 +1,46 @@
+﻿imap\_processing.idex.idex\_l1b
+===============================
+
+.. automodule:: imap_processing.idex.idex_l1b
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+      :toctree:
+   
+      convert_waveforms
+      get_spice_data
+      get_trigger_mode_and_level
+      get_trigger_origin
+      idex_l1b
+      idex_l1b_msg
+      idex_l1b_science
+      unpack_instrument_settings
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+      :toctree:
+   
+      EventMessage
+      TriggerMode
+      TriggerOrigin
+   
+   
+
+   
+   
+   
+
+
+

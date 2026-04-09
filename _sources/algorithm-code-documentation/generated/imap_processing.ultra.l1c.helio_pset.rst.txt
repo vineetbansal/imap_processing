@@ -1,0 +1,30 @@
+﻿imap\_processing.ultra.l1c.helio\_pset
+======================================
+
+.. automodule:: imap_processing.ultra.l1c.helio_pset
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+      :toctree:
+   
+      calculate_helio_pset
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+

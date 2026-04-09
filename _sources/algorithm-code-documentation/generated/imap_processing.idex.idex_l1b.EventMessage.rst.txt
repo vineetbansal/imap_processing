@@ -1,0 +1,25 @@
+imap\_processing.idex.idex\_l1b.EventMessage
+============================================
+
+.. currentmodule:: imap_processing.idex.idex_l1b
+
+.. autoclass:: EventMessage
+
+   
+   .. automethod:: __init__
+
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~EventMessage.PULSER_ON
+      ~EventMessage.PULSER_OFF
+      ~EventMessage.SCIENCE_ON
+      ~EventMessage.SCIENCE_OFF
+   
+   

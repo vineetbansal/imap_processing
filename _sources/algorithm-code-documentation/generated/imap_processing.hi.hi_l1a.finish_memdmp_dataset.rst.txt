@@ -1,0 +1,6 @@
+imap\_processing.hi.hi\_l1a.finish\_memdmp\_dataset
+===================================================
+
+.. currentmodule:: imap_processing.hi.hi_l1a
+
+.. autofunction:: finish_memdmp_dataset

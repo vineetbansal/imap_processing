@@ -1,0 +1,6 @@
+imap\_processing.swe.l1a.swe\_l1a.swe\_l1a
+==========================================
+
+.. currentmodule:: imap_processing.swe.l1a.swe_l1a
+
+.. autofunction:: swe_l1a
