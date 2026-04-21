@@ -6,6 +6,7 @@ from typing import ClassVar
 import numpy as np
 
 from imap_processing import imap_module_directory
+from imap_processing.spice.config import IMAP_SPICE_DATA_PATH
 
 SPICE_DATA_SIM_PATH = imap_module_directory / "ultra/l1c/sim_spice_kernels"
 
@@ -166,11 +167,13 @@ class UltraConstants:
         "non_proton": [20, 21, 22, 23, 24, 25, 26],
     }
 
+    # Load common SPICE kernels first, then the ones packaged with `ultra`.
     SIM_KERNELS_FOR_HELIO_INDEX_MAPS: ClassVar[list] = [
+        str(p) for p in IMAP_SPICE_DATA_PATH.rglob("*") if p.is_file()
+    ] + [
         str(SPICE_DATA_SIM_PATH / k)
         for k in [
             "imap_sclk_0000.tsc",
-            "naif0012.tls",
             "imap_spk_demo.bsp",
             "sim_1yr_imap_attitude.bc",
             "imap_001.tf",
