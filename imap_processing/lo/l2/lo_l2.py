@@ -98,9 +98,16 @@ def lo_l2(
     angle of the map being made, which is done in pre-processing (see
     ``cli.Lo.pre_processing``) so that the map records only the files it was
     made from as its parents. A combined map, written "ilo" rather than with a
-    pivot angle of its own, is filtered by nothing and accumulates every
-    pointing it is given. Each pointing is projected from the pivot angle its
-    own goodtimes report.
+    pivot angle of its own, is filtered by nothing and is given the pointings
+    of every pivot angle.
+
+    A combined map is not built by pooling those pointings. Each pivot angle is
+    calibrated, corrected and masked on a map of its own, exactly as it would
+    be if it had been asked for by its own descriptor, and the finished maps
+    are combined onto one grid at the end. Pooling first would force one
+    pivot's geometric factors onto all of them, tune the ISN mask on a mixed
+    intensity distribution, and blend the RAM projections of pivot angles that
+    never looked the same way.
 
     Parameters
     ----------
@@ -127,8 +134,9 @@ def lo_l2(
         or if the map is of a species other than hydrogen.
     ValueError
         If the map is to be Compton-Getting corrected but the ancillary
-        dependencies hold no ESA eta fit factors to correct it with, or if it
-        is to be ISN masked at a pivot angle the mask has no tuning for.
+        dependencies hold no ESA eta fit factors to correct it with, if it is
+        to be ISN masked at a pivot angle the mask has no tuning for, or if the
+        pivot angles of a combined map were not all taken in the same ESA mode.
     """
     logger.info("Starting IMAP-Lo L2 processing pipeline")
 
@@ -152,24 +160,91 @@ def lo_l2(
             f"{descriptor}. Only hydrogen maps are supported."
         )
 
+    pointings = _complete_pointings(sci_dependencies)
+    logger.info(f"Building {descriptor} from {len(pointings)} pointings")
+
+    # One group per pivot angle, each of which becomes a map of its own. A map
+    # named for a pivot angle has only ever the one group.
+    groups = _group_pointings_by_pivot(map_descriptor, pointings)
+
+    built = {
+        pivot_angle: _build_pivot_map(
+            group, map_descriptor, pivot_angle, flux_corrector
+        )
+        for pivot_angle, group in sorted(groups.items())
+    }
+
+    if len(built) == 1:
+        sky_map, variables, calibration = next(iter(built.values()))
+    else:
+        logger.info(f"Combining the maps of pivot angles {sorted(built)}")
+        sky_map, variables, calibration = _combine_pivot_maps(built)
+
+    dataset = _build_map_dataset(sky_map, variables, calibration)
+
+    logger.info("IMAP-Lo L2 processing pipeline completed successfully")
+    return [
+        sky_map.build_cdf_dataset(
+            instrument="lo",
+            level="l2",
+            descriptor=descriptor,
+            external_map_dataset=dataset,
+        )
+    ]
+
+
+def _build_pivot_map(
+    pointings: dict[int, tuple],
+    map_descriptor: MapDescriptor,
+    pivot_angle: int,
+    flux_corrector: PowerLawFluxCorrector | None,
+) -> tuple[RectangularSkyMap, dict[str, np.ndarray], EsaCalibration]:
+    """
+    Build one finished map from the pointings of a single pivot angle.
+
+    This is the whole of a map named for a pivot angle, and one contribution to
+    a combined map: the pointings are accumulated onto the grid and every
+    correction the descriptor asks for is made, leaving map variables that need
+    nothing further done to them.
+
+    Parameters
+    ----------
+    pointings : dict[int, tuple]
+        The (goodtimes, bgrates, histrates) datasets of the pointings taken at
+        this pivot angle, keyed by repointing.
+    map_descriptor : MapDescriptor
+        The parsed descriptor of the map being made.
+    pivot_angle : int
+        The nominal pivot angle [degrees] of these pointings, which the ISN
+        mask is tuned by.
+    flux_corrector : PowerLawFluxCorrector | None
+        The ESA transmission factors the Compton-Getting correction reads, or
+        None if the map is not to be corrected.
+
+    Returns
+    -------
+    tuple[RectangularSkyMap, dict[str, np.ndarray], EsaCalibration]
+        The map the pointings were projected onto, its variables each of shape
+        (epoch, esa level, pixel), and the energy response it is binned in.
+
+    Raises
+    ------
+    NotImplementedError
+        If a HEALPix map is requested (only rectangular maps supported for Lo).
+    """
     sky_map = map_descriptor.to_empty_map()
     if not isinstance(sky_map, RectangularSkyMap):
         raise NotImplementedError("HEALPix map output not supported for Lo")
 
-    pointings = _complete_pointings(sci_dependencies)
-    logger.info(f"Building {descriptor} from {len(pointings)} pointings")
-
-    # The mask is tuned per pivot angle, which a combined map takes from the
-    # pointings themselves. Resolved before anything is accumulated, so that a
-    # map the mask cannot be tuned for fails before the work is done.
+    # The mask is tuned per pivot angle. Resolved before anything is
+    # accumulated, so that a map the mask cannot be tuned for fails before the
+    # work is done.
     isn_mask_parameters = (
-        _isn_mask_parameters(_map_pivot_angles(map_descriptor, pointings))
-        if map_descriptor.isn_masked
-        else None
+        _isn_mask_parameters(pivot_angle) if map_descriptor.isn_masked else None
     )
 
-    # Every pointing of a map is taken in the same ESA mode, so the last one
-    # sets the energy response the whole map is binned in.
+    # Every pointing of a pivot angle is taken in the same ESA mode, so the
+    # last one sets the energy response this map is binned in.
     esa_mode = _get_esa_mode(pointings[max(pointings)][2]) if pointings else 0
     calibration = _esa_calibration(map_descriptor.species, esa_mode)
 
@@ -213,17 +288,218 @@ def lo_l2(
         flux_corrector,
         isn_mask_parameters,
     )
-    dataset = _build_map_dataset(sky_map, variables, calibration)
+    return sky_map, variables, calibration
 
-    logger.info("IMAP-Lo L2 processing pipeline completed successfully")
-    return [
-        sky_map.build_cdf_dataset(
-            instrument="lo",
-            level="l2",
-            descriptor=descriptor,
-            external_map_dataset=dataset,
-        )
+
+def _combine_pivot_maps(
+    built: dict[int, tuple[RectangularSkyMap, dict[str, np.ndarray], EsaCalibration]],
+) -> tuple[RectangularSkyMap, dict[str, np.ndarray], EsaCalibration]:
+    """
+    Combine the finished maps of each pivot angle onto one grid.
+
+    Counts and exposure add. Intensities combine by inverse variance, weighting
+    each pivot by what it actually measured, and everything else is exposure
+    weighted. A pivot contributes to a pixel only where it has a value to
+    report there: one it was exposed for, and that the ISN mask left in place.
+    A pixel no pivot reports is left at the fill value rather than averaged
+    with one.
+
+    Parameters
+    ----------
+    built : dict[int, tuple[RectangularSkyMap, dict[str, np.ndarray], EsaCalibration]]
+        The map, variables and calibration of each nominal pivot angle, as
+        ``_build_pivot_map`` returned them.
+
+    Returns
+    -------
+    tuple[RectangularSkyMap, dict[str, np.ndarray], EsaCalibration]
+        The map carrying the combined result, the combined variables, and the
+        energy response they are binned in.
+
+    Raises
+    ------
+    ValueError
+        If the pivot angles were not all taken in the same ESA mode, leaving
+        them binned in energies that cannot be combined onto one axis.
+    """
+    pivot_angles = sorted(built)
+    maps = [built[pivot][0] for pivot in pivot_angles]
+    per_pivot = [built[pivot][1] for pivot in pivot_angles]
+    calibration = built[pivot_angles[0]][2]
+
+    # The pivots have to share an energy axis to be combined onto one. They do
+    # when they were flown in the same ESA mode, which is what sets it.
+    for pivot in pivot_angles[1:]:
+        energy = built[pivot][2].energy
+        if not np.array_equal(energy, calibration.energy):
+            raise ValueError(
+                f"The pivot angles of the combined map were taken in different "
+                f"ESA modes: {pivot_angles[0]} is binned in energies "
+                f"{calibration.energy.tolist()} keV and {pivot} in "
+                f"{energy.tolist()} keV, which cannot be combined."
+            )
+
+    exposure = [variables["exposure_factor"] for variables in per_pivot]
+    total_exposure = np.sum(exposure, axis=0)
+
+    # A pivot has a background to report wherever it was exposed, and a signal
+    # to report where the ISN mask also left the pixel in place.
+    exposed = [pivot_exposure > 0 for pivot_exposure in exposure]
+    measured = [variables["ena_intensity"] > FILLVAL_FLOAT for variables in per_pivot]
+    any_exposed = np.logical_or.reduce(exposed)
+    any_measured = np.logical_or.reduce(measured)
+
+    # The exposure each pivot brings to a pixel it reports, which is the weight
+    # of every exposure weighted mean below.
+    signal_weight = [
+        np.where(m, e, 0.0) for m, e in zip(measured, exposure, strict=True)
     ]
+    background_weight = [
+        np.where(m, e, 0.0) for m, e in zip(exposed, exposure, strict=True)
+    ]
+    total_signal_weight = np.sum(signal_weight, axis=0)
+    total_background_weight = np.sum(background_weight, axis=0)
+
+    def _mean(name: str, weight: list[np.ndarray], total: np.ndarray) -> np.ndarray:
+        """
+        Take the weighted mean of a variable over the pivots reporting it.
+
+        Parameters
+        ----------
+        name : str
+            The variable to combine.
+        weight : list[np.ndarray]
+            The weight of each pivot, zero where it reports nothing.
+        total : np.ndarray
+            The summed weight, which the mean is divided by.
+
+        Returns
+        -------
+        np.ndarray
+            The weighted mean, zero where no pivot reports the pixel.
+        """
+        weighted = np.sum(
+            [w * v[name] for w, v in zip(weight, per_pivot, strict=True)], axis=0
+        )
+        return np.divide(weighted, total, out=np.zeros_like(total), where=total > 0)
+
+    def _propagate(
+        name: str, weight: list[np.ndarray], total: np.ndarray
+    ) -> np.ndarray:
+        """
+        Propagate an uncertainty through the weighted mean of its variable.
+
+        Parameters
+        ----------
+        name : str
+            The uncertainty to combine.
+        weight : list[np.ndarray]
+            The weight of each pivot, zero where it reports nothing.
+        total : np.ndarray
+            The summed weight, which the mean is divided by.
+
+        Returns
+        -------
+        np.ndarray
+            The uncertainty on the weighted mean, taking the pivots as
+            independent, zero where no pivot reports the pixel.
+        """
+        variance = np.sum(
+            [(w * v[name]) ** 2 for w, v in zip(weight, per_pivot, strict=True)], axis=0
+        )
+        return np.divide(
+            np.sqrt(variance), total, out=np.zeros_like(total), where=total > 0
+        )
+
+    # The intensity is combined by inverse variance, so that a pivot that
+    # barely saw a pixel does not pull the pixel it barely saw. A pivot with no
+    # uncertainty to weight by has no variance either, which happens where it
+    # counted nothing; those pixels fall back to the exposure weighted mean, so
+    # that a genuine zero is reported as zero rather than lost.
+    uncertainty = [variables["ena_intensity_stat_uncert"] for variables in per_pivot]
+    inverse_variance = [
+        np.where(m & (u > 0), 1.0 / np.where(u > 0, u, 1.0) ** 2, 0.0)
+        for m, u in zip(measured, uncertainty, strict=True)
+    ]
+    total_inverse_variance = np.sum(inverse_variance, axis=0)
+    weighted = total_inverse_variance > 0
+
+    intensity = np.where(
+        weighted,
+        _mean("ena_intensity", inverse_variance, total_inverse_variance),
+        _mean("ena_intensity", signal_weight, total_signal_weight),
+    )
+    intensity_stat_uncert = np.where(
+        weighted,
+        np.sqrt(
+            np.divide(
+                1.0,
+                total_inverse_variance,
+                out=np.zeros_like(total_inverse_variance),
+                where=weighted,
+            )
+        ),
+        _mean("ena_intensity_stat_uncert", signal_weight, total_signal_weight),
+    )
+
+    # Counts add over the pivots that report the pixel. One no pivot reports is
+    # masked out if it was exposed at all, and simply unseen if it was not.
+    counts = np.sum(
+        [
+            np.where(m, v["ena_count"], 0.0)
+            for m, v in zip(measured, per_pivot, strict=True)
+        ],
+        axis=0,
+    )
+    counts = np.where(any_measured, counts, np.where(any_exposed, FILLVAL_FLOAT, 0.0))
+
+    sys_err_plus = _mean(
+        "ena_intensity_sys_err_plus", signal_weight, total_signal_weight
+    )
+    sys_err_minus = _mean(
+        "ena_intensity_sys_err_minus", signal_weight, total_signal_weight
+    )
+
+    variables = {
+        "ena_count": counts,
+        "exposure_factor": total_exposure,
+        "ena_count_rate": _mean("ena_count_rate", signal_weight, total_signal_weight),
+        "ena_count_rate_stat_uncert": _propagate(
+            "ena_count_rate_stat_uncert", signal_weight, total_signal_weight
+        ),
+        "ena_intensity": intensity,
+        "ena_intensity_stat_uncert": intensity_stat_uncert,
+        "ena_intensity_sys_err": np.sqrt(sys_err_plus * sys_err_minus),
+        "ena_intensity_sys_err_plus": sys_err_plus,
+        "ena_intensity_sys_err_minus": sys_err_minus,
+        "bg_rate": _mean("bg_rate", background_weight, total_background_weight),
+        "bg_rate_stat_uncert": _propagate(
+            "bg_rate_stat_uncert", background_weight, total_background_weight
+        ),
+        "bg_intensity": _mean(
+            "bg_intensity", background_weight, total_background_weight
+        ),
+        "bg_intensity_stat_uncert": _propagate(
+            "bg_intensity_stat_uncert", background_weight, total_background_weight
+        ),
+    }
+
+    # A pixel no pivot reports has nothing to say about it. The counts carry
+    # their own distinction between masked and unseen, and the exposure is real
+    # wherever the map looked, so neither is filled here.
+    for name, value in variables.items():
+        if name in ("ena_count", "exposure_factor"):
+            continue
+        reported = any_exposed if name.startswith("bg_") else any_measured
+        variables[name] = np.where(reported, value, FILLVAL_FLOAT)
+
+    # The combined map covers the whole window its pivots were taken over, not
+    # the window of whichever one happens to carry the result.
+    sky_map = maps[0]
+    sky_map.min_epoch = min(pivot_map.min_epoch for pivot_map in maps)
+    sky_map.max_epoch = max(pivot_map.max_epoch for pivot_map in maps)
+
+    return sky_map, variables, calibration
 
 
 # =============================================================================
@@ -435,20 +711,19 @@ def load_isn_mask_parameters() -> pd.DataFrame:
     return lo_ancillary.read_ancillary_file(mask_files[-1])
 
 
-def _isn_mask_parameters(pivot_angles: list[int]) -> pd.DataFrame:
+def _isn_mask_parameters(pivot_angle: int) -> pd.DataFrame:
     """
-    Get the ISN mask tuning of a map, in ascending ESA level order.
+    Get the ISN mask tuning of a pivot angle, in ascending ESA level order.
 
-    A map made at one pivot angle is masked with that pivot's tuning. A map
-    combining several is masked with the most permissive tuning of the pivots
-    that went into it: a pixel of the combined map holds the interstellar
-    neutrals seen at every one of them, so it is masked if any of those pivots
-    would have masked it.
+    The mask is tuned per pivot angle, and a map is masked one pivot angle at a
+    time: a combined map masks each of its pivots on that pivot's own map,
+    before the maps are combined, so there is never a mixed intensity
+    distribution for a tuning to be applied to.
 
     Parameters
     ----------
-    pivot_angles : list[int]
-        The nominal pivot angles [degrees] the map was built from.
+    pivot_angle : int
+        The nominal pivot angle [degrees] being masked.
 
     Returns
     -------
@@ -458,27 +733,18 @@ def _isn_mask_parameters(pivot_angles: list[int]) -> pd.DataFrame:
     Raises
     ------
     ValueError
-        If the ancillary has no tuning for one of the pivot angles.
+        If the ancillary has no tuning for the pivot angle.
     """
     parameters = load_isn_mask_parameters()
 
-    untuned = sorted(set(pivot_angles) - set(parameters["pivot_angle"]))
-    if untuned:
+    if pivot_angle not in set(parameters["pivot_angle"]):
         raise ValueError(
             f"The map asks for the ISN band to be masked out, but the ancillary "
-            f"has no mask tuning for the {untuned} degree pivot angle(s) it was "
-            f"built from"
+            f"has no mask tuning for the {[pivot_angle]} degree pivot angle(s) "
+            f"it was built from"
         )
 
-    parameters = parameters[parameters["pivot_angle"].isin(pivot_angles)]
-
-    # The widest band, the faintest pixel taken as bright, and the shortest
-    # outlier tail, i.e. the union of what each contributing pivot would mask.
-    tuning = parameters.groupby("esa_step").agg(
-        intensity_threshold_fraction=("intensity_threshold_fraction", "min"),
-        angular_width_deg=("angular_width_deg", "max"),
-        outlier_percentile=("outlier_percentile", "min"),
-    )
+    tuning = parameters[parameters["pivot_angle"] == pivot_angle].set_index("esa_step")
 
     # Select the ESA levels, in order. Raises if the ancillary is missing one.
     return tuning.loc[list(range(1, c.N_ESA_LEVELS + 1))]
@@ -605,17 +871,18 @@ def _nominal_pivot_angle(pivot_angle: float) -> int | None:
     return None
 
 
-def _map_pivot_angles(
+def _group_pointings_by_pivot(
     map_descriptor: MapDescriptor, pointings: dict[int, tuple]
-) -> list[int]:
+) -> dict[int, dict[int, tuple]]:
     """
-    Get the nominal pivot angles a map is built from.
+    Split the pointings of a map into one group per nominal pivot angle.
 
     A Lo map carries its pivot angle as its sensor, e.g. the 90 of "l090", and
-    its inputs were filtered down to that pivot in pre-processing. A map that
-    combines every pivot angle instead of selecting one is written without a
-    sensor, as "ilo", so the pivot angles it holds are the ones its pointings
-    were actually flown at, which their goodtimes report.
+    its inputs were filtered down to that pivot in pre-processing, so it has
+    the one group. A map that combines every pivot angle instead of selecting
+    one is written without a sensor, as "ilo", and is grouped by the pivot
+    angles its pointings were actually flown at, which their goodtimes report.
+    Each group becomes a map of its own.
 
     Parameters
     ----------
@@ -626,43 +893,44 @@ def _map_pivot_angles(
 
     Returns
     -------
-    list[int]
-        The nominal pivot angles [degrees] of the map, in ascending order.
+    dict[int, dict[int, tuple]]
+        The pointings of each nominal pivot angle [degrees], keyed by
+        repointing within each group.
 
     Raises
     ------
     ValueError
         If the map combines pivot angles but none of its pointings reports one
-        that is recognisably nominal, leaving nothing to identify it by.
+        that is recognisably nominal, leaving nothing to group them by.
     """
     if isinstance(map_descriptor.sensor, int):
-        return [map_descriptor.sensor]
+        return {map_descriptor.sensor: pointings}
 
-    measured = {
-        float(np.atleast_1d(goodtimes["pivot"].values)[0])
-        for goodtimes, _, _ in pointings.values()
-    }
-    nominal = {_nominal_pivot_angle(pivot) for pivot in measured}
+    groups: dict[int, dict[int, tuple]] = {}
+    unrecognised = set()
+    for repointing, products in pointings.items():
+        measured = float(np.atleast_1d(products[0]["pivot"].values)[0])
+        pivot_angle = _nominal_pivot_angle(measured)
+        if pivot_angle is None:
+            unrecognised.add(measured)
+            continue
+        groups.setdefault(pivot_angle, {})[repointing] = products
 
-    unrecognised = sorted(
-        pivot for pivot in measured if _nominal_pivot_angle(pivot) is None
-    )
     if unrecognised:
         logger.warning(
-            f"Ignoring the pivot angles {unrecognised} of "
+            f"Ignoring the pivot angles {sorted(unrecognised)} of "
             f"{map_descriptor.instrument_descriptor}, they match none of the "
             f"nominal pivot angles."
         )
 
-    pivot_angles = sorted(pivot for pivot in nominal if pivot is not None)
-    if not pivot_angles:
+    if not groups:
         raise ValueError(
-            f"The map asks for the ISN band to be masked out, but none of the "
-            f"pointings of {map_descriptor.instrument_descriptor} reports a "
-            f"nominal pivot angle to look the mask tuning up by"
+            f"None of the pointings of "
+            f"{map_descriptor.instrument_descriptor} reports a nominal pivot "
+            f"angle to build a combined map from"
         )
 
-    return pivot_angles
+    return groups
 
 
 def _complete_pointings(

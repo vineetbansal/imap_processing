@@ -489,14 +489,57 @@ class TestCombinedMap:
             combined["ena_count"].values, single_pivot["ena_count"].values, rtol=1e-5
         )
 
-    def test_the_isn_mask_reads_the_pivot_angles_off_the_pointings(
+    def test_each_pivot_angle_is_masked_with_its_own_tuning(
         self, pointings_at_every_pivot, anc_dependencies
     ):
-        """A combined map is masked with the union of its pivots' tunings.
+        """A combined map masks each pivot on that pivot's own map.
 
-        The pivot 105 tuning of the test ancillary masks the top half of each
-        ESA level and the pivot 90 one the bright pixels, so a map holding both
-        is masked at least everywhere either of them would mask.
+        The mask is tuned per pivot angle and reads the intensity distribution
+        of the map it is masking, so it is applied before the pivots are
+        combined, never to a mixture of them. A pixel therefore survives into
+        the combined map wherever any one pivot still reports it, and is filled
+        only where every pivot masked it away.
+        """
+        with patch(
+            "imap_processing.lo.l1c.lo_l1c.frame_transform_az_el",
+            side_effect=identity_pointing,
+        ):
+            (combined,) = lo_l2(
+                as_dependencies(*pointings_at_every_pivot),
+                anc_dependencies,
+                COMBINED_MASK_DESCRIPTOR,
+            )
+            # The same pointing under its own pivot angle's descriptor is
+            # exactly the map the combined run builds for that pivot.
+            singly = [
+                lo_l2(
+                    as_dependencies(pointing),
+                    anc_dependencies,
+                    f"l{int(pointing['goodtimes']['pivot'].values[0]):03d}"
+                    "-enansnbsmsk-h-sf-nsp-full-hae-6deg-3mo",
+                )[0]
+                for pointing in pointings_at_every_pivot
+            ]
+
+        masked = is_fill(combined["ena_intensity"].values)
+        expected = np.logical_and.reduce(
+            [is_fill(single["ena_intensity"].values) for single in singly]
+        )
+
+        assert expected.any(), "the tuning must mask something"
+        assert not expected.all(), "the tuning must leave something"
+        np.testing.assert_array_equal(masked, expected)
+
+    def test_a_pivot_angles_mask_does_not_leak_into_the_others(
+        self, pointings_at_every_pivot, anc_dependencies
+    ):
+        """Pooling the pivots first would mask strictly more than this.
+
+        The pivot 105 tuning masks the top half of its own map and the pivot 90
+        one the bright pixels of its own. Applied to a pooled map those tunings
+        would blank out pixels that a pivot which never masked them still
+        measured, so the correct combined map keeps strictly more than the
+        union of the tunings would.
         """
         with patch(
             "imap_processing.lo.l1c.lo_l1c.frame_transform_az_el",
@@ -513,24 +556,156 @@ class TestCombinedMap:
                 COMBINED_DESCRIPTOR,
             )
 
-        masked = is_fill(combined["ena_intensity"].values)
         intensity = unmasked["ena_intensity"].values
         unexposed = is_fill(intensity)
 
-        # The union of the three tunings: the widest band (pivot 75's 1 degree
-        # loses to the 90 degrees of the others), the faintest brightness taken
-        # as bright, and the shortest outlier tail.
+        # What the old pooled behaviour produced: the union of the three
+        # tunings applied to one mixed intensity distribution.
         as_masked = np.where(unexposed, 0.0, intensity)
         peak = np.max(as_masked, axis=(-2, -1), keepdims=True)
         median = np.percentile(as_masked, 50, axis=(-2, -1), keepdims=True)
-        expected = (
+        pooled = (
             (as_masked >= MASK_THRESHOLD_FRACTION * peak)
             | (as_masked > median)
             | unexposed
         )
 
-        assert expected.any(), "the tuning must mask something"
-        np.testing.assert_array_equal(masked, expected)
+        masked = is_fill(combined["ena_intensity"].values)
+        assert masked.sum() < pooled.sum(), (
+            "masking each pivot on its own map must keep pixels that masking a "
+            "pooled map throws away"
+        )
+
+    def test_the_intensity_is_combined_by_inverse_variance(
+        self, pointings_at_every_pivot, anc_dependencies
+    ):
+        """Each pivot weighs on a pixel by how well it measured that pixel.
+
+        A pivot that barely saw a pixel carries a large uncertainty there, and
+        must not pull the pixel as hard as a pivot that saw it well.
+        """
+        with patch(
+            "imap_processing.lo.l1c.lo_l1c.frame_transform_az_el",
+            side_effect=identity_pointing,
+        ):
+            (combined,) = lo_l2(
+                as_dependencies(*pointings_at_every_pivot),
+                anc_dependencies,
+                COMBINED_DESCRIPTOR,
+            )
+            singly = [
+                lo_l2(
+                    as_dependencies(pointing),
+                    anc_dependencies,
+                    f"l{int(pointing['goodtimes']['pivot'].values[0]):03d}"
+                    "-enansnbs-h-sf-nsp-full-hae-6deg-3mo",
+                )[0]
+                for pointing in pointings_at_every_pivot
+            ]
+
+        intensity = np.stack([s["ena_intensity"].values for s in singly])
+        uncert = np.stack([s["ena_intensity_stat_uncert"].values for s in singly])
+        reported = intensity > FILL
+
+        weight = np.where(
+            reported & (uncert > 0), 1.0 / np.where(uncert > 0, uncert, 1.0) ** 2, 0.0
+        )
+        total = weight.sum(axis=0)
+
+        # Only the pixels the weighting actually applies to: those at least one
+        # pivot measured with a real uncertainty.
+        check = total > 0
+        assert check.any(), "some pixel must be inverse-variance weighted"
+
+        expected = np.divide(
+            (np.where(reported, intensity, 0.0) * weight).sum(axis=0),
+            total,
+            out=np.zeros_like(total),
+            where=check,
+        )
+        np.testing.assert_allclose(
+            combined["ena_intensity"].values[check], expected[check], rtol=1e-4
+        )
+
+        # And the combined uncertainty is the inverse quadrature sum.
+        np.testing.assert_allclose(
+            combined["ena_intensity_stat_uncert"].values[check],
+            np.sqrt(1.0 / total[check]),
+            rtol=1e-4,
+        )
+
+    def test_counts_and_exposure_still_add(
+        self, pointings_at_every_pivot, anc_dependencies
+    ):
+        """Building each pivot separately does not lose any exposure."""
+        with patch(
+            "imap_processing.lo.l1c.lo_l1c.frame_transform_az_el",
+            side_effect=identity_pointing,
+        ):
+            (combined,) = lo_l2(
+                as_dependencies(*pointings_at_every_pivot),
+                anc_dependencies,
+                COMBINED_DESCRIPTOR,
+            )
+
+        expected = sum(
+            pointing["expected_exposure"].sum() for pointing in pointings_at_every_pivot
+        )
+        assert combined["exposure_factor"].values.sum() == pytest.approx(expected)
+
+    def test_the_combined_map_spans_every_pivots_window(
+        self, pointings_at_every_pivot, anc_dependencies
+    ):
+        """The epoch of the map covers the pointings of all of its pivots.
+
+        Each pivot is accumulated onto a map of its own, so the combined map
+        has to take the union of their windows rather than whichever one
+        happens to carry the result.
+        """
+        # Give each pivot a window of its own, so a map that took only one
+        # pivot's window would report the wrong one.
+        for offset, pointing in enumerate(pointings_at_every_pivot):
+            shift = offset * 1_000.0
+            pointing["goodtimes"]["gt_start_met"].values[:] = GT_START + shift
+            pointing["goodtimes"]["gt_end_met"].values[:] = GT_END + shift
+            pointing["histrates"] = pointing["histrates"].assign_coords(
+                epoch=met_to_ttj2000ns(np.array(IN_METS + OUT_METS) + shift)
+            )
+
+        with patch(
+            "imap_processing.lo.l1c.lo_l1c.frame_transform_az_el",
+            side_effect=identity_pointing,
+        ):
+            (combined,) = lo_l2(
+                as_dependencies(*pointings_at_every_pivot),
+                anc_dependencies,
+                COMBINED_DESCRIPTOR,
+            )
+
+        last = (len(pointings_at_every_pivot) - 1) * 1_000.0
+        assert combined["epoch"].values[0] == met_to_ttj2000ns(GT_START)
+        assert combined["epoch_delta"].values[0] == pytest.approx(
+            met_to_ttj2000ns(GT_END + last) - met_to_ttj2000ns(GT_START)
+        )
+
+    def test_pivot_angles_in_different_esa_modes_cannot_be_combined(
+        self, pointings_at_every_pivot, anc_dependencies
+    ):
+        """Pivots binned in different energies have no shared energy axis."""
+        # The ESA mode sets the energies a map is binned in, so a map whose
+        # pivots disagree about it has no one axis to combine them onto.
+        pointings_at_every_pivot[-1]["histrates"]["esa_mode"].values[:] = 1
+
+        with patch(
+            "imap_processing.lo.l1c.lo_l1c.frame_transform_az_el",
+            side_effect=identity_pointing,
+        ):
+            with pytest.raises(ValueError, match="different ESA modes"):
+                lo_l2(
+                    as_dependencies(*pointings_at_every_pivot),
+                    anc_dependencies,
+                    COMBINED_DESCRIPTOR,
+                )
 
     def test_a_combined_map_of_one_pivot_angle_uses_that_pivots_tuning(
         self, one_pointing, anc_dependencies
