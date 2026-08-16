@@ -1862,6 +1862,49 @@ def get_pivot_angle_from_nhk(ds_nhk: xr.Dataset) -> float:
     return ds_nhk["pcc_cumulative_cnt_pri"].isel(epoch=nitems // 2).item()
 
 
+def get_pointing_pivot_angle(l1b_nhk: xr.Dataset | None) -> float:
+    """
+    Get the pivot angle of a pointing from the L1B NHK dataset.
+
+    The pivot platform holds a fixed position for the duration of a pointing, so
+    the angle is the median of the ``pcc_coarse_pot_pri`` housekeeping samples
+    taken well away from the repoint maneuvers at either end (the window is set
+    by ``LoConstants.PIVOT_HK_HOUR_RANGE``).
+
+    This needs no science data, so it is available for any pointing with an NHK
+    product, including ones where the instrument never entered science mode.
+
+    Parameters
+    ----------
+    l1b_nhk : xr.Dataset | None
+        The L1B NHK dataset, or None when it is not among the dependencies.
+
+    Returns
+    -------
+    pivot_angle : float
+        The pivot angle in degrees, or the nominal ``NOMINAL_PIVOT_ANGLE`` when
+        the housekeeping is missing or contains no samples in the window.
+    """
+    if l1b_nhk is None or "pcc_coarse_pot_pri" not in l1b_nhk:
+        return c.NOMINAL_PIVOT_ANGLE
+
+    hk_epoch_ets = ttj2000ns_to_et(l1b_nhk["epoch"])
+    start_et_hk = (
+        hk_epoch_ets[0] + timedelta(hours=c.PIVOT_HK_HOUR_RANGE[0]).total_seconds()
+    )
+    end_et_hk = (
+        hk_epoch_ets[0] + timedelta(hours=c.PIVOT_HK_HOUR_RANGE[1]).total_seconds()
+    )
+
+    coarse_pot_pri = l1b_nhk["pcc_coarse_pot_pri"].values
+    pivot: float = np.nanmedian(  # type: ignore
+        coarse_pot_pri[(hk_epoch_ets >= start_et_hk) & (hk_epoch_ets <= end_et_hk)]
+    )
+    if np.isnan(pivot):
+        pivot = c.NOMINAL_PIVOT_ANGLE
+    return pivot
+
+
 def _get_esa_level_indices(epochs: np.ndarray, anc_dependencies: list) -> np.ndarray:
     """
     Get the ESA level indices (reswept indices) for the given epochs.
@@ -2482,23 +2525,7 @@ def l1b_bgrates_and_goodtimes(  # noqa: PLR0912
     if cdf_de is not None:
         pivot_de = cdf_de["pivot_angle"].item() if "pivot_angle" in cdf_de else 0.0
 
-    pivot: float = 90.0
-    cdf_hk = sci_dependencies.get("imap_lo_l1b_nhk")
-    if cdf_hk is not None and "pcc_coarse_pot_pri" in cdf_hk:
-        hk_epoch_ets = ttj2000ns_to_et(cdf_hk["epoch"])
-        start_et_hk = (
-            hk_epoch_ets[0] + timedelta(hours=c.PIVOT_HK_HOUR_RANGE[0]).total_seconds()
-        )
-        end_et_hk = (
-            hk_epoch_ets[0] + timedelta(hours=c.PIVOT_HK_HOUR_RANGE[1]).total_seconds()
-        )
-
-        coarse_pot_pri = cdf_hk["pcc_coarse_pot_pri"].values
-        pivot = np.nanmedian(  # type: ignore
-            coarse_pot_pri[(hk_epoch_ets >= start_et_hk) & (hk_epoch_ets <= end_et_hk)]
-        )
-        if np.isnan(pivot):
-            pivot = 90.0
+    pivot = get_pointing_pivot_angle(sci_dependencies.get("imap_lo_l1b_nhk"))
 
     cdf_hist = sci_dependencies["imap_lo_l1b_histrates"]
     epoch_ttj2000 = cdf_hist["epoch"].values

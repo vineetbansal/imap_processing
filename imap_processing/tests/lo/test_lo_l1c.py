@@ -6,17 +6,22 @@ import xarray as xr
 
 from imap_processing import imap_module_directory
 from imap_processing.cdf.imap_cdf_manager import ImapCdfAttributes
+from imap_processing.lo.constants import LoConstants
 from imap_processing.lo.l1c.lo_l1c import (
     N_ESA_ENERGY_STEPS,
     N_OFF_ANGLE_BINS,
     N_SPIN_ANGLE_BINS,
     OFF_ANGLE_BIN_CENTERS,
+    PIVOT_ANGLE_ASSUMED,
+    PIVOT_ANGLE_MEASURED,
+    PIVOT_ANGLE_SCHEDULED,
     PSET_SHAPE,
     FilterType,
     calculate_exposure_times,
     compute_pointing_directions,
     create_pset_counts,
     filter_goodtimes,
+    get_pivot_angle,
     lo_l1c,
     set_background_rates,
     set_pointing_directions,
@@ -808,3 +813,38 @@ def test_set_pointing_directions_delegates(attr_mgr):
         assert hae_longitude.shape == (1, 3600, 40)
         np.testing.assert_array_equal(hae_longitude.values[0], mock_az_el[:, :, 0])
         np.testing.assert_array_equal(hae_latitude.values[0], mock_az_el[:, :, 1])
+
+
+def test_get_pivot_angle_prefers_measured():
+    """Measured housekeeping wins over the scheduled angle."""
+    pointing_file = (
+        imap_module_directory
+        / "tests/lo/test_anc/imap_lo_pointing-file-small_20250101_20271231_v001.csv"
+    )
+    goodtimes = xr.Dataset({"pivot": ([74.99])})
+
+    angle, source = get_pivot_angle(
+        {"imap_lo_l1b_goodtimes": goodtimes},
+        [pointing_file],
+        np.datetime64("2025-01-01"),
+    )
+    assert angle == pytest.approx(74.99)
+    assert source == PIVOT_ANGLE_MEASURED
+
+
+def test_get_pivot_angle_falls_back_to_schedule():
+    """With no housekeeping the pointing file supplies the angle."""
+    pointing_file = (
+        imap_module_directory
+        / "tests/lo/test_anc/imap_lo_pointing-file-small_20250101_20271231_v001.csv"
+    )
+    angle, source = get_pivot_angle({}, [pointing_file], np.datetime64("2025-01-01"))
+    assert angle == 105.0
+    assert source == PIVOT_ANGLE_SCHEDULED
+
+
+def test_get_pivot_angle_falls_back_to_nominal():
+    """With neither housekeeping nor a pointing file, the nominal angle is used."""
+    angle, source = get_pivot_angle({}, [], np.datetime64("2025-01-01"))
+    assert angle == LoConstants.NOMINAL_PIVOT_ANGLE
+    assert source == PIVOT_ANGLE_ASSUMED

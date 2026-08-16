@@ -199,3 +199,52 @@ def test_read_pointing_index_file():
             dtype=object,
         ),
     )
+
+
+def test_get_nominal_pivot_angle():
+    ancillary_file = (
+        ANCILLARY_DIR / "imap_lo_pointing-file-small_20250101_20271231_v001.csv"
+    )
+    # The fixture schedules 105, 90, 75, 90, 105 deg on 2025 days 001 to 005.
+    assert (
+        lo_ancillary.get_nominal_pivot_angle(
+            [ancillary_file], np.datetime64("2025-01-01")
+        )
+        == 105.0
+    )
+    assert (
+        lo_ancillary.get_nominal_pivot_angle(
+            [ancillary_file], np.datetime64("2025-01-03")
+        )
+        == 75.0
+    )
+    # A pointing starts partway through its first day, so the time of day is
+    # not part of the lookup.
+    assert (
+        lo_ancillary.get_nominal_pivot_angle(
+            [ancillary_file], np.datetime64("2025-01-03T10:03:21")
+        )
+        == 75.0
+    )
+
+
+def test_get_nominal_pivot_angle_unavailable():
+    ancillary_file = (
+        ANCILLARY_DIR / "imap_lo_pointing-file-small_20250101_20271231_v001.csv"
+    )
+    # A date the pointing file does not cover.
+    assert (
+        lo_ancillary.get_nominal_pivot_angle(
+            [ancillary_file], np.datetime64("2026-01-01")
+        )
+        is None
+    )
+    # No pointing file among the ancillary dependencies.
+    assert lo_ancillary.get_nominal_pivot_angle([], np.datetime64("2025-01-01")) is None
+    assert (
+        lo_ancillary.get_nominal_pivot_angle(
+            [ANCILLARY_DIR / "imap_lo_esa-mode-lut_v001.csv"],
+            np.datetime64("2025-01-01"),
+        )
+        is None
+    )

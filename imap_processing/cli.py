@@ -1416,10 +1416,13 @@ class Lo(ProcessInstrument):
             science_files += dependencies.get_file_paths(
                 source="lo", data_type="l1b", descriptor="histrates"
             )
+            science_files += dependencies.get_file_paths(
+                source="lo", data_type="l1b", descriptor="nhk"
+            )
             for file in science_files:
                 dataset = load_cdf(file)
                 data_dict[dataset.attrs["Logical_source"]] = dataset
-            datasets = lo_l1c.lo_l1c(data_dict, anc_dependencies)
+            datasets = lo_l1c.lo_l1c(data_dict, anc_dependencies, self.repointing)
 
         elif self.data_level == "l2":
             anc_dependencies = dependencies.get_file_paths(data_type="ancillary")

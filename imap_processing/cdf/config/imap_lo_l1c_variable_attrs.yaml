@@ -123,6 +123,15 @@ pivot_angle_de:
   VALIDMAX: 180.0
   VALIDMIN: 0.0
 
+pivot_angle_source:
+  <<: *default
+  CATDESC: Provenance of pivot_angle, 0 = nominal constant assumed, 1 = measured from housekeeping, 2 = scheduled by the pointing file
+  FIELDNAM: Pivot Angle Source
+  FORMAT: I1
+  LABLAXIS: pivot source
+  VALIDMAX: 2
+  VALIDMIN: 0
+
 esa_mode:
   <<: *default
   CATDESC: Science Mode for Pointing

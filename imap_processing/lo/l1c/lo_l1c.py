@@ -11,6 +11,9 @@ from imap_processing.cdf.imap_cdf_manager import ImapCdfAttributes
 from imap_processing.ena_maps.utils.corrections import (
     add_spacecraft_position_and_velocity_to_pset,
 )
+from imap_processing.lo import lo_ancillary
+from imap_processing.lo.constants import LoConstants as c  # noqa: N813
+from imap_processing.lo.l1b.lo_l1b import get_pointing_pivot_angle
 from imap_processing.spice.geometry import (
     SpiceFrame,
     frame_transform_az_el,
@@ -18,6 +21,7 @@ from imap_processing.spice.geometry import (
 from imap_processing.spice.repoint import get_pointing_times_from_id
 from imap_processing.spice.spin import get_spin_number
 from imap_processing.spice.time import (
+    met_to_datetime64,
     met_to_ttj2000ns,
     ttj2000ns_to_et,
 )
@@ -36,6 +40,12 @@ SPIN_ANGLE_BIN_CENTERS = (SPIN_ANGLE_BIN_EDGES[:-1] + SPIN_ANGLE_BIN_EDGES[1:]) 
 OFF_ANGLE_BIN_EDGES = np.linspace(-2, 2, N_OFF_ANGLE_BINS + 1)
 OFF_ANGLE_BIN_CENTERS = (OFF_ANGLE_BIN_EDGES[:-1] + OFF_ANGLE_BIN_EDGES[1:]) / 2
 
+# Values of the pset "pivot_angle_source" variable, recording where the pivot
+# angle the pointing geometry was built from came from.
+PIVOT_ANGLE_ASSUMED = 0  # nominal constant, nothing better was available
+PIVOT_ANGLE_MEASURED = 1  # measured from housekeeping
+PIVOT_ANGLE_SCHEDULED = 2  # scheduled for the pointing by the pointing-file ancillary
+
 
 class FilterType(str, Enum):
     """
@@ -52,7 +62,9 @@ class FilterType(str, Enum):
     NONE = ""
 
 
-def lo_l1c(sci_dependencies: dict, anc_dependencies: list) -> list[xr.Dataset]:
+def lo_l1c(
+    sci_dependencies: dict, anc_dependencies: list, repointing: str | None = None
+) -> list[xr.Dataset]:
     """
     Will process IMAP-Lo L1B data into L1C CDF data products.
 
@@ -62,6 +74,9 @@ def lo_l1c(sci_dependencies: dict, anc_dependencies: list) -> list[xr.Dataset]:
         Dictionary of datasets needed for L1C data product creation in xarray Datasets.
     anc_dependencies : list
         Ancillary files needed for L1C data product creation.
+    repointing : str | None, optional
+        The repoint ID processing was invoked with, e.g. "repoint00189". Only
+        needed for a pointing with no Lo dependencies to read it from.
 
     Returns
     -------
@@ -73,22 +88,100 @@ def lo_l1c(sci_dependencies: dict, anc_dependencies: list) -> list[xr.Dataset]:
     attr_mgr.add_instrument_global_attrs(instrument="lo")
     attr_mgr.add_instrument_variable_attrs(instrument="lo", level="l1c")
 
-    # if the dependencies are used to create Annotated Direct Events
-    if "imap_lo_l1b_de" in sci_dependencies:
-        logical_source = "imap_lo_l1c_pset"
-        l1b_de = sci_dependencies["imap_lo_l1b_de"]
-        l1b_goodtimes_only = filter_goodtimes(
-            l1b_de, sci_dependencies["imap_lo_l1b_goodtimes"]
+    logical_source = "imap_lo_l1c_pset"
+    l1b_de = sci_dependencies.get("imap_lo_l1b_de")
+    l1b_goodtimes = sci_dependencies.get("imap_lo_l1b_goodtimes")
+
+    # Get the pointing times from the repoint ID stored on any of the dependencies
+    pointing_start_met, pointing_end_met = get_pointing_times_from_id(
+        get_repoint_id(sci_dependencies, repointing)
+    )
+
+    pset = xr.Dataset(
+        coords={"epoch": np.array([met_to_ttj2000ns(pointing_start_met)])},
+        attrs=attr_mgr.get_global_attributes(logical_source),
+    )
+
+    pivot_angle, pivot_angle_source = get_pivot_angle(
+        sci_dependencies, anc_dependencies, met_to_datetime64(pointing_start_met)
+    )
+    if pivot_angle_source != PIVOT_ANGLE_MEASURED:
+        logging.warning(
+            "No housekeeping to measure the pivot angle from. The pointing "
+            "geometry is built from %s degrees, taken from %s, which the "
+            "pivot_angle_source variable records.",
+            pivot_angle,
+            "the pointing file"
+            if pivot_angle_source == PIVOT_ANGLE_SCHEDULED
+            else "the nominal constant",
         )
+    pset["pivot_angle"] = xr.DataArray(
+        np.array([pivot_angle], dtype=np.float32),
+        dims=["epoch"],
+        attrs=attr_mgr.get_variable_attributes("pivot_angle"),
+    )
+    pset["pivot_angle_source"] = xr.DataArray(
+        np.array([pivot_angle_source], dtype=np.uint8),
+        dims=["epoch"],
+        attrs=attr_mgr.get_variable_attributes("pivot_angle_source"),
+    )
+    # The DE pivot angle has no meaning without Direct Events. L1B uses 0.0 for
+    # the same case, so match it here.
+    pivot_angle_de = (
+        np.atleast_1d(l1b_goodtimes["pivot_de"].values)[0]
+        if l1b_goodtimes is not None and "pivot_de" in l1b_goodtimes
+        else 0.0
+    )
+    pset["pivot_angle_de"] = xr.DataArray(
+        np.array([pivot_angle_de], dtype=np.float32),
+        dims=["epoch"],
+        attrs=attr_mgr.get_variable_attributes("pivot_angle_de"),
+    )
 
-        # Get the pointing times from the repoint ID stored in the l1b_de dataset
-        repoint_id = l1b_de.attrs.get("Repointing", None)
-        if repoint_id is None:
-            raise ValueError(
-                "Repointing ID attribute is missing from the L1B DE dataset."
-            )
-        pointing_start_met, pointing_end_met = get_pointing_times_from_id(repoint_id)
+    # ESA mode needs to be added to L1B DE. Adding try statement
+    # to avoid error until it's available in the dataset
+    if l1b_de is None or "esa_mode" not in l1b_de:
+        logging.debug(
+            "ESA mode not found in L1B DE dataset. \
+            Setting to default value of 0 for Hi-Res."
+        )
+        esa_mode = 0
+    else:
+        esa_mode = l1b_de["esa_mode"].values[0]
+    pset["esa_mode"] = xr.DataArray(
+        np.array([esa_mode]),
+        dims=["epoch"],
+        attrs=attr_mgr.get_variable_attributes("esa_mode"),
+    )
 
+    pset["pointing_start_met"] = xr.DataArray(
+        np.array([pointing_start_met]),
+        dims="epoch",
+        attrs=attr_mgr.get_variable_attributes("pointing_start_met"),
+    )
+    pset["pointing_end_met"] = xr.DataArray(
+        np.array([pointing_end_met]),
+        dims="epoch",
+        attrs=attr_mgr.get_variable_attributes("pointing_end_met"),
+    )
+
+    # Get the start and end spin numbers based on the pointing start and end MET
+    start_spin_number = get_spin_number(pset["pointing_start_met"].item())
+    end_spin_number = get_spin_number(pset["pointing_end_met"].item())
+    pset["start_spin_number"] = xr.DataArray(
+        [start_spin_number],
+        dims="epoch",
+        attrs=attr_mgr.get_variable_attributes("start_spin_number"),
+    )
+    pset["end_spin_number"] = xr.DataArray(
+        [end_spin_number],
+        dims="epoch",
+        attrs=attr_mgr.get_variable_attributes("end_spin_number"),
+    )
+
+    # Set the counts
+    if l1b_de is not None and l1b_goodtimes is not None:
+        l1b_goodtimes_only = filter_goodtimes(l1b_de, l1b_goodtimes)
         # Handle case where no good times are found after filtering,
         # which would lead to an empty dataset with zero counts
         if len(l1b_goodtimes_only["epoch"]) == 0:
@@ -96,60 +189,6 @@ def lo_l1c(sci_dependencies: dict, anc_dependencies: list) -> list[xr.Dataset]:
                 "No good times found in L1B DE dataset after filtering. "
                 "Creating PSET dataset with zero counts and exposure time."
             )
-
-        pset = xr.Dataset(
-            coords={"epoch": np.array([met_to_ttj2000ns(pointing_start_met)])},
-            attrs=attr_mgr.get_global_attributes(logical_source),
-        )
-
-        pset["pivot_angle"] = sci_dependencies["imap_lo_l1b_goodtimes"]["pivot"]
-        pset["pivot_angle_de"] = sci_dependencies["imap_lo_l1b_goodtimes"]["pivot_de"]
-
-        # ESA mode needs to be added to L1B DE. Adding try statement
-        # to avoid error until it's available in the dataset
-        if "esa_mode" not in l1b_de:
-            logging.debug(
-                "ESA mode not found in L1B DE dataset. \
-                Setting to default value of 0 for Hi-Res."
-            )
-            pset["esa_mode"] = xr.DataArray(
-                np.array([0]),
-                dims=["epoch"],
-                attrs=attr_mgr.get_variable_attributes("esa_mode"),
-            )
-        else:
-            pset["esa_mode"] = xr.DataArray(
-                np.array([l1b_de["esa_mode"].values[0]]),
-                dims=["epoch"],
-                attrs=attr_mgr.get_variable_attributes("esa_mode"),
-            )
-
-        pset["pointing_start_met"] = xr.DataArray(
-            np.array([pointing_start_met]),
-            dims="epoch",
-            attrs=attr_mgr.get_variable_attributes("pointing_start_met"),
-        )
-        pset["pointing_end_met"] = xr.DataArray(
-            np.array([pointing_end_met]),
-            dims="epoch",
-            attrs=attr_mgr.get_variable_attributes("pointing_end_met"),
-        )
-
-        # Get the start and end spin numbers based on the pointing start and end MET
-        start_spin_number = get_spin_number(pset["pointing_start_met"].item())
-        end_spin_number = get_spin_number(pset["pointing_end_met"].item())
-        pset["start_spin_number"] = xr.DataArray(
-            [start_spin_number],
-            dims="epoch",
-            attrs=attr_mgr.get_variable_attributes("start_spin_number"),
-        )
-        pset["end_spin_number"] = xr.DataArray(
-            [end_spin_number],
-            dims="epoch",
-            attrs=attr_mgr.get_variable_attributes("end_spin_number"),
-        )
-
-        # Set the counts
         pset["triples_counts"] = create_pset_counts(
             l1b_goodtimes_only, FilterType.TRIPLES
         )
@@ -158,43 +197,62 @@ def lo_l1c(sci_dependencies: dict, anc_dependencies: list) -> list[xr.Dataset]:
         )
         pset["h_counts"] = create_pset_counts(l1b_goodtimes_only, FilterType.HYDROGEN)
         pset["o_counts"] = create_pset_counts(l1b_goodtimes_only, FilterType.OXYGEN)
+    else:
+        logging.info(
+            "No L1B Direct Event dependency. Creating a PSET with the pointing "
+            "geometry only and zero counts."
+        )
+        for counts_variable in (
+            "triples_counts",
+            "doubles_counts",
+            "h_counts",
+            "o_counts",
+        ):
+            pset[counts_variable] = xr.DataArray(
+                data=np.zeros(PSET_SHAPE, dtype=np.int16), dims=PSET_DIMS
+            )
 
-        # Set the exposure time from L1B histrates summed over good-time epochs
+    # Set the exposure time from L1B histrates summed over good-time epochs
+    if "imap_lo_l1b_histrates" in sci_dependencies and l1b_goodtimes is not None:
         pset["exposure_time"] = calculate_exposure_times(
             sci_dependencies["imap_lo_l1b_histrates"],
-            sci_dependencies["imap_lo_l1b_goodtimes"],
+            l1b_goodtimes,
+        )
+    else:
+        pset["exposure_time"] = xr.DataArray(
+            data=np.zeros(PSET_SHAPE, dtype=np.float32), dims=PSET_DIMS
         )
 
-        # Set backgrounds
-        (
-            pset["h_background_rates"],
-            pset["h_background_rates_stat_uncert"],
-            pset["h_background_rates_sys_err"],
-        ) = set_background_rates(
-            FilterType.HYDROGEN,
-            sci_dependencies,
-            attr_mgr,
-        )
+    # Set backgrounds. These default to zero when the bgrates dependency is absent.
+    (
+        pset["h_background_rates"],
+        pset["h_background_rates_stat_uncert"],
+        pset["h_background_rates_sys_err"],
+    ) = set_background_rates(
+        FilterType.HYDROGEN,
+        sci_dependencies,
+        attr_mgr,
+    )
 
-        (
-            pset["o_background_rates"],
-            pset["o_background_rates_stat_uncert"],
-            pset["o_background_rates_sys_err"],
-        ) = set_background_rates(
-            FilterType.OXYGEN,
-            sci_dependencies,
-            attr_mgr,
-        )
+    (
+        pset["o_background_rates"],
+        pset["o_background_rates_stat_uncert"],
+        pset["o_background_rates_sys_err"],
+    ) = set_background_rates(
+        FilterType.OXYGEN,
+        sci_dependencies,
+        attr_mgr,
+    )
 
-        # Use pointing midpoint time to query DPS kernel in order to avoid potential
-        # querying outside of pointing due to rounding errors
-        pointing_midpoint_met = (
-            pset["pointing_start_met"].item() + pset["pointing_end_met"].item()
-        ) / 2
-        pointing_midpoint_ttj2000ns = met_to_ttj2000ns(pointing_midpoint_met)
-        pset["hae_longitude"], pset["hae_latitude"] = set_pointing_directions(
-            pointing_midpoint_ttj2000ns, attr_mgr, pset["pivot_angle"].values[0].item()
-        )
+    # Use pointing midpoint time to query DPS kernel in order to avoid potential
+    # querying outside of pointing due to rounding errors
+    pointing_midpoint_met = (
+        pset["pointing_start_met"].item() + pset["pointing_end_met"].item()
+    ) / 2
+    pointing_midpoint_ttj2000ns = met_to_ttj2000ns(pointing_midpoint_met)
+    pset["hae_longitude"], pset["hae_latitude"] = set_pointing_directions(
+        pointing_midpoint_ttj2000ns, attr_mgr, pivot_angle
+    )
 
     pset.attrs = attr_mgr.get_global_attributes(logical_source)
 
@@ -220,6 +278,121 @@ def lo_l1c(sci_dependencies: dict, anc_dependencies: list) -> list[xr.Dataset]:
     )
 
     return [pset]
+
+
+def get_repoint_id(sci_dependencies: dict, repointing: str | None = None) -> str:
+    """
+    Get the repoint ID of the pointing.
+
+    Every L1B product of a pointing carries the same ``Repointing`` attribute,
+    so any of them will do. They are checked in order of preference to keep the
+    Direct Event product authoritative when it is present. A pointing with no
+    Lo data at all has no dependency to read, so the repoint ID processing was
+    invoked with is used instead.
+
+    Parameters
+    ----------
+    sci_dependencies : dict
+        Dictionary of datasets needed for L1C data product creation.
+    repointing : str | None, optional
+        The repoint ID processing was invoked with, e.g. "repoint00189".
+
+    Returns
+    -------
+    repoint_id : str
+        The repoint ID of the pointing, e.g. "repoint00189".
+
+    Raises
+    ------
+    ValueError
+        If the repoint ID cannot be determined from either source.
+    """
+    for logical_source in (
+        "imap_lo_l1b_de",
+        "imap_lo_l1b_goodtimes",
+        "imap_lo_l1b_histrates",
+        "imap_lo_l1b_nhk",
+    ):
+        dataset = sci_dependencies.get(logical_source)
+        if dataset is not None and dataset.attrs.get("Repointing") is not None:
+            return str(dataset.attrs["Repointing"])
+
+    if repointing is not None:
+        return repointing
+
+    raise ValueError(
+        "Repointing ID is missing from the L1B dependencies and was not passed "
+        "to processing."
+    )
+
+
+def get_pivot_angle(
+    sci_dependencies: dict,
+    anc_dependencies: list | None = None,
+    pointing_date: np.datetime64 | None = None,
+) -> tuple[float, int]:
+    """
+    Get the pivot angle of the pointing and where it came from.
+
+    Sources are used in descending order of authority:
+
+    1. The measured angle, which ``get_pointing_pivot_angle`` derives from the
+       ``pcc_coarse_pot_pri`` housekeeping. It is stored in the L1B goodtimes
+       product, so it is read back from there when goodtimes is a dependency,
+       and recomputed from the L1B NHK dataset when it is not.
+    2. The angle scheduled for the pointing by the "pointing-file" ancillary,
+       for a pointing with no housekeeping to measure.
+    3. The nominal constant, when the ancillary is unavailable or has no entry.
+
+    Housekeeping is currently the only source of a measured pivot angle. If a Lo
+    pivot CK is delivered in the future it would be preferable to both fallbacks,
+    since it would cover pointings with no Lo data.
+
+    Parameters
+    ----------
+    sci_dependencies : dict
+        Dictionary of datasets needed for L1C data product creation.
+    anc_dependencies : list | None, optional
+        Ancillary file paths, used to find the pointing file.
+    pointing_date : numpy.datetime64 | None, optional
+        The date the pointing starts on, used to index the pointing file.
+
+    Returns
+    -------
+    pivot_angle : float
+        The pivot angle of the pointing in degrees.
+    pivot_angle_source : int
+        Which of ``PIVOT_ANGLE_MEASURED``, ``PIVOT_ANGLE_SCHEDULED`` or
+        ``PIVOT_ANGLE_ASSUMED`` the angle came from.
+    """
+    goodtimes_ds = sci_dependencies.get("imap_lo_l1b_goodtimes")
+    if goodtimes_ds is not None and "pivot" in goodtimes_ds:
+        # Goodtimes only exists for pointings that took science data, which
+        # implies housekeeping was downlinked for them too.
+        return (
+            float(np.atleast_1d(goodtimes_ds["pivot"].values)[0]),
+            PIVOT_ANGLE_MEASURED,
+        )
+
+    l1b_nhk = sci_dependencies.get("imap_lo_l1b_nhk")
+    if l1b_nhk is not None and "pcc_coarse_pot_pri" in l1b_nhk:
+        pivot_angle = get_pointing_pivot_angle(l1b_nhk)
+        # get_pointing_pivot_angle substitutes the nominal angle when the
+        # housekeeping is present but holds no usable samples. An exact match
+        # therefore means the value was not measured; a real median landing
+        # exactly on the nominal angle would be reported as unmeasured, which
+        # is the safe direction to err in.
+        if pivot_angle != c.NOMINAL_PIVOT_ANGLE:
+            return pivot_angle, PIVOT_ANGLE_MEASURED
+
+    if anc_dependencies is not None and pointing_date is not None:
+        scheduled_angle = lo_ancillary.get_nominal_pivot_angle(
+            anc_dependencies, pointing_date
+        )
+        if scheduled_angle is not None:
+            return scheduled_angle, PIVOT_ANGLE_SCHEDULED
+
+    return c.NOMINAL_PIVOT_ANGLE, PIVOT_ANGLE_ASSUMED
 
 
 def filter_goodtimes(l1b_de: xr.Dataset, goodtimes_ds: xr.Dataset) -> xr.Dataset:

@@ -138,6 +138,7 @@ class LoConstants:
     # Default background-rate thresholds [counts/s] when the pivot angle matches no
     # spec in PIVOT_ANGLES, or the matching spec has no pivot-specific value.
     # Currently set to nominal values for the 90-deg pivot angle.
+    NOMINAL_PIVOT_ANGLE = 90.0
     THRESHOLD_BG_RATE_RAM_DEFAULT: float = 0.028
     THRESHOLD_BG_RATE_ANTI_RAM_DEFAULT: float = 0.014
 
