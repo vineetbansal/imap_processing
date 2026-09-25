@@ -156,16 +156,13 @@ def lo_l2(
             f"{descriptor}. Only hydrogen maps are supported."
         )
 
-    sky_map = map_descriptor.to_empty_map()
-    if not isinstance(sky_map, RectangularSkyMap):
-        raise NotImplementedError("HEALPix map output not supported for Lo")
-
     pointings = _complete_pointings(sci_dependencies)
 
     esa_mode = c.ESA_MODES[map_descriptor.instrument]
     logger.info(
         f"Building {descriptor} from {len(pointings)} pointings in ESA mode {esa_mode}"
     )
+    calibration = _esa_calibration(map_descriptor.species, esa_mode)
 
     # The mask is tuned per pivot angle, which a combined map takes from the
     # pointings themselves. Resolved before anything is accumulated, so that a
@@ -176,7 +173,69 @@ def lo_l2(
         else None
     )
 
-    calibration = _esa_calibration(map_descriptor.species, esa_mode)
+    sky_map, variables, _ = _build_pivot_map(
+        pointings,
+        map_descriptor,
+        calibration,
+        flux_corrector,
+        isn_mask_parameters,
+    )
+    dataset = _build_map_dataset(sky_map, variables, calibration)
+
+    logger.info("IMAP-Lo L2 processing pipeline completed successfully")
+    return [
+        sky_map.build_cdf_dataset(
+            instrument="lo",
+            level="l2",
+            descriptor=descriptor,
+            external_map_dataset=dataset,
+        )
+    ]
+
+
+def _build_pivot_map(
+    pointings: dict[int, tuple],
+    map_descriptor: MapDescriptor,
+    calibration: xr.Dataset,
+    flux_corrector: PowerLawFluxCorrector | None,
+    isn_mask_parameters: pd.DataFrame | None,
+) -> tuple[RectangularSkyMap, dict[str, xr.DataArray], xr.DataArray | None]:
+    """
+    Build one finished map from a set of pointings.
+
+    The pointings are accumulated onto the grid and every correction the
+    descriptor asks for is made.
+
+    Parameters
+    ----------
+    pointings : dict[int, tuple]
+        The (goodtimes, bgrates, histrates) datasets of the pointings, keyed by
+        repointing.
+    map_descriptor : MapDescriptor
+        The parsed descriptor of the map being made.
+    calibration : xr.Dataset
+        The energy response the map is binned in.
+    flux_corrector : PowerLawFluxCorrector | None
+        The ESA transmission factors the Compton-Getting correction reads, or
+        None if the map is not to be corrected.
+    isn_mask_parameters : pd.DataFrame | None
+        The ISN mask tuning of the map, or None if the map is not to be masked.
+
+    Returns
+    -------
+    tuple[RectangularSkyMap, dict[str, xr.DataArray], xr.DataArray | None]
+        The map the pointings were projected onto, its variables each of shape
+        (epoch, esa level, pixel), and the pixels the ISN mask blanked out, or
+        None if the map was not masked.
+
+    Raises
+    ------
+    NotImplementedError
+        If a HEALPix map is requested (only rectangular maps supported for Lo).
+    """
+    sky_map = map_descriptor.to_empty_map()
+    if not isinstance(sky_map, RectangularSkyMap):
+        raise NotImplementedError("HEALPix map output not supported for Lo")
 
     # The species sputtering into this map, if it is to be sputter corrected,
     # and the ESA levels it sputters into. Its counts are accumulated on the
@@ -210,7 +269,7 @@ def lo_l2(
         _bootstrap_correction() if map_descriptor.bootstrap_corrected else None
     )
 
-    variables, _ = _calculate_rates_and_intensities(
+    variables, isn_mask = _calculate_rates_and_intensities(
         sky_map,
         calibration,
         sputter_matrix,
@@ -218,17 +277,7 @@ def lo_l2(
         flux_corrector,
         isn_mask_parameters,
     )
-    dataset = _build_map_dataset(sky_map, variables, calibration)
-
-    logger.info("IMAP-Lo L2 processing pipeline completed successfully")
-    return [
-        sky_map.build_cdf_dataset(
-            instrument="lo",
-            level="l2",
-            descriptor=descriptor,
-            external_map_dataset=dataset,
-        )
-    ]
+    return sky_map, variables, isn_mask
 
 
 # =============================================================================
