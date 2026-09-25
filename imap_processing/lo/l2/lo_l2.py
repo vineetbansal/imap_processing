@@ -210,7 +210,7 @@ def lo_l2(
         _bootstrap_correction() if map_descriptor.bootstrap_corrected else None
     )
 
-    variables = _calculate_rates_and_intensities(
+    variables, _ = _calculate_rates_and_intensities(
         sky_map,
         calibration,
         sputter_matrix,
@@ -1631,7 +1631,7 @@ def _calculate_rates_and_intensities(
     bootstrap_matrix: np.ndarray | None = None,
     flux_corrector: PowerLawFluxCorrector | None = None,
     isn_mask_parameters: pd.DataFrame | None = None,
-) -> dict[str, xr.DataArray]:
+) -> tuple[dict[str, xr.DataArray], xr.DataArray | None]:
     """
     Turn the accumulated counts and exposure into rates and intensities.
 
@@ -1664,8 +1664,9 @@ def _calculate_rates_and_intensities(
 
     Returns
     -------
-    dict[str, xr.DataArray]
-        The map variables, each of shape (epoch, esa level, pixel).
+    tuple[dict[str, xr.DataArray], xr.DataArray | None]
+        The map variables, each of shape (epoch, esa level, pixel), and the
+        pixels the ISN mask blanked out, or None if the map was not masked.
     """
     counts = sky_map.data_1d["ena_count"]
     exposure = sky_map.data_1d["exposure_factor"]
@@ -1849,7 +1850,7 @@ def _calculate_rates_and_intensities(
     for name in FILLED_VARIABLES:
         variables[name] = variables[name].where(exposed, FILLVAL_FLOAT)
 
-    return variables
+    return variables, isn_mask
 
 
 def _build_map_dataset(
