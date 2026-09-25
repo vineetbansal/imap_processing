@@ -72,6 +72,7 @@ UNTUNED_MASK_DESCRIPTOR = "l060-enansnbsmsk-h-sf-nsp-full-hae-6deg-3mo"
 COMBINED_DESCRIPTOR = "ilo-enansnbs-h-sf-nsp-full-hae-6deg-3mo"
 COMBINED_RAM_DESCRIPTOR = "ilo-enansnbs-h-sf-nsp-ram-hae-6deg-3mo"
 COMBINED_MASK_DESCRIPTOR = "ilo-enansnbsmsk-h-sf-nsp-full-hae-6deg-3mo"
+COMBINED_CG_DESCRIPTOR = "ilo-enansnbs-h-hf-nsp-full-hae-6deg-3mo"
 
 HI_THR_DESCRIPTOR = "t090-enansnbs-h-sf-nsp-full-hae-6deg-3mo"
 
@@ -553,6 +554,89 @@ class TestCombinedMap:
         assert partly.any(), "some pixel must be masked by some pivots but not all"
         np.testing.assert_array_equal(
             is_fill(combined["ena_intensity"].values), filled.all(axis=0)
+        )
+
+    @pytest.mark.parametrize(
+        "descriptor",
+        [COMBINED_DESCRIPTOR, COMBINED_MASK_DESCRIPTOR, COMBINED_CG_DESCRIPTOR],
+    )
+    def test_the_pivots_are_averaged_by_exposure(
+        self, pointings_at_every_pivot, anc_dependencies, descriptor
+    ):
+        """The combined intensity is the exposure weighted mean of the pivots'.
+
+        Each pivot is weighted by its exposure wherever it reports the pixel,
+        so a pivot that masked it takes no part. Heliospheric frame maps are
+        included, each pivot being Compton-Getting corrected on its own.
+        """
+        with patch(
+            "imap_processing.lo.l1c.lo_l1c.frame_transform_az_el",
+            side_effect=overlapping_pointing,
+        ):
+            (combined,) = lo_l2(
+                as_dependencies(*pointings_at_every_pivot),
+                anc_dependencies,
+                descriptor,
+            )
+            singly = self._pivot_maps(
+                pointings_at_every_pivot, anc_dependencies, descriptor
+            )
+
+        reported = [~is_fill(single["ena_intensity"].values) for single in singly]
+        # The pivots overlap, so that there is something to average.
+        seen = [single["exposure_factor"].values > 0 for single in singly]
+        assert (np.sum(seen, axis=0) == len(singly)).any()
+        weight = [
+            np.where(r, single["exposure_factor"].values, 0.0)
+            for r, single in zip(reported, singly, strict=True)
+        ]
+        total = sum(weight)
+        measured = total > 0
+        intensity = sum(
+            w * np.where(r, single["ena_intensity"].values, 0.0)
+            for w, r, single in zip(weight, reported, singly, strict=True)
+        )
+        counts = sum(
+            np.where(r, single["ena_count"].values, 0.0)
+            for r, single in zip(reported, singly, strict=True)
+        )
+
+        np.testing.assert_allclose(
+            combined["ena_intensity"].values[measured],
+            intensity[measured] / total[measured],
+            rtol=1e-5,
+        )
+        np.testing.assert_allclose(
+            combined["ena_count"].values[measured], counts[measured], rtol=1e-5
+        )
+        np.testing.assert_allclose(
+            combined["exposure_factor"].values[measured], total[measured], rtol=1e-5
+        )
+
+    def test_an_uncorrected_map_is_its_summed_counts_over_summed_exposure(
+        self, pointings_at_every_pivot, anc_dependencies
+    ):
+        """With no corrections, the average is Appendix A eq. 2 over all pivots."""
+        with patch(
+            "imap_processing.lo.l1c.lo_l1c.frame_transform_az_el",
+            side_effect=overlapping_pointing,
+        ):
+            (combined,) = lo_l2(
+                as_dependencies(*pointings_at_every_pivot),
+                anc_dependencies,
+                COMBINED_DESCRIPTOR,
+            )
+
+        counts = combined["ena_count"].values
+        exposure = combined["exposure_factor"].values
+        exposed = exposure > 0
+        response = (GEO_FACTORS[0] * ESA_ENERGIES[0])[
+            np.newaxis, :, np.newaxis, np.newaxis
+        ]
+        expected = counts / np.where(exposed, exposure, 1.0) / response
+
+        np.testing.assert_allclose(
+            combined["ena_intensity"].values[exposed], expected[exposed], rtol=1e-5
         )
 
     def test_a_combined_map_of_one_pivot_angle_uses_that_pivots_tuning(
