@@ -235,6 +235,18 @@ def identity_pointing(et, az_el, *args, **kwargs):
     return np.asarray(az_el)[:, 0, :]
 
 
+def overlapping_pointing(et, az_el, *args, **kwargs):
+    """Stand in for the SPICE DPS transform, landing every pivot on one ring.
+
+    Spin angle maps to longitude as in ``identity_pointing``, but every
+    pointing lands at the same latitude whatever its pivot angle, so that the
+    pointings of a combined map overlap on the sky, on one ring of pixels.
+    """
+    lon_lat = np.array(np.asarray(az_el)[:, 0, :], dtype=float)
+    lon_lat[:, 1] = 0.5
+    return lon_lat
+
+
 def make_pointing_set(sky_map, spin_angles, pivot=PIVOT):
     """Build the in-memory pointing set of one pointing, sky pointing mocked."""
     energy = np.arange(1.0, N_ESA + 1.0)
@@ -492,48 +504,56 @@ class TestCombinedMap:
             combined["ena_count"].values, single_pivot["ena_count"].values, rtol=1e-5
         )
 
-    def test_the_isn_mask_reads_the_pivot_angles_off_the_pointings(
+    @staticmethod
+    def _pivot_maps(pointings, anc_dependencies, descriptor):
+        """Map each pointing on its own, named for its own pivot angle."""
+        return [
+            lo_l2(
+                as_dependencies(pointing),
+                anc_dependencies,
+                descriptor.replace(
+                    "ilo", f"l{int(pointing['goodtimes']['pivot'][0]):03d}"
+                ),
+            )[0]
+            for pointing in pointings
+        ]
+
+    def test_each_pivot_angle_is_masked_with_its_own_tuning(
         self, pointings_at_every_pivot, anc_dependencies
     ):
-        """A combined map is masked with the union of its pivots' tunings.
+        """A pixel is masked only where every pivot that saw it masked it.
 
-        The pivot 105 tuning of the test ancillary masks the top half of each
-        ESA level and the pivot 90 one the bright pixels, so a map holding both
-        is masked at least everywhere either of them would mask.
+        The pointings overlap on one ring of pixels. There the pivot 75 tuning
+        of the test ancillary masks nothing, pivot 90 the bright pixels, and
+        pivot 105 every pixel above its level's median, each on its own pivot's
+        map. A pixel one pivot masks is still reported from the pivots that did
+        not.
         """
         with patch(
             "imap_processing.lo.l1c.lo_l1c.frame_transform_az_el",
-            side_effect=identity_pointing,
+            side_effect=overlapping_pointing,
         ):
             (combined,) = lo_l2(
                 as_dependencies(*pointings_at_every_pivot),
                 anc_dependencies,
                 COMBINED_MASK_DESCRIPTOR,
             )
-            (unmasked,) = lo_l2(
-                as_dependencies(*pointings_at_every_pivot),
-                anc_dependencies,
-                COMBINED_DESCRIPTOR,
+            singly = self._pivot_maps(
+                pointings_at_every_pivot, anc_dependencies, COMBINED_MASK_DESCRIPTOR
             )
 
-        masked = is_fill(combined["ena_intensity"].values)
-        intensity = unmasked["ena_intensity"].values
-        unexposed = is_fill(intensity)
-
-        # The union of the three tunings: the widest band (pivot 75's 1 degree
-        # loses to the 90 degrees of the others), the faintest brightness taken
-        # as bright, and the shortest outlier tail.
-        as_masked = np.where(unexposed, 0.0, intensity)
-        peak = np.max(as_masked, axis=(-2, -1), keepdims=True)
-        median = np.percentile(as_masked, 50, axis=(-2, -1), keepdims=True)
-        expected = (
-            (as_masked >= MASK_THRESHOLD_FRACTION * peak)
-            | (as_masked > median)
-            | unexposed
+        # Filled in a pivot's own map: masked by it, or never seen by it.
+        filled = np.stack(
+            [is_fill(single["ena_intensity"].values) for single in singly]
         )
-
-        assert expected.any(), "the tuning must mask something"
-        np.testing.assert_array_equal(masked, expected)
+        seen_by_all = np.all(
+            [single["exposure_factor"].values > 0 for single in singly], axis=0
+        )
+        partly = filled.any(axis=0) & ~filled.all(axis=0) & seen_by_all
+        assert partly.any(), "some pixel must be masked by some pivots but not all"
+        np.testing.assert_array_equal(
+            is_fill(combined["ena_intensity"].values), filled.all(axis=0)
+        )
 
     def test_a_combined_map_of_one_pivot_angle_uses_that_pivots_tuning(
         self, one_pointing, anc_dependencies
@@ -581,7 +601,7 @@ class TestCombinedMap:
         # 60 is a nominal pivot angle, but the mask ancillary has no row for it.
         untuned = make_pointing(repointing=100, pivot=60.0)
 
-        with pytest.raises(ValueError, match=r"no mask tuning for the \[60\]"):
+        with pytest.raises(ValueError, match=r"no mask tuning for the 60 degree"):
             lo_l2(as_dependencies(untuned), anc_dependencies, COMBINED_MASK_DESCRIPTOR)
 
 
@@ -1639,7 +1659,7 @@ class TestIsnMask:
 
     def test_an_untuned_pivot_angle_is_refused(self, one_pointing, anc_dependencies):
         """A map cannot be masked at a pivot the ancillary says nothing about."""
-        with pytest.raises(ValueError, match=r"no mask tuning for the \[60\] degree"):
+        with pytest.raises(ValueError, match=r"no mask tuning for the 60 degree"):
             lo_l2(
                 as_dependencies(one_pointing),
                 anc_dependencies,
