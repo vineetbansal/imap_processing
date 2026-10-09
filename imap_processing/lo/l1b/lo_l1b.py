@@ -146,6 +146,7 @@ HIST_RATE_FIELDS = [
     "esa_mode",
     "exposure_time_6deg",
     "spin_cycle",
+    "spin_angle",
 ]
 MONITOR_RATE_FIELDS = [
     "tof0_tof1_rates",
@@ -372,6 +373,7 @@ def l1b_allrates(
         avg_spin_durations_per_cycle,
         exposure_factor,
     )
+    l1b_all_rates = set_spin_angle(l1b_all_rates, spin_data)
 
     l1b_hist_rates, l1b_monitor_rates = split_rate_dataset(l1b_all_rates, attr_mgr_l1b)
     datasets_to_return.extend([l1b_hist_rates, l1b_monitor_rates])
@@ -1669,6 +1671,48 @@ def calculate_histogram_rates(
     return l1b_histrates
 
 
+def set_spin_angle(l1b_histrates: xr.Dataset, spin_data: xr.Dataset) -> xr.Dataset:
+    """
+    Set the spin angle each 6-degree histogram bin looks in.
+
+    The histogram bins are counted on board from Lo's own spin pulse, not from
+    the instrument look direction. The center of bin i looks at the IMAP_DPS
+    azimuth
+
+        (i + 0.5) * 6 + Lo mounting azimuth + Lo spin-start offset
+
+    where the spin-start offset is the spacecraft spin angle at which Lo starts
+    each spin (see ``get_lo_spin_start_phase_offset``). It is taken from the spin
+    table, so it includes any star-tracker delay correction the spin table
+    carries.
+
+    Parameters
+    ----------
+    l1b_histrates : xr.Dataset
+        The L1B histogram rates dataset.
+    spin_data : xr.Dataset
+        The L1A Spin dataset.
+
+    Returns
+    -------
+    l1b_histrates : xr.Dataset
+        The L1B histogram rates dataset with the spin angle [degrees] of each
+        6-degree bin center, in [0, 360).
+    """
+    n_bins = l1b_histrates.sizes["spin_bin_6"]
+    bin_centers = (np.arange(n_bins) + 0.5) * (360.0 / n_bins)
+    mounting_offset = 360.0 * get_spacecraft_to_instrument_spin_phase_offset(
+        SpiceFrame.IMAP_LO
+    )
+    spin_start_offset = get_lo_spin_start_phase_offset(spin_data)
+
+    l1b_histrates["spin_angle"] = xr.DataArray(
+        np.mod(bin_centers + mounting_offset + spin_start_offset, 360.0),
+        dims=["spin_bin_6"],
+    )
+    return l1b_histrates
+
+
 def calculate_de_rates(
     sci_dependencies: dict,
     anc_dependencies: list,
@@ -2292,6 +2336,67 @@ def calculate_star_sensor_profiles_by_group(
         counts_per_bin[group_label] = count_arr
 
     return spin_angle, group_mets, avg_amplitudes, counts_per_bin
+
+
+def get_lo_spin_start_phase_offset(spin_data: xr.Dataset) -> float:
+    """
+    Get the spacecraft spin angle at which Lo starts each spin.
+
+    Lo starts its star-sensor sampling on its own spin pulse, which lags the
+    spacecraft spin phase 0 of the spin table slightly. This returns that lag as
+    an angle, the circular mean over all spins where both Lo and the spin table
+    flag the phase as valid.
+
+    Parameters
+    ----------
+    spin_data : xr.Dataset
+        The L1A Spin dataset, with start_sec_spin and start_subsec_spin.
+
+    Returns
+    -------
+    offset : float
+        Spin angle [degrees] of Lo's spin start, in (-180, 180]. 0.0 if the spin
+        product has no spin start fields, or no spin start can be matched to the
+        spin table.
+    """
+    spin_fields = ["start_sec_spin", "start_subsec_spin", "valid_phase_spin"]
+    missing = [field for field in spin_fields if field not in spin_data]
+    if missing:
+        logger.warning(f"Spin data lacks {missing}; using spin start offset 0.")
+        return 0.0
+
+    start_met = (
+        spin_data["start_sec_spin"].values
+        + spin_data["start_subsec_spin"].values / c.SPIN_SUBSEC_PER_SEC
+    ).ravel()
+    valid = (spin_data["valid_phase_spin"].values.ravel() == 1) & (start_met > 0)
+
+    # interpolate_spin_data raises on times outside the spin table, so drop them
+    spin_table = get_spin_data()
+    table_start = spin_table["spin_start_met"].values[0]
+    table_end = (
+        spin_table["spin_start_met"].values[-1]
+        + spin_table["actual_spin_period"].values[-1]
+    )
+    start_met = start_met[valid & (start_met >= table_start) & (start_met < table_end)]
+    if start_met.size == 0:
+        logger.warning("No Lo spin starts within the spin table; using offset 0.")
+        return 0.0
+
+    # sc_spin_phase is NaN where the spin table flags the phase as invalid
+    phase = interpolate_spin_data(start_met)["sc_spin_phase"].values
+    phase = phase[np.isfinite(phase)]
+    if phase.size == 0:
+        logger.warning("No valid spin-table phase at Lo spin starts; using offset 0.")
+        return 0.0
+
+    # Circular mean
+    offset = float(np.degrees(np.angle(np.mean(np.exp(2j * np.pi * phase)))))
+    logger.info(
+        f"Lo spin start offset from spin table: {offset:.4f} deg "
+        f"over {phase.size} spins"
+    )
+    return offset
 
 
 def get_sampling_cadence_from_nhk(l1b_nhk: xr.Dataset) -> float:
