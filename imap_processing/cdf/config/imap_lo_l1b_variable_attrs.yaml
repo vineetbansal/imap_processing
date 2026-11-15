@@ -149,6 +149,30 @@ spin_angle_bin:
   VALIDMIN: 0
   VAR_TYPE: support_data
 
+ecliptic_longitude:
+  <<: *default
+  CATDESC: ECLIPJ2000 longitude of the star sensor boresight per spin angle bin
+  DEPEND_0: spin_angle
+  FIELDNAM: Ecliptic Longitude
+  FILLVAL: -1.0e31
+  FORMAT: F8.3
+  UNITS: deg
+  VALIDMAX: 360.0
+  VALIDMIN: 0.0
+  VAR_TYPE: support_data
+
+ecliptic_latitude:
+  <<: *default
+  CATDESC: ECLIPJ2000 latitude of the star sensor boresight per spin angle bin
+  DEPEND_0: spin_angle
+  FIELDNAM: Ecliptic Latitude
+  FILLVAL: -1.0e31
+  FORMAT: F8.3
+  UNITS: deg
+  VALIDMAX: 90.0
+  VALIDMIN: -90.0
+  VAR_TYPE: support_data
+
 avg_amplitude:
   <<: *default
   CATDESC: Average star sensor amplitude per spin angle bin

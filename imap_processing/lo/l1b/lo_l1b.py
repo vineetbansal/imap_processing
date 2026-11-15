@@ -22,6 +22,7 @@ from imap_processing.spice.geometry import (
     SpiceFrame,
     cartesian_to_latitudinal,
     frame_transform,
+    frame_transform_az_el,
     get_instrument_mounting_az_el,
     instrument_pointing,
 )
@@ -2519,9 +2520,10 @@ def l1b_star(
     pointing_mid_met = get_pointing_mid_time(first_met)
 
     et = ttj2000ns_to_et(met_to_ttj2000ns(pointing_mid_met))
-    sc_to_inst_angle_offset = float(
-        get_instrument_mounting_az_el(SpiceFrame.IMAP_LO_STAR_SENSOR, et)[0]
+    star_sensor_az, star_sensor_el = get_instrument_mounting_az_el(
+        SpiceFrame.IMAP_LO_STAR_SENSOR, et
     )
+    sc_to_inst_angle_offset = float(star_sensor_az)
     spin_start_offset = get_lo_spin_start_phase_offset(spin_data)
     end_bins_to_exclude = c.STAR_END_BINS_TO_EXCLUDE
     min_count_threshold = c.STAR_MIN_COUNT_THRESHOLD
@@ -2572,6 +2574,22 @@ def l1b_star(
         attrs=attr_mgr_l1b.get_global_attributes(logical_source),
     )
 
+    # Sky direction of each bin: azimuth spin_angle and the star sensor's
+    # elevation in the despun pointing frame, at the pointing mid time
+    eclip_lon_lat = frame_transform_az_el(
+        et,
+        np.column_stack([spin_angle, np.full(spin_angle.shape, star_sensor_el)]),
+        SpiceFrame.IMAP_DPS,
+        SpiceFrame.ECLIPJ2000,
+        degrees=True,
+    )
+    for i, name in enumerate(["ecliptic_longitude", "ecliptic_latitude"]):
+        l1b_star_ds[name] = xr.DataArray(
+            eclip_lon_lat[:, i],
+            dims=["spin_angle"],
+            attrs=attr_mgr_l1b.get_variable_attributes(name, check_schema=False),
+        )
+
     # Add spin_angle_bin as a variable (original bin indices)
     l1b_star_ds["spin_angle_bin"] = xr.DataArray(
         np.arange(720, dtype=np.uint16),
@@ -2611,7 +2629,9 @@ def l1b_star(
     l1b_star_ds.attrs["end_doy"] = end_doy
     l1b_star_ds.attrs["pointing_mid_met"] = pointing_mid_met
     l1b_star_ds.attrs["star_sensor_azimuth_deg"] = sc_to_inst_angle_offset
+    l1b_star_ds.attrs["star_sensor_elevation_deg"] = float(star_sensor_el)
     l1b_star_ds.attrs["spin_start_offset_deg"] = spin_start_offset
+    l1b_star_ds.attrs["bin_offset"] = bin_offset
     l1b_star_ds.attrs["sampling_cadence_ms"] = sampling_cadence
     l1b_star_ds.attrs["spin_duration_sec"] = spin_duration
     l1b_star_ds.attrs["end_bins_excluded"] = end_bins_to_exclude
